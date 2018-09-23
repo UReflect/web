@@ -2,10 +2,34 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {
+      "@env/*": [
+        "envvironements/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ],
+      "@core/*": [
+        "core/*"
+      ],
+      "@admin/*": [
+        "admin/*"
+      ],
+      "@user/*": [
+        "user/*"
+      ],
+      "@dev-console/*": [
+        "dev-console/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ]
+    }
   },
   "exclude": [
-    "test.ts",
-    "**/*.spec.ts"
+    "../unit-tests/test.ts",
+    "**/*.spec.ts",
+    "**/assets/js/plugins/**"
   ]
 }
