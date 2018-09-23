@@ -3,27 +3,31 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "types": [],
+    "baseUrl": "./",
     "paths": {
       "@env/*": [
-        "envvironements/*"
+        "environments/*"
       ],
       "@shared/*": [
-        "shared/*"
+        "app/shared/*"
       ],
       "@core/*": [
-        "core/*"
+        "app/core/*"
       ],
       "@admin/*": [
-        "admin/*"
+        "app/admin/*"
       ],
       "@user/*": [
-        "user/*"
+        "app/user/*"
       ],
       "@dev-console/*": [
-        "dev-console/*"
+        "app/dev-console/*"
       ],
       "@store/*": [
-        "store/*"
+        "app/store/*"
+      ],
+      "@reducers": [
+        "app/reducers"
       ]
     }
   },

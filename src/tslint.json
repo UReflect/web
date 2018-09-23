@@ -13,6 +13,10 @@
       "app",
       "kebab-case"
     ],
-    "import-spacing": false
+    "import-spacing": false,
+    "semicolon": [
+      false,
+      "always"
+    ]
   }
 }
