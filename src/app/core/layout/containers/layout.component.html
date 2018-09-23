@@ -38,29 +38,32 @@
   </header>
   <!-- END Header -->
 
-  <!-- Main Container -->
-  <main id="main-container">
-    <!-- Page Content -->
-    <div class="content">
-      <router-outlet></router-outlet>
-    </div>
-    <!-- END Page Content -->
-  </main>
-  <!-- END Main Container -->
+  <div class="bg-primary-darker text-body-color-light">
+    <!-- Main Container -->
+    <main id="main-container">
 
-  <!-- Footer -->
-  <footer id="page-footer" class="opacity-0">
-    <div class="content py-20 font-size-xs clearfix">
-      <div class="float-right">
-        Crafted with <i class="fa fa-heart text-pulse"></i> by <a class="font-w600" href="https://ureflect.io"
-                                                                  target="_blank">uReflect</a>
+      <!-- Page Content -->
+      <div class="content">
+        <router-outlet></router-outlet>
       </div>
-      <div class="float-left">
-        <a class="font-w600" href="https://ureflect.io" target="_blank">uReflect</a> &copy; <span
-        class="js-year-copy"></span>
+      <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+
+    <!-- Footer -->
+    <footer id="page-footer" class="opacity-0">
+      <div class="content py-20 font-size-xs clearfix">
+        <div class="float-right">
+          Crafted with <i class="fa fa-heart text-pulse"></i> by <a class="font-w600" href="https://ureflect.io"
+                                                                    target="_blank">uReflect</a>
+        </div>
+        <div class="float-left">
+          <a class="font-w600" href="https://ureflect.io" target="_blank">uReflect</a> &copy; <span
+          class="js-year-copy"></span>
+        </div>
       </div>
-    </div>
-  </footer>
-  <!-- END Footer -->
+    </footer>
+    <!-- END Footer -->
+  </div>
 </div>
 <!-- END Page Container -->

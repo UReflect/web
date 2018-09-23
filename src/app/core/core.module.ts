@@ -1,12 +1,15 @@
 import { NgModule }     from '@angular/core'
 import { LayoutModule } from './layout/layout.module'
+import { AuthModule }   from '@core/auth/auth.module'
 
 @NgModule({
   imports: [
-    LayoutModule
+    LayoutModule,
+    AuthModule
   ],
   exports: [
-    LayoutModule
+    LayoutModule,
+    AuthModule
   ],
   declarations: [],
   providers: []
