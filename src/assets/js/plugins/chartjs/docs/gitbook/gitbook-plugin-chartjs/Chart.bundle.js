@@ -1440,11 +1440,11 @@ for (var func in conversions) {
   // export rgb2hsl and ["rgb"]["hsl"]
   convert[from] = convert[from] || {};
 
-  convert[from][to] = convert[func] = (function(func) { 
+  convert[from][to] = convert[func] = (function(func) {
     return function(arg) {
       if (typeof arg == "number")
         arg = Array.prototype.slice.call(arguments);
-      
+
       var val = conversions[func](arg);
       if (typeof val == "string" || val === undefined)
         return val; // keyword
@@ -1472,12 +1472,12 @@ Converter.prototype.routeSpace = function(space, args) {
    }
    // color.rgb(10, 10, 10)
    if (typeof values == "number") {
-      values = Array.prototype.slice.call(args);        
+      values = Array.prototype.slice.call(args);
    }
 
    return this.setValues(space, values);
 };
-  
+
 /* Set the values for a space, invalidating cache */
 Converter.prototype.setValues = function(space, values) {
    this.space = space;
@@ -8133,7 +8133,7 @@ module.exports = function(Chart) {
 	// Create a dictionary of chart types, to allow for extension of existing types
 	Chart.types = {};
 
-	// Store a reference to each instance - allowing us to globally resize chart instances on window resize.
+	// StoreLoggedUser a reference to each instance - allowing us to globally resize chart instances on window resize.
 	// Destroy method on the chart will remove the instance of the chart from this reference.
 	Chart.instances = {};
 
@@ -11235,7 +11235,7 @@ module.exports = function(Chart) {
 							lineWidths[lineWidths.length] = me.left;
 						}
 
-						// Store the hitbox width and height here. Final position will be updated in `draw`
+						// StoreLoggedUser the hitbox width and height here. Final position will be updated in `draw`
 						hitboxes[i] = {
 							left: 0,
 							top: 0,
@@ -11273,7 +11273,7 @@ module.exports = function(Chart) {
 						currentColWidth = Math.max(currentColWidth, itemWidth);
 						currentColHeight += itemHeight;
 
-						// Store the hitbox width and height here. Final position will be updated in `draw`
+						// StoreLoggedUser the hitbox width and height here. Final position will be updated in `draw`
 						hitboxes[i] = {
 							left: 0,
 							top: 0,
@@ -15126,7 +15126,7 @@ module.exports = function(Chart) {
 						};
 					}
 
-					// Store these per type
+					// StoreLoggedUser these per type
 					var positiveValues = valuesPerStack[key].positiveValues;
 					var negativeValues = valuesPerStack[key].negativeValues;
 

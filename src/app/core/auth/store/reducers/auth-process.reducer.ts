@@ -1,4 +1,4 @@
-import { AuthActionsUnion, AuthActionTypes } from '@core/auth/actions/auth-process.actions'
+import { AuthActionsUnion, AuthActionTypes } from '../actions/auth-process.actions'
 
 export interface IState {
   isAuthenticated: boolean,

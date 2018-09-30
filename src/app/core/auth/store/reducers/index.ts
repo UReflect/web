@@ -15,9 +15,4 @@ export const reducers: ActionReducerMap<IState> = {
   authProcess: fromAuthProcess.reducer
 }
 
-export const getTokenState = createFeatureSelector<IState, fromToken.IState>('token')
-export const getToken = createSelector(getTokenState, fromToken.getToken)
-
-export const getAuthProcessState = createFeatureSelector<IState, fromAuthProcess.IState>('authProcess')
-export const getPending = createSelector(getAuthProcessState, fromAuthProcess.getPending)
-export const getError = createSelector(getAuthProcessState, fromAuthProcess.getError)
+export const getAuthState = createFeatureSelector<IState>('auth')

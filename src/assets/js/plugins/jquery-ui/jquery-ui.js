@@ -629,7 +629,7 @@ $.Widget.prototype = {
 			this.eventNamespace;
 		element.off( eventName ).off( eventName );
 
-		// Clear the stack to avoid memory leaks (#10056)
+		// ClearLoggedUser the stack to avoid memory leaks (#10056)
 		this.bindings = $( this.bindings.not( element ).get() );
 		this.focusable = $( this.focusable.not( element ).get() );
 		this.hoverable = $( this.hoverable.not( element ).get() );
@@ -2283,7 +2283,7 @@ if ( $.uiBackCompat !== false ) {
 						padding: 0
 					} ),
 
-				// Store the size in case width/height are defined in % - Fixes #5245
+				// StoreLoggedUser the size in case width/height are defined in % - Fixes #5245
 				size = {
 					width: element.width(),
 					height: element.height()
@@ -6368,7 +6368,7 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 					}
 					element[ widget ]( instanceOptions );
 
-					// Store an instance of the controlgroup to be able to reference
+					// StoreLoggedUser an instance of the controlgroup to be able to reference
 					// from the outermost element for changing options and refresh
 					var widgetElement = element[ widget ]( "widget" );
 					$.data( widgetElement[ 0 ], "ui-controlgroup-data",
@@ -9692,7 +9692,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		//Cache the margins of the original element
 		this._cacheMargins();
 
-		//Store the helper's css position
+		//StoreLoggedUser the helper's css position
 		this.cssPosition = this.helper.css( "position" );
 		this.scrollParent = this.helper.scrollParent( true );
 		this.offsetParent = this.helper.offsetParent();
@@ -10377,14 +10377,14 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 				if ( !sortable.isOver ) {
 					sortable.isOver = 1;
 
-					// Store draggable's parent in case we need to reappend to it later.
+					// StoreLoggedUser draggable's parent in case we need to reappend to it later.
 					draggable._parent = ui.helper.parent();
 
 					sortable.currentItem = ui.helper
 						.appendTo( sortable.element )
 						.data( "ui-sortable-item", true );
 
-					// Store helper option to later restore it
+					// StoreLoggedUser helper option to later restore it
 					sortable.options._helper = sortable.options.helper;
 
 					sortable.options.helper = function() {
@@ -12906,7 +12906,7 @@ $.widget( "ui.droppable", {
 		this.proportions = function( /* valueToWrite */ ) {
 			if ( arguments.length ) {
 
-				// Store the droppable's proportions
+				// StoreLoggedUser the droppable's proportions
 				proportions = arguments[ 0 ];
 			} else {
 
@@ -18573,7 +18573,7 @@ $.widget( "ui.tooltip", {
 			return;
 		}
 
-		// Clear the interval for delayed tracking tooltips
+		// ClearLoggedUser the interval for delayed tracking tooltips
 		clearInterval( this.delayedShow );
 
 		// Only set title if we had one before (see comment in _open())

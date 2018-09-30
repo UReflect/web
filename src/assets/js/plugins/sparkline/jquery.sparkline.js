@@ -2367,7 +2367,7 @@
                 }
             }
             if (donutWidth) {
-                target.drawCircle(radius, radius, radius - donutWidth, options.get('donutColor'), 
+                target.drawCircle(radius, radius, radius - donutWidth, options.get('donutColor'),
                     options.get('donutColor'), 0).append();
             }
             target.render();
@@ -2625,7 +2625,7 @@
         },
 
         /**
-         * Clear and reset the canvas
+         * ClearLoggedUser and reset the canvas
          */
         reset: function () {
             alert('reset not implemented');

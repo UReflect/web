@@ -2,29 +2,34 @@
 <div class="content-side content-side-full">
   <ul class="nav-main">
     <li>
-      <a class="active" routerLink="/">
+      <a [routerLinkActive]="'active'" routerLink="/dashboard">
         <i class="si si-cup"></i>
         <span class="sidebar-mini-hide">Dashboard</span>
       </a>
     </li>
     <li class="nav-main-heading">
-      <span class="sidebar-mini-visible">HD</span>
-      <span class="sidebar-mini-hidden">Heading</span>
+      <span class="sidebar-mini-hidden">Modules</span>
     </li>
     <li>
-      <a class="nav-submenu" data-toggle="nav-submenu" href="#">
-        <i class="si si-puzzle"></i>
-        <span class="sidebar-mini-hide">Dropdown</span>
+      <a [routerLinkActive]="'active'" routerLink="/modules">
+        <i class="si si-cup"></i>
+        <span class="sidebar-mini-hide">List</span>
       </a>
-      <ul>
-        <li>
-          <a href="javascript:void(0)">Link #1</a>
-        </li>
-        <li>
-          <a href="javascript:void(0)">Link #2</a>
-        </li>
-      </ul>
     </li>
+    <!--<li>-->
+      <!--<a class="nav-submenu" data-toggle="nav-submenu" href="#">-->
+        <!--<i class="si si-puzzle"></i>-->
+        <!--<span class="sidebar-mini-hide">Dropdown</span>-->
+      <!--</a>-->
+      <!--<ul>-->
+        <!--<li>-->
+          <!--<a href="javascript:void(0)">Link #1</a>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<a href="javascript:void(0)">Link #2</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</li>-->
   </ul>
 </div>
 <!-- END Side Navigation -->

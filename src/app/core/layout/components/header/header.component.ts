@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { select, Store }                from '@ngrx/store'
 import * as fromRoot                    from '@reducers'
 import { Observable, Subscription }     from 'rxjs'
-import * as fromAuthProcess             from '@core/auth/reducers/auth-process.reducer'
-import * as fromLayout                  from '@core/layout/reducers/layout.reducer'
-import * as LayoutActions               from '@core/layout/actions/layout.actions'
+import * as fromAuthProcess             from '@core/auth/store/reducers/auth-process.reducer'
+import * as fromLayout                  from '@core/layout/store/reducers/layout.reducer'
+import * as LayoutActions               from '@core/layout/store/actions/layout.actions'
 
 @Component({
   selector: 'app-header',

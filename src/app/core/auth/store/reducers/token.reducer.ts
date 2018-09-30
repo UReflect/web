@@ -1,4 +1,4 @@
-import { TokenActionsUnion, TokenActionTypes } from '@core/auth/actions/token.actions'
+import { TokenActionsUnion, TokenActionTypes } from '../actions/token.actions'
 
 export interface IState {
   token: string
@@ -10,12 +10,12 @@ export const initialState: IState = {
 
 export function reducer(state: IState = initialState, action: TokenActionsUnion): IState {
   switch (action.type) {
-    case TokenActionTypes.StoreToken:
+    case TokenActionTypes.Store:
       return {
         ...state,
         token: action.payload
       }
-    case TokenActionTypes.ClearToken:
+    case TokenActionTypes.Clear:
       return initialState
     default:
       return state

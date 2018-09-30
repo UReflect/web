@@ -1,5 +1,5 @@
-import { IUser }                                         from '@core/auth/models/user'
-import { LoggedUserActionsUnion, LoggedUserActionTypes } from '@core/auth/actions/logged-user.actions'
+import { IUser }                                         from '../../models/user'
+import { LoggedUserActionsUnion, LoggedUserActionTypes } from '../actions/logged-user.actions'
 
 export interface IState {
   user: IUser
@@ -11,12 +11,12 @@ export const initialState: IState = {
 
 export function reducer(state: IState = initialState, action: LoggedUserActionsUnion): IState {
   switch (action.type) {
-    case LoggedUserActionTypes.StoreUser:
+    case LoggedUserActionTypes.StoreLoggedUser:
       return {
         ...state,
         user: action.payload
       }
-    case LoggedUserActionTypes.ClearUser:
+    case LoggedUserActionTypes.ClearLoggedUser:
       return initialState
     default:
       return state

@@ -2485,7 +2485,7 @@ var methods = {
   },
 
 
-  // Clear the crop box
+  // ClearLoggedUser the crop box
   clear: function clear() {
     if (this.cropped && !this.disabled) {
       assign(this.cropBoxData, {

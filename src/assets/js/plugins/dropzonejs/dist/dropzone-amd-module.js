@@ -2339,7 +2339,7 @@ var Dropzone = function (_Emitter) {
             var allFinished = true;
             chunk.status = Dropzone.SUCCESS;
 
-            // Clear the data from the chunk
+            // ClearLoggedUser the data from the chunk
             chunk.dataBlock = null;
 
             for (var i = 0; i < file.upload.totalChunkCount; i++) {

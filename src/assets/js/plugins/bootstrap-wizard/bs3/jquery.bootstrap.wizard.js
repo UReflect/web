@@ -314,7 +314,7 @@ $.fn.bootstrapWizard = function(options) {
 		if (element.data('bootstrapWizard')) return;
 		// pass options to plugin constructor
 		var wizard = new bootstrapWizardCreate(element, options);
-		// Store plugin object in this element's data
+		// StoreLoggedUser plugin object in this element's data
 		element.data('bootstrapWizard', wizard);
 		// and then trigger initial change
 		wizard.fixNavigationButtons();

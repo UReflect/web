@@ -3,10 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Observable, Subscription }                            from 'rxjs'
 import { AuthService }                                         from '../../services/auth.service'
 import { IAuthentication }                                     from '../../models/user'
-import * as fromAuth                                           from '@core/auth/reducers'
+import * as fromAuth                                           from '@core/auth/store'
 import { select, Store }                                       from '@ngrx/store'
-import * as AuthProcessActions                                 from '@core/auth/actions/auth-process.actions'
-import * as LoggedUserActions                                  from '@core/auth/actions/logged-user.actions'
 
 @Component({
   selector: 'app-login',
@@ -44,13 +42,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: this.getPassword().value
     }
 
-    this.store.dispatch(new AuthProcessActions.SignIn(credentials))
+    this.store.dispatch(new fromAuth.SignIn(credentials))
     this.subscriptions.add(this.authService.signin(credentials).subscribe(response => {
-      this.store.dispatch(new AuthProcessActions.SignInSuccess(response.data))
-      this.store.dispatch(new LoggedUserActions.StoreUser(response.data.user))
+      this.store.dispatch(new fromAuth.SignInSuccess)
+      this.store.dispatch(new fromAuth.StoreLoggedUser(response.data.user))
     }, e => {
       if (e) {
-        this.store.dispatch(new AuthProcessActions.SignInFailure(e.error))
+        this.store.dispatch(new fromAuth.SignInFailure(e.error))
       }
     }))
   }

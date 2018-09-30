@@ -43,7 +43,7 @@ require([
     var noResults = res.count == 0
     $bookSearchResults.toggleClass('no-results', noResults)
 
-    // Clear old results
+    // ClearLoggedUser old results
     $searchList.empty()
 
     // Display title for research

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable }        from 'rxjs'
-import * as fromRoot         from '@reducers'
 import { select, Store }     from '@ngrx/store'
+import * as fromLayout       from '@core/layout/store'
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,10 @@ import { select, Store }     from '@ngrx/store'
 export class AppComponent implements OnInit {
   showSidenav$: Observable<boolean>
 
-  constructor(private store: Store<fromRoot.IState>) {
+  constructor(private store: Store<fromLayout.IState>) {
   }
 
   ngOnInit() {
-    this.showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav))
+    this.showSidenav$ = this.store.pipe(select(fromLayout.getShowSidenav))
   }
 }

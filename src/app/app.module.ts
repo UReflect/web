@@ -23,7 +23,7 @@ import { LayoutModule }                from '@core/layout/layout.module'
       stateKey: 'router'
     }),
     StoreDevtoolsModule.instrument({
-      name: 'NgRx uReflect Store Devtools',
+      name: 'NgRx uReflect StoreLoggedUser Devtools',
       logOnly: environment.production
     }),
     CoreModule,

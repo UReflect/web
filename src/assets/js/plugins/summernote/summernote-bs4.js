@@ -2714,11 +2714,11 @@ var History = /** @class */ (function () {
     * Resets the history stack completely; reverting to an empty editor.
     */
     History.prototype.reset = function () {
-        // Clear the stack.
+        // ClearLoggedUser the stack.
         this.stack = [];
         // Restore stackOffset to its original value.
         this.stackOffset = -1;
-        // Clear the editable area.
+        // ClearLoggedUser the editable area.
         this.$editable.html('');
         // Record our first snapshot (of nothing).
         this.recordUndo();
@@ -3764,7 +3764,7 @@ var Editor = /** @class */ (function () {
             })(idx);
             this.context.memo('help.formatH' + idx, this.lang.help['formatH' + idx]);
         }
-        
+
         this.insertParagraph = this.wrapCommand(function () {
             _this.typing.insertParagraph(_this.editable);
         });

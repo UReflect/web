@@ -5,9 +5,13 @@ import { AuthRoutingModule }                         from '@core/auth/auth.routi
 import { CommonModule }                              from '@angular/common'
 import { FormsModule, ReactiveFormsModule }          from '@angular/forms'
 import { LoginComponent, RegisterComponent }         from '@core/auth/components'
+import { AuthGuardService }                          from '@core/auth/services/auth-guard.service'
+import { StoreModule }                               from '@ngrx/store'
+import { reducers }                                  from './store'
 
 @NgModule({
   imports: [
+    StoreModule.forFeature('auth', reducers),
     AuthRoutingModule,
     CommonModule,
     FormsModule,
@@ -26,7 +30,8 @@ import { LoginComponent, RegisterComponent }         from '@core/auth/components
     RegisterComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuardService
   ]
 })
 export class AuthModule {

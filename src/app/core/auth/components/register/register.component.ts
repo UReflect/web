@@ -1,13 +1,11 @@
 import { Component, OnDestroy, OnInit }                        from '@angular/core'
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthService }                                         from '@core/auth/services/auth.service'
-import { passwordConfirm, passwordStrength } from '@shared/validators'
-import { Observable, Subscription }          from 'rxjs'
-import { IRegistration }                     from '@core/auth/models/user'
-import * as fromAuth                         from '@core/auth/reducers'
-import * as AuthProcessActions               from '@core/auth/actions/auth-process.actions'
-import { select, Store }                     from '@ngrx/store'
-import * as LoggedUserActions                from '@core/auth/actions/logged-user.actions'
+import { passwordConfirm, passwordStrength }                   from '@shared/validators'
+import { Observable, Subscription }                            from 'rxjs'
+import { IRegistration }                                       from '@core/auth/models/user'
+import * as fromAuth                                           from '@core/auth/store'
+import { select, Store }                                       from '@ngrx/store'
 
 @Component({
   selector: 'app-register',
@@ -52,13 +50,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
       password: this.getPassword().value
     }
 
-    this.store.dispatch(new AuthProcessActions.SignUp(credentials))
+    this.store.dispatch(new fromAuth.SignUp(credentials))
     this.subscriptions.add(this.authService.signup(credentials).subscribe(response => {
-      this.store.dispatch(new AuthProcessActions.SignInSuccess(response.data))
-      this.store.dispatch(new LoggedUserActions.StoreUser(response.data.user))
+      this.store.dispatch(new fromAuth.SignInSuccess)
+      this.store.dispatch(new fromAuth.StoreLoggedUser(response.data.user))
     }, e => {
       if (e) {
-        this.store.dispatch(new AuthProcessActions.SignInFailure(e.error))
+        this.store.dispatch(new fromAuth.SignInFailure(e.error))
       }
     }))
   }

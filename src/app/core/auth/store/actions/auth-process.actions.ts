@@ -1,5 +1,5 @@
 import { Action }                                from '@ngrx/store'
-import { IAuthentication, IRegistration, IUser } from '@core/auth/models/user'
+import { IAuthentication, IRegistration, IUser } from '../../models/user'
 
 export enum AuthActionTypes {
   SignIn = '[Auth] Sign In',
@@ -30,9 +30,6 @@ export class SignOut implements Action {
 
 export class SignInSuccess implements Action {
   readonly type = AuthActionTypes.SignInSuccess
-
-  constructor(public payload: { user: IUser, token: string }) {
-  }
 }
 
 export class SignInFailure implements Action {

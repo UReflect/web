@@ -6301,7 +6301,7 @@ S2.define('select2/selection/stopPropagation',[
             } else {
                 this.onmousewheel = handler;
             }
-            // Store the line height and page height for this particular element
+            // StoreLoggedUser the line height and page height for this particular element
             $.data(this, 'mousewheel-line-height', special.getLineHeight(this));
             $.data(this, 'mousewheel-page-height', special.getPageHeight(this));
         },
@@ -6406,7 +6406,7 @@ S2.define('select2/selection/stopPropagation',[
             deltaX *= pageHeight;
         }
 
-        // Store lowest absolute delta to normalize the delta values
+        // StoreLoggedUser lowest absolute delta to normalize the delta values
         absDelta = Math.max( Math.abs(deltaY), Math.abs(deltaX) );
 
         if ( !lowestDelta || absDelta < lowestDelta ) {

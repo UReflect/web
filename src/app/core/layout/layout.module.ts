@@ -6,11 +6,14 @@ import { SidebarUserComponent } from './components/sidebar-user/sidebar-user.com
 import { SidenavComponent }     from './components/sidenav/sidenav.component'
 import { HeaderComponent }      from './components/header/header.component'
 import { CommonModule }         from '@angular/common'
+import { StoreModule }          from '@ngrx/store'
+import { reducers }             from './store/reducers'
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    StoreModule.forFeature('layout', reducers)
   ],
   exports: [
     SidebarLogoComponent,
