@@ -1,0 +1,24 @@
+<div class="col-md-6 col-xl-3">
+  <a class="block block-link-shadow block-rounded ribbon ribbon-bookmark ribbon-left ribbon-success text-center"
+     [routerLink]="">
+    <div class="ribbon-box">${{ module.price }}</div>
+    <div class="block-content block-content-full">
+      <div class="item item-circle bg-pulse text-pulse-lighter mx-auto my-20">
+        <i class="fa fa-html5"></i>
+      </div>
+      <div class="text-warning">
+        <i class="fa fa-fw" [ngClass]="{'fa-star': star, 'fa-star-empty-o': !star}"
+           *ngFor="let star of stars"></i>
+      </div>
+      <div class="font-size-sm text-muted">
+        ({{ module.ratingNb }} reviews)
+      </div>
+    </div>
+    <div class="block-content block-content-full block-content-sm bg-body-light">
+      <!--<div class="font-size-sm text-muted">10 lessons &bull; 5 hours</div>-->
+    </div>
+    <div class="block-content block-content-full">
+      <div class="font-w600">{{ module.title }}</div>
+    </div>
+  </a>
+</div>

@@ -10,12 +10,12 @@ export const initialState: IState = {
 
 export function reducer(state: IState = initialState, action: TokenActionsUnion): IState {
   switch (action.type) {
-    case TokenActionTypes.Store:
+    case TokenActionTypes.StoreToken:
       return {
         ...state,
         token: action.payload
       }
-    case TokenActionTypes.Clear:
+    case TokenActionTypes.ClearToken:
       return initialState
     default:
       return state

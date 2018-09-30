@@ -1,21 +1,21 @@
 import { Action } from '@ngrx/store'
 
 export enum TokenActionTypes {
-  Store = '[Token] Store Token',
-  Clear = '[Token] Clear Token'
+  StoreToken = '[Token] Store Token',
+  ClearToken = '[Token] Clear Token'
 }
 
-export class Store implements Action {
-  readonly type = TokenActionTypes.Store
+export class StoreToken implements Action {
+  readonly type = TokenActionTypes.StoreToken
 
   constructor(public payload: string) {
   }
 }
 
-export class Clear implements Action {
-  readonly type = TokenActionTypes.Clear
+export class ClearToken implements Action {
+  readonly type = TokenActionTypes.ClearToken
 }
 
 export type TokenActionsUnion =
-  | Store
-  | Clear
+  | StoreToken
+  | ClearToken

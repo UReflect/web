@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.authService.signin(credentials).subscribe(response => {
       this.store.dispatch(new fromAuth.SignInSuccess)
       this.store.dispatch(new fromAuth.StoreLoggedUser(response.data.user))
+      this.store.dispatch(new fromAuth.StoreToken(response.data.token))
     }, e => {
       if (e) {
         this.store.dispatch(new fromAuth.SignInFailure(e.error))

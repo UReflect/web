@@ -4,6 +4,7 @@ import { AppComponent }         from './app.component'
 import { LayoutComponent }      from './core/layout/containers/layout.component'
 
 const mainRoutes: Routes = [
+
 ]
 
 @NgModule({
