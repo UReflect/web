@@ -1,10 +1,10 @@
 import { NgModule }             from '@angular/core'
-import { SidebarLogoComponent } from './components/sidebar-logo.component'
+import { SidebarLogoComponent } from './components/sidebar-logo/sidebar-logo.component'
 import { LayoutComponent }      from './containers/layout.component'
 import { RouterModule }         from '@angular/router'
-import { SidebarUserComponent } from './components/sidebar-user.component'
-import { SidenavComponent }     from './components/sidenav.component'
-import { HeaderComponent }      from './components/header.component'
+import { SidebarUserComponent } from './components/sidebar-user/sidebar-user.component'
+import { SidenavComponent }     from './components/sidenav/sidenav.component'
+import { HeaderComponent }      from './components/header/header.component'
 import { CommonModule }         from '@angular/common'
 
 @NgModule({
@@ -13,6 +13,10 @@ import { CommonModule }         from '@angular/common'
     RouterModule
   ],
   exports: [
+    SidebarLogoComponent,
+    SidebarUserComponent,
+    SidenavComponent,
+    HeaderComponent,
     LayoutComponent
   ],
   declarations: [

@@ -1,20 +1,29 @@
-import { NgModule }           from '@angular/core'
-import { AuthService }        from './services/auth.service'
-import { LoginPageComponent } from '@core/auth/containers/login-page.component'
-import { LoginComponent }     from '@core/auth/components/login.component'
-import { AuthRoutingModule }  from '@core/auth/auth.routing'
+import { NgModule }                                  from '@angular/core'
+import { AuthService }                               from './services/auth.service'
+import { LoginPageComponent, RegisterPageComponent } from '@core/auth/containers'
+import { AuthRoutingModule }                         from '@core/auth/auth.routing'
+import { CommonModule }                              from '@angular/common'
+import { FormsModule, ReactiveFormsModule }          from '@angular/forms'
+import { LoginComponent, RegisterComponent }         from '@core/auth/components'
 
 @NgModule({
   imports: [
-    AuthRoutingModule
+    AuthRoutingModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     LoginPageComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterPageComponent,
+    RegisterComponent
   ],
   declarations: [
     LoginPageComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterPageComponent,
+    RegisterComponent
   ],
   providers: [
     AuthService

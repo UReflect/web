@@ -8,6 +8,8 @@ import { metaReducers, reducers }      from './reducers'
 import { StoreRouterConnectingModule } from '@ngrx/router-store'
 import { StoreDevtoolsModule }         from '@ngrx/store-devtools'
 import { environment }                 from '@env/environment'
+import { HttpClientModule }            from '@angular/common/http'
+import { LayoutModule }                from '@core/layout/layout.module'
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { environment }                 from '@env/environment'
       name: 'NgRx uReflect Store Devtools',
       logOnly: environment.production
     }),
-    CoreModule
+    CoreModule,
+    HttpClientModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

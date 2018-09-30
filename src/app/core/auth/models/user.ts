@@ -1,15 +1,15 @@
-export interface Authentication {
+export interface IAuthentication {
   email: string,
   password: string
 }
 
-export interface Registration {
+export interface IRegistration {
   email: string,
   password: string,
   name: string
 }
 
-export interface User {
+export interface IUser {
   id: number,
   active: boolean,
   email: string,

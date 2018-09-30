@@ -1,7 +1,8 @@
-import { Injectable }  from '@angular/core'
-import { HttpClient }  from '@angular/common/http'
-import { environment } from '../../../../environments/environment'
-import { Observable }  from 'rxjs'
+import { Injectable }                     from '@angular/core'
+import { HttpClient }                     from '@angular/common/http'
+import { environment }                    from '@env/environment'
+import { Observable }                     from 'rxjs'
+import { IAuthentication, IRegistration } from '@core/auth/models/user'
 
 @Injectable()
 export class AuthService {
@@ -15,24 +16,24 @@ export class AuthService {
     }
   }
 
-  signin(email: string, passwd: string): Observable<any> {
+  signin(credentials: IAuthentication): Observable<any> {
     return this.http.post(`${this.url}/signin`, {
-      email: email,
-      password: passwd
+      email: credentials.email,
+      password: credentials.password
     })
   }
 
-  signup(email: string, passwd: string, name: string): Observable<any> {
+  signup(credentials: IRegistration): Observable<any> {
     return this.http.post(`${this.url}/signup`, {
-      email: email,
-      password: passwd,
-      name: name
+      email: credentials.email,
+      password: credentials.password,
+      name: credentials.name
     })
   }
 
   signout(): Observable<Object> {
     return this.http.post(`${this.url}/signout`, {}, {
-      headers: {...this.authHeader}
+      headers: { ...this.authHeader }
     })
   }
 }

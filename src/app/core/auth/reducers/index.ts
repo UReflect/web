@@ -1,43 +1,23 @@
-import * as fromAuth                                               from './auth.reducer'
-import * as fromLoginPage                                          from './login-page.reducer'
-import * as fromRoot                                               from '@reducers'
+import * as fromToken                                              from './token.reducer'
+import * as fromAuthProcess                                        from './auth-process.reducer'
+import * as fromLoggedUser                                         from './logged-user.reducer'
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store'
 
-export interface AuthState {
-  auth: fromAuth.State
-  loginPage: fromLoginPage.State
+export interface IState {
+  authProcess: fromAuthProcess.IState,
+  loggedUser: fromLoggedUser.IState,
+  token: fromToken.IState
 }
 
-export interface State extends fromRoot.State {
-  auth: AuthState
+export const reducers: ActionReducerMap<IState> = {
+  token: fromToken.reducer,
+  loggedUser: fromLoggedUser.reducer,
+  authProcess: fromAuthProcess.reducer
 }
 
-export const reducers: ActionReducerMap<AuthState> = {
-  auth: fromAuth.reducer,
-  loginPage: fromLoginPage.reducer
-}
+export const getTokenState = createFeatureSelector<IState, fromToken.IState>('token')
+export const getToken = createSelector(getTokenState, fromToken.getToken)
 
-export const selectAuthState = createFeatureSelector<State, AuthState>('auth')
-
-export const selectAuthStatusState = createSelector(
-  selectAuthState,
-  (state: AuthState) => state.auth
-)
-export const getLoggedIn = createSelector(
-  selectAuthStatusState,
-  fromAuth.getIsAuthenticated
-)
-export const getUser = createSelector(selectAuthStatusState, fromAuth.getUser)
-
-export const selectLoginPageState = createSelector(
-  selectAuthState,
-  (state: AuthState) => state.loginPage
-)
-export const getLoginPageError = createSelector(
-  selectLoginPageState,
-  fromLoginPage.getError
-)
-export const getLoginPagePending = createSelector(
-  selectLoginPageState,
-  fromLoginPage.getPending
-)
+export const getAuthProcessState = createFeatureSelector<IState, fromAuthProcess.IState>('authProcess')
+export const getPending = createSelector(getAuthProcessState, fromAuthProcess.getPending)
+export const getError = createSelector(getAuthProcessState, fromAuthProcess.getError)

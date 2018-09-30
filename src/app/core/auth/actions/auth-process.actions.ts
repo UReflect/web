@@ -1,5 +1,5 @@
-import { Authentication, Registration, User } from '../models/user'
-import { Action }                             from '@ngrx/store'
+import { Action }                                from '@ngrx/store'
+import { IAuthentication, IRegistration, IUser } from '@core/auth/models/user'
 
 export enum AuthActionTypes {
   SignIn = '[Auth] Sign In',
@@ -13,14 +13,14 @@ export enum AuthActionTypes {
 export class SignIn implements Action {
   readonly type = AuthActionTypes.SignIn
 
-  constructor(public payload: Authentication) {
+  constructor(public payload: IAuthentication) {
   }
 }
 
 export class SignUp implements Action {
   readonly type = AuthActionTypes.SignUp
 
-  constructor(public payload: Registration) {
+  constructor(public payload: IRegistration) {
   }
 }
 
@@ -31,7 +31,7 @@ export class SignOut implements Action {
 export class SignInSuccess implements Action {
   readonly type = AuthActionTypes.SignInSuccess
 
-  constructor(public payload: { user: User, token: string }) {
+  constructor(public payload: { user: IUser, token: string }) {
   }
 }
 

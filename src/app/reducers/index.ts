@@ -1,21 +1,33 @@
-import * as fromLayout                                                                         from '../core/layout/reducers/layout.reducer'
-import { ActionReducer, ActionReducerMap, createFeatureSelector, createSelector, MetaReducer } from '@ngrx/store'
-import { environment }                                                                         from '@env/environment'
-import { storeFreeze }                                                                         from 'ngrx-store-freeze'
-import * as fromRouter                                                                         from '@ngrx/router-store'
+import {
+  ActionReducer, ActionReducerMap, createFeatureSelector,
+  createSelector, MetaReducer
+}                           from '@ngrx/store'
+import { environment }      from '@env/environment'
+import { storeFreeze }      from 'ngrx-store-freeze'
+import * as fromRouter      from '@ngrx/router-store'
+import { localStorageSync } from 'ngrx-store-localstorage'
+import * as fromAuthProcess
+                            from '@core/auth/reducers/auth-process.reducer'
+import * as fromLoggedUser
+                            from '@core/auth/reducers/logged-user.reducer'
+import * as fromLayout      from '@core/layout/reducers/layout.reducer'
 
-export interface State {
-  layout: fromLayout.State
-  router: fromRouter.RouterReducerState
+export interface IState {
+  router: fromRouter.RouterReducerState,
+  authProcess: fromAuthProcess.IState,
+  loggedUser: fromLoggedUser.IState,
+  layout: fromLayout.IState
 }
 
-export const reducers: ActionReducerMap<State> = {
-  layout: fromLayout.reducer,
-  router: fromRouter.routerReducer
+export const reducers: ActionReducerMap<IState> = {
+  router: fromRouter.routerReducer,
+  authProcess: fromAuthProcess.reducer,
+  loggedUser: fromLoggedUser.reducer,
+  layout: fromLayout.reducer
 }
 
-export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
-  return function (state: State, action: any): State {
+export function logger(reducer: ActionReducer<IState>): ActionReducer<IState> {
+  return function (state: IState, action: any): IState {
     console.log('state', state)
     console.log('action', action)
 
@@ -23,8 +35,23 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   }
 }
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger, storeFreeze] : []
+export function localStorageSyncReducer(reducer: ActionReducer<IState>): ActionReducer<IState> {
+  return localStorageSync({
+    keys: ['router', 'authProcess', 'loggedUser', 'layout'],
+    rehydrate: true
+  })(reducer)
+}
 
-export const getLayoutState = createFeatureSelector<State, fromLayout.State>('layout')
+export const metaReducers: MetaReducer<IState>[] = !environment.production
+  ? [logger, storeFreeze, localStorageSyncReducer]
+  : [localStorageSyncReducer]
 
+export const getLayoutState = createFeatureSelector<IState, fromLayout.IState>('layout')
 export const getShowSidenav = createSelector(getLayoutState, fromLayout.getShowSidenav)
+
+export const getAuthProcessState = createFeatureSelector<IState, fromAuthProcess.IState>('authProcess')
+export const getIsAuthenticated = createSelector(getAuthProcessState, fromAuthProcess.getIsAuthenticated)
+
+export const getLoggedUserState = createFeatureSelector<IState, fromLoggedUser.IState>('loggedUser')
+export const getLoggedUser = createSelector(getLoggedUserState, fromLoggedUser.getUser)
+

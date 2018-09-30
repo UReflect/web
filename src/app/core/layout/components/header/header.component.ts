@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { select, Store }                from '@ngrx/store'
 import * as fromRoot                    from '@reducers'
 import { Observable, Subscription }     from 'rxjs'
+import * as fromAuthProcess             from '@core/auth/reducers/auth-process.reducer'
+import * as fromLayout                  from '@core/layout/reducers/layout.reducer'
 import * as LayoutActions               from '@core/layout/actions/layout.actions'
 
 @Component({
@@ -12,23 +14,21 @@ import * as LayoutActions               from '@core/layout/actions/layout.action
 
 export class HeaderComponent implements OnInit, OnDestroy {
   showSidenav$: Observable<boolean>
-  private isOpen: boolean
+  isAuthenticated$: Observable<boolean>
   private subscriptions: Subscription = new Subscription()
 
-  constructor(private store: Store<fromRoot.State>) {
-    this.showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav))
+  constructor(private store: Store<fromRoot.IState>) {
   }
 
   ngOnInit() {
-    this.subscriptions.add(this.showSidenav$.subscribe(response => {
-      this.isOpen = response
-    }))
+    this.showSidenav$ = this.store.pipe(
+      select(fromLayout.getShowSidenav))
+    this.isAuthenticated$ = this.store.pipe(
+      select(fromAuthProcess.getIsAuthenticated))
   }
 
   toggleSidebar() {
-    this.isOpen
-      ? this.store.dispatch(new LayoutActions.CloseSidenav())
-      : this.store.dispatch(new LayoutActions.OpenSidenav())
+    this.store.dispatch(new LayoutActions.ToggleSidenav())
   }
 
   ngOnDestroy() {
