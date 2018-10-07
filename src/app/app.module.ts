@@ -1,15 +1,16 @@
-import { BrowserModule }               from '@angular/platform-browser'
-import { NgModule }                    from '@angular/core'
-import { AppComponent }                from './app.component'
-import { AppRoutingModule }            from './app.routing'
-import { CoreModule }                  from './core/core.module'
-import { StoreModule }                 from '@ngrx/store'
-import { metaReducers, reducers }      from './reducers'
-import { StoreRouterConnectingModule } from '@ngrx/router-store'
-import { StoreDevtoolsModule }         from '@ngrx/store-devtools'
-import { environment }                 from '@env/environment'
-import { HttpClientModule }            from '@angular/common/http'
-import { LayoutModule }                from '@core/layout/layout.module'
+import { BrowserModule }                                      from '@angular/platform-browser'
+import { NgModule }                                           from '@angular/core'
+import { AppComponent }                                       from './app.component'
+import { AppRoutingModule }                                   from './app.routing'
+import { CoreModule }                                         from './core/core.module'
+import { StoreModule }                                        from '@ngrx/store'
+import { metaReducers, reducers, CustomSerializer, effects }  from './store'
+import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store'
+import { StoreDevtoolsModule }                                from '@ngrx/store-devtools'
+import { environment }                                        from '@env/environment'
+import { HttpClientModule }                                   from '@angular/common/http'
+import { LayoutModule }                                       from '@core/layout/layout.module'
+import { EffectsModule }                                      from '@ngrx/effects'
 
 @NgModule({
   declarations: [
@@ -26,11 +27,17 @@ import { LayoutModule }                from '@core/layout/layout.module'
       name: 'NgRx uReflect StoreLoggedUser Devtools',
       logOnly: environment.production
     }),
+    EffectsModule.forRoot(effects),
     CoreModule,
     HttpClientModule,
     LayoutModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RouterStateSerializer,
+      useClass: CustomSerializer
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

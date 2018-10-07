@@ -1,0 +1,83 @@
+import { Injectable }                      from '@angular/core'
+import { AuthService }                     from '@core/auth/services/auth.service'
+import * as fromAuth                       from '@core/auth/store/actions'
+import * as AuthState                      from '@core/auth/store/reducers'
+import { Store }                           from '@ngrx/store'
+import { Actions, Effect, ofType }         from '@ngrx/effects'
+import { catchError, map, switchMap, tap } from 'rxjs/operators'
+import { Router }                          from '@angular/router'
+import { of }                              from 'rxjs'
+
+@Injectable()
+export class AuthProcessEffects {
+  constructor(private actions$: Actions,
+              private authService: AuthService,
+              private store: Store<AuthState.IState>,
+              private router: Router) {
+  }
+
+  @Effect()
+  signIn$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignIn)
+    .pipe(map((action: fromAuth.SignIn) => action.payload),
+      switchMap(credentials => {
+        return this.authService.signin(credentials)
+          .pipe(
+            map(response => {
+              this.store.dispatch(new fromAuth.StoreLoggedUser(response.data.user))
+              this.store.dispatch(new fromAuth.StoreToken(response.data.token))
+              return new fromAuth.SignInSuccess
+            }),
+            catchError(e => {
+              return of(new fromAuth.SignInFailure(e.error))
+            })
+          )
+      })
+    )
+
+  @Effect()
+  signUp$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignUp)
+    .pipe(map((action: fromAuth.SignUp) => action.payload),
+      switchMap(credentials => {
+        return this.authService.signup(credentials)
+          .pipe(
+            map(response => {
+              this.store.dispatch(new fromAuth.StoreLoggedUser(response.data.user))
+              this.store.dispatch(new fromAuth.StoreToken(response.data.token))
+              return new fromAuth.SignInSuccess
+            }),
+            catchError(e => {
+              return of(new fromAuth.SignInFailure(e.error))
+            })
+          )
+      })
+    )
+
+  @Effect()
+  signOut$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignOut)
+    .pipe(
+      map(() => {
+        this.authService.signout()
+          .pipe(map(() => {
+              this.store.dispatch(new fromAuth.ClearLoggedUser())
+              this.store.dispatch(new fromAuth.ClearToken())
+            })
+          )
+      })
+    )
+
+  @Effect({ dispatch: false })
+  signInSuccess$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignInSuccess)
+    .pipe(ofType(fromAuth.AuthActionTypes.SignInSuccess),
+      tap(() => {
+        this.router.navigate(['/modules'])
+      })
+    )
+
+  @Effect({ dispatch: false })
+  signInRedirect$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignOut)
+    .pipe(ofType(fromAuth.AuthActionTypes.SignInRedirect),
+      tap(() => {
+        this.router.navigate(['/login'])
+      })
+    )
+}

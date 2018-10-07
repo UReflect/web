@@ -26,8 +26,8 @@
       "@store/*": [
         "app/store/*"
       ],
-      "@reducers": [
-        "app/reducers"
+      "@store": [
+        "app/store"
       ]
     }
   },

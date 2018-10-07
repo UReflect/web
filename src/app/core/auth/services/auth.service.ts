@@ -3,7 +3,8 @@ import { HttpClient }                     from '@angular/common/http'
 import { environment }                    from '@env/environment'
 import { Observable }                     from 'rxjs'
 import { IAuthentication, IRegistration } from '@core/auth/models/user'
-import * as fromAuth                      from '@core/auth/store'
+import * as fromAuth                      from '@core/auth/store/selectors'
+import * as AuthState                     from '@core/auth/store/reducers'
 import { select, Store }                  from '@ngrx/store'
 
 @Injectable()
@@ -13,7 +14,7 @@ export class AuthService {
   private token$: Observable<string>
 
   constructor(private http: HttpClient,
-              private store: Store<fromAuth.IState>) {
+              private store: Store<AuthState.IState>) {
     this.url = environment.apiUrl
     this.token$ = this.store.pipe(select(fromAuth.getToken))
     this.getToken().then(() => {

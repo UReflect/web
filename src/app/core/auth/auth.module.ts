@@ -1,33 +1,31 @@
-import { NgModule }                                  from '@angular/core'
-import { AuthService }                               from './services/auth.service'
-import { LoginPageComponent, RegisterPageComponent } from '@core/auth/containers'
-import { AuthRoutingModule }                         from '@core/auth/auth.routing'
-import { CommonModule }                              from '@angular/common'
-import { FormsModule, ReactiveFormsModule }          from '@angular/forms'
-import { LoginComponent, RegisterComponent }         from '@core/auth/components'
-import { AuthGuardService }                          from '@core/auth/services/auth-guard.service'
-import { StoreModule }                               from '@ngrx/store'
-import { reducers }                                  from './store'
+import { NgModule }                         from '@angular/core'
+import { AuthService }                      from './services/auth.service'
+import { AuthRoutingModule }                from '@core/auth/auth.routing'
+import { CommonModule }                     from '@angular/common'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { AuthGuardService }                 from '@core/auth/services/auth-guard.service'
+import { StoreModule }                      from '@ngrx/store'
+import { reducers, effects }                from './store'
+import { EffectsModule }                    from '@ngrx/effects'
+import * as fromComponents                  from './components'
+import * as fromContainers                  from './containers'
 
 @NgModule({
   imports: [
     StoreModule.forFeature('auth', reducers),
+    EffectsModule.forFeature(effects),
     AuthRoutingModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule
   ],
   exports: [
-    LoginPageComponent,
-    LoginComponent,
-    RegisterPageComponent,
-    RegisterComponent
+    ...fromComponents.components,
+    ...fromContainers.containers
   ],
   declarations: [
-    LoginPageComponent,
-    LoginComponent,
-    RegisterPageComponent,
-    RegisterComponent
+    ...fromComponents.components,
+    ...fromContainers.containers
   ],
   providers: [
     AuthService,

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { select, Store }                from '@ngrx/store'
-import * as fromRoot                    from '@reducers'
+import * as fromRoot                    from '@store'
 import { Observable, Subscription }     from 'rxjs'
 import * as fromAuthProcess             from '@core/auth/store/reducers/auth-process.reducer'
 import * as fromLayout                  from '@core/layout/store/reducers/layout.reducer'
