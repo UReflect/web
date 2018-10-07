@@ -1,13 +1,18 @@
 import { NgModule }             from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { ModuleListComponent }  from '@core/modules/containers/module-list/module-list.component'
-import { AuthGuardService }     from '@core/auth/services/auth-guard.service'
+import { AuthGuardService }     from '@core/auth/guards/auth-guard.service'
+import * as fromContainer       from './containers'
+import * as fromGuards          from './guards'
+import * as fromServices        from './services'
 
 const routes: Routes = [
   {
     path: 'modules',
-    component: ModuleListComponent,
-    canActivate: [AuthGuardService]
+    component: fromContainer.ModuleListComponent,
+    canActivate: [
+      AuthGuardService,
+      fromGuards.ModulesGuard
+    ]
   }
 ]
 
@@ -19,7 +24,10 @@ const routes: Routes = [
     RouterModule
   ],
   declarations: [],
-  providers: []
+  providers: [
+    ...fromServices.services,
+    ...fromGuards.guards
+  ]
 })
 export class ModuleRoutingModule {
 }

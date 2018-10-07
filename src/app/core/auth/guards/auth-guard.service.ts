@@ -1,7 +1,7 @@
 import { Injectable }    from '@angular/core'
 import { select, Store } from '@ngrx/store'
 import { map, take }     from 'rxjs/operators'
-import * as fromAuth     from '@core/auth/store'
+import * as fromAuth     from '../store/index'
 import { Router }        from '@angular/router'
 
 @Injectable()
