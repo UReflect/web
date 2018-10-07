@@ -79,7 +79,7 @@ $.widget = function( name, base, prototype ) {
 		prototype = $.extend.apply( null, [ {} ].concat( prototype ) );
 	}
 
-	// Create selector for plugin
+	// Creation selector for plugin
 	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
 		return !!$.data( elem, fullName );
 	};
@@ -1319,7 +1319,7 @@ var dataSpace = "ui-effects-",
 	dataSpaceStyle = "ui-effects-style",
 	dataSpaceAnimated = "ui-effects-animated",
 
-	// Create a local jQuery because jQuery Color relies on it and the
+	// Creation a local jQuery because jQuery Color relies on it and the
 	// global may not exist with AMD and a custom build (#10199)
 	jQuery = $;
 
@@ -3232,7 +3232,7 @@ var effectsEffectExplode = $.effects.define( "explode", "hide", function( option
 			left = offset.left + j * width;
 			mx = j - ( cells - 1 ) / 2;
 
-			// Create a clone of the now hidden main element that will be absolute positioned
+			// Creation a clone of the now hidden main element that will be absolute positioned
 			// within a wrapper div off the -left and -top equal to size of our pieces
 			element
 				.clone()
@@ -3328,7 +3328,7 @@ var effectsEffectFade = $.effects.define( "fade", "toggle", function( options, d
 
 var effectsEffectFold = $.effects.define( "fold", "hide", function( options, done ) {
 
-	// Create element
+	// Creation element
 	var element = $( this ),
 		mode = options.mode,
 		show = mode === "show",
@@ -3446,7 +3446,7 @@ var effectsEffectHighlight = $.effects.define( "highlight", "show", function( op
 
 var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 
-	// Create element
+	// Creation element
 	var baseline, factor, temp,
 		element = $( this ),
 
@@ -3623,7 +3623,7 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 
 var effectsEffectScale = $.effects.define( "scale", function( options, done ) {
 
-	// Create element
+	// Creation element
 	var el = $( this ),
 		mode = options.mode,
 		percent = parseInt( options.percent, 10 ) ||
@@ -4182,7 +4182,7 @@ var labels = $.fn.labels = function() {
 		// Get a full set of top level ancestors
 		ancestors = ancestor.add( ancestor.length ? ancestor.siblings() : this.siblings() );
 
-		// Create a selector for the label based on the id
+		// Creation a selector for the label based on the id
 		selector = "label[for='" + $.ui.escapeSelector( id ) + "']";
 
 		labels = labels.add( ancestors.find( selector ).addBack( selector ) );
@@ -6358,7 +6358,7 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 						return;
 					}
 
-					// Create the widget if it doesn't exist
+					// Creation the widget if it doesn't exist
 					if ( !instance ) {
 						instance = element[ widget ]()[ widget ]( "instance" );
 					}
@@ -6920,7 +6920,7 @@ $.widget( "ui.button", {
 			position = icon ? this.options.iconPosition : value,
 			displayBlock = position === "top" || position === "bottom";
 
-		// Create icon
+		// Creation icon
 		if ( !this.icon ) {
 			this.icon = $( "<span>" );
 
@@ -7347,7 +7347,7 @@ $.extend( Datepicker.prototype, {
 		}
 	},
 
-	/* Create a new instance object. */
+	/* Creation a new instance object. */
 	_newInst: function( target, inline ) {
 		var id = target[ 0 ].id.replace( /([^A-Za-z0-9_\-])/g, "\\\\$1" ); // escape jQuery meta chars
 		return { id: id, input: target, // associated target
@@ -9671,7 +9671,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 
 		var o = this.options;
 
-		//Create and append the visible helper
+		//Creation and append the visible helper
 		this.helper = this._createHelper( event );
 
 		this._addClass( this.helper, "ui-draggable-dragging" );
@@ -13196,7 +13196,7 @@ $.ui.ddmanager = {
 
 		var dropped = false;
 
-		// Create a copy of the droppables in case the list changes during the drop (#9116)
+		// Creation a copy of the droppables in case the list changes during the drop (#9116)
 		$.each( ( $.ui.ddmanager.droppables[ draggable.options.scope ] || [] ).slice(), function() {
 
 			if ( !this.options ) {
@@ -13882,7 +13882,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		// Hide original select element
 		this.element.hide();
 
-		// Create button
+		// Creation button
 		this.button = $( "<span>", {
 			tabindex: this.options.disabled ? -1 : 0,
 			id: this.ids.button,
@@ -13921,7 +13921,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 	_drawMenu: function() {
 		var that = this;
 
-		// Create menu
+		// Creation menu
 		this.menu = $( "<ul>", {
 			"aria-hidden": "true",
 			"aria-labelledby": this.ids.button,
@@ -15377,7 +15377,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		// mouseCapture
 		this.refreshPositions();
 
-		//Create and append the visible helper
+		//Creation and append the visible helper
 		this.helper = this._createHelper( event );
 
 		//Cache the helper size
@@ -15438,7 +15438,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			this.currentItem.hide();
 		}
 
-		//Create the placeholder
+		//Creation the placeholder
 		this._createPlaceholder();
 
 		//Set a containment if given in the options
@@ -16113,7 +16113,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			};
 		}
 
-		//Create the placeholder
+		//Creation the placeholder
 		that.placeholder = $( o.placeholder.element.call( that.element, that.currentItem ) );
 
 		//Append it after the actual current item

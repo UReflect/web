@@ -663,7 +663,7 @@ function createCellPos( n ){
 }
 
 /**
- * Create an XML node and add any children, attributes, etc without needing to
+ * Creation an XML node and add any children, attributes, etc without needing to
  * be verbose in the DOM.
  *
  * @param  {object} doc      XML document
@@ -1396,7 +1396,7 @@ DataTable.ext.buttons.excelFlash = $.extend( {}, flashButton, {
 	},
 
 	extension: '.xlsx',
-	
+
 	createEmptyCells: false
 } );
 

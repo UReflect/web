@@ -55,7 +55,7 @@ require(['gitbook', 'jquery'], function(gitbook, $) {
     gitbook.events.bind('start', function(e, config) {
         var opts = config.sharing;
 
-        // Create dropdown menu
+        // Creation dropdown menu
         var menu = $.map(opts.all, function(id) {
             var site = SITES[id];
 
@@ -65,7 +65,7 @@ require(['gitbook', 'jquery'], function(gitbook, $) {
             };
         });
 
-        // Create main button with dropdown
+        // Creation main button with dropdown
         if (menu.length > 0) {
             gitbook.toolbar.createButton({
                 icon: 'fa fa-share-alt',

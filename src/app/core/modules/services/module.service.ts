@@ -1,10 +1,10 @@
-import { Injectable }              from '@angular/core'
-import { environment }             from '@env/environment'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable }              from 'rxjs'
-import * as fromAuth               from '@core/auth/store'
-import { select, Store }           from '@ngrx/store'
-import { IModuleCreation }         from '@core/modules/models/module'
+import { Injectable }                     from '@angular/core'
+import { environment }                    from '@env/environment'
+import { HttpClient, HttpHeaders }        from '@angular/common/http'
+import { Observable }                     from 'rxjs'
+import * as fromAuth                      from '@core/auth/store'
+import { select, Store }                  from '@ngrx/store'
+import { IModuleCreation, IModuleUpload } from '@core/modules/models/module'
 
 @Injectable()
 export class ModuleService {
@@ -96,13 +96,13 @@ export class ModuleService {
     })
   }
 
-  uploadPackage(id: number, formData: FormData): Observable<any> {
+  uploadPackage(data: IModuleUpload): Observable<any> {
     return new Observable<any>(observer => {
       this.getToken().then(() => {
         const headers = new HttpHeaders()
         headers.append('Content-Type', 'multipart/form-data')
 
-        observer.next(this.http.post(`${this.url}/module/${id}/upload`, formData, {
+        observer.next(this.http.post(`${this.url}/module/${data.id}/upload`, data.formData, {
           headers: { ...this.authHeader }
         }))
         observer.complete()

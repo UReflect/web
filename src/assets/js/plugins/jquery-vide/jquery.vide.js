@@ -457,7 +457,7 @@
       // Destroy the plugin instance if exists
       instance && instance.destroy();
 
-      // Create the plugin instance
+      // Creation the plugin instance
       instance = new Vide(this, path, options);
       instance.index = $[PLUGIN_NAME].lookup.push(instance) - 1;
       $.data(this, PLUGIN_NAME, instance);

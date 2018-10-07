@@ -49,7 +49,7 @@ var Emitter = function () {
     // Add an event listener for given event
     value: function on(event, fn) {
       this._callbacks = this._callbacks || {};
-      // Create namespace for this event
+      // Creation namespace for this event
       if (!this._callbacks[event]) {
         this._callbacks[event] = [];
       }
@@ -1304,7 +1304,7 @@ var Dropzone = function (_Emitter) {
         }
       };
 
-      // Create the listeners
+      // Creation the listeners
       this.listeners = [{
         element: this.element,
         events: {
@@ -1933,7 +1933,7 @@ var Dropzone = function (_Emitter) {
   }, {
     key: "removeAllFiles",
     value: function removeAllFiles(cancelIfNecessary) {
-      // Create a copy of files since removeFile() changes the @files array.
+      // Creation a copy of files since removeFile() changes the @files array.
       if (cancelIfNecessary == null) {
         cancelIfNecessary = false;
       }
@@ -2959,7 +2959,7 @@ Dropzone.discover = function () {
 
       var dropzone = _ref33;
 
-      // Create a dropzone unless auto discover has been disabled for specific element
+      // Creation a dropzone unless auto discover has been disabled for specific element
       if (Dropzone.optionsForElement(dropzone) !== false) {
         result.push(new Dropzone(dropzone));
       } else {

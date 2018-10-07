@@ -17,3 +17,8 @@ export interface IModuleCreation {
   minHeight: number,
   price: number
 }
+
+export interface IModuleUpload {
+  id: number,
+  formData: FormData
+}

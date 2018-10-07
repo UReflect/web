@@ -434,7 +434,7 @@ function _addToZip( zip, obj ) {
 }
 
 /**
- * Create an XML node and add any children, attributes, etc without needing to
+ * Creation an XML node and add any children, attributes, etc without needing to
  * be verbose in the DOM.
  *
  * @param  {object} doc      XML document

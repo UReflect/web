@@ -2696,7 +2696,7 @@ var History = /** @class */ (function () {
     * Leaves the stack intact, so that "Redo" can still be used.
     */
     History.prototype.rewind = function () {
-        // Create snap shot if not yet recorded
+        // Creation snap shot if not yet recorded
         if (this.$editable.html() !== this.stack[this.stackOffset].contents) {
             this.recordUndo();
         }
@@ -2723,7 +2723,7 @@ var History = /** @class */ (function () {
      * undo
      */
     History.prototype.undo = function () {
-        // Create snap shot if not yet recorded
+        // Creation snap shot if not yet recorded
         if (this.$editable.html() !== this.stack[this.stackOffset].contents) {
             this.recordUndo();
         }
@@ -2750,7 +2750,7 @@ var History = /** @class */ (function () {
         if (this.stack.length > this.stackOffset) {
             this.stack = this.stack.slice(0, this.stackOffset);
         }
-        // Create new snapshot and push it to the end
+        // Creation new snapshot and push it to the end
         this.stack.push(this.makeSnapshot());
     };
     return History;
@@ -3158,7 +3158,7 @@ var Typing = /** @class */ (function () {
 }());
 
 /**
- * @class Create a virtual table to create what actions to do in change.
+ * @class Creation a virtual table to create what actions to do in change.
  * @param {object} startPoint Cell selected to apply change.
  * @param {enum} where  Where change will be applied Row or Col. Use enum: TableResultAction.where
  * @param {enum} action Action to be applied. Use enum: TableResultAction.requestAction
@@ -3209,7 +3209,7 @@ var TableResultAction = function (startPoint, where, action, domTable) {
         _virtualTable[rowIndex][cellIndex] = objPosition;
     }
     /**
-     * Create action cell object.
+     * Creation action cell object.
      *
      * @param {object} virtualTableCellObj Object of specific position on virtual table.
      * @param {enum} resultAction Action to be applied in that item.
@@ -3290,7 +3290,7 @@ var TableResultAction = function (startPoint, where, action, domTable) {
         }
     }
     /**
-     * Create virtual table of cells with all cells, including span cells.
+     * Creation virtual table of cells with all cells, including span cells.
      */
     function createVirtualTable() {
         var rows = domTable.rows;

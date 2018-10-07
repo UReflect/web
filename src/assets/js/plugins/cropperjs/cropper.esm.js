@@ -2391,7 +2391,7 @@ var change = {
         renderable = false;
         break;
 
-      // Create crop box
+      // Creation crop box
       case ACTION_CROP:
         if (!range.x || !range.y) {
           renderable = false;
@@ -3287,7 +3287,7 @@ var AnotherCropper = WINDOW.Cropper;
 
 var Cropper = function () {
   /**
-   * Create a new Cropper.
+   * Creation a new Cropper.
    * @param {Element} element - The target element for cropping.
    * @param {Object} [options={}] - The configuration options.
    */
@@ -3558,7 +3558,7 @@ var Cropper = function () {
           options = this.options,
           image = this.image;
 
-      // Create cropper elements
+      // Creation cropper elements
 
       var container = element.parentNode;
       var template = document.createElement('div');

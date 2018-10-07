@@ -17,7 +17,7 @@
 		factory(jQuery);
 	}
 }(function ($) {
-	// Create the defaults once
+	// Creation the defaults once
 	var defaults = {
 			element: 'body',
 			position: null,

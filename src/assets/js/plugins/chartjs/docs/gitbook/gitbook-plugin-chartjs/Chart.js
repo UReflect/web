@@ -3829,7 +3829,7 @@ module.exports = function(Chart) {
 	var plugins = Chart.plugins;
 	var platform = Chart.platform;
 
-	// Create a dictionary of chart types, to allow for extension of existing types
+	// Creation a dictionary of chart types, to allow for extension of existing types
 	Chart.types = {};
 
 	// StoreLoggedUser a reference to each instance - allowing us to globally resize chart instances on window resize.

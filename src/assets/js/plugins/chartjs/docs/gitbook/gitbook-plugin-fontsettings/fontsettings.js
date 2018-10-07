@@ -177,7 +177,7 @@ require(['gitbook', 'jquery'], function(gitbook, $) {
             gitbook.toolbar.removeButton(BUTTON_ID);
         }
 
-        // Create buttons in toolbar
+        // Creation buttons in toolbar
         BUTTON_ID = gitbook.toolbar.createButton({
             icon: 'fa fa-font',
             label: 'Font Settings',

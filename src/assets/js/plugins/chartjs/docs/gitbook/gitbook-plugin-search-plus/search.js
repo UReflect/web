@@ -50,7 +50,7 @@ require([
     $searchResultsCount.text(res.count)
     $searchQuery.text(res.query)
 
-    // Create an <li> element for each result
+    // Creation an <li> element for each result
     res.results.forEach(function (item) {
       var $li = $('<li>', {
         'class': 'search-results-item'
