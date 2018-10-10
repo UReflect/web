@@ -30,6 +30,7 @@ export function reducer(state: IState = initialState,
       }
     }
     case fromActions.ModuleActionTypes.LoadAllSuccess: {
+      console.log(action)
       const entities = action.payload.reduce(
         (obj: { [id: number]: IModule }, pizza: IModule) => {
           return {
