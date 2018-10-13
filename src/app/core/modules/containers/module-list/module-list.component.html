@@ -1,1 +1,5 @@
-<app-module-list-card *ngFor="let module of modules" [module]="module"></app-module-list-card>
+<div class="container">
+  <div class="col-md-6 col-xl-3" *ngFor="let module of modules$ | async">
+    <app-module-list-card [module]="module"></app-module-list-card>
+  </div>
+</div>

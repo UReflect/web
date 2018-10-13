@@ -18,7 +18,7 @@ export const getSelectedModule = createSelector(
   getModuleState,
   fromRouter.getRouterState,
   (entities, router): IModule => {
-    return router.state && entities[router.state.params.moduleId]
+    return router.state && entities.entities[router.state.params.id]
   }
 )
 

@@ -1,32 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { IModule }                      from '../../models/module'
-import { Observable, Subscription }     from 'rxjs'
-import { select, Store }                from '@ngrx/store'
-import * as fromModule                  from '@core/modules/store'
+import { Component, OnInit } from '@angular/core'
+import { Observable }        from 'rxjs'
+import { select, Store }     from '@ngrx/store'
+import * as fromStore        from '@core/modules/store'
+import * as fromSelectors    from '@core/modules/store/selectors'
 
 @Component({
   selector: 'app-module-list',
-  templateUrl: 'module-list.component.html'
+  templateUrl: 'module-list.component.html',
+  styles: ['.container { display: flex; flex-flow: row wrap}']
 })
 
-export class ModuleListComponent implements OnInit, OnDestroy {
-  modules: IModule[]
-  private subscriptions: Subscription
+export class ModuleListComponent implements OnInit {
   private modulesEntities$: Observable<any>
   private modules$: Observable<any>
 
-  constructor(private store: Store<fromModule.IModulesState>) {
-    this.subscriptions = new Subscription()
-    this.modulesEntities$ = this.store.pipe(select(fromModule.getModuleEntities))
-    this.modules$ = this.store.pipe(select(fromModule.getAllModules))
+  constructor(private store: Store<fromStore.IModulesState>) {
+    this.modulesEntities$ = this.store.pipe(select(fromSelectors.getModuleEntities))
+    this.modules$ = this.store.pipe(select(fromSelectors.getAllModules))
   }
 
   ngOnInit() {
-    this.store.dispatch(new fromModule.LoadAll)
-    this.modulesEntities$.subscribe(response => console.log('toto', response))
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe()
   }
 }

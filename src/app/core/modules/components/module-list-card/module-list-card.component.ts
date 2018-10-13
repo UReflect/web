@@ -28,7 +28,6 @@ export class ModuleListCardComponent implements OnInit {
       stars.push(false)
       ++i
     }
-    console.log(stars)
     return stars
   }
 }

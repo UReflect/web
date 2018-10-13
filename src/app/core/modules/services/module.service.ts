@@ -1,11 +1,11 @@
-import { Injectable }                     from '@angular/core'
-import { environment }                    from '@env/environment'
-import { HttpClient }                     from '@angular/common/http'
-import { Observable }                     from 'rxjs'
-import { IModuleCreation, IModuleUpload } from '@core/modules/models/module'
-import { catchError, map }                from 'rxjs/operators'
-import * as fromAuth                      from '@core/auth/store'
-import { select, Store }                  from '@ngrx/store'
+import { Injectable }                                             from '@angular/core'
+import { environment }                                            from '@env/environment'
+import { HttpClient, HttpHeaders, HttpResponse }                  from '@angular/common/http'
+import { Observable }                                             from 'rxjs'
+import { IModule, IModuleCreation, IModuleUpdate, IModuleUpload } from '@core/modules/models/module'
+import { catchError, map }                                        from 'rxjs/operators'
+import * as fromAuth                                              from '@core/auth/store'
+import { select, Store }                                          from '@ngrx/store'
 
 @Injectable()
 export class ModuleService {
@@ -19,108 +19,106 @@ export class ModuleService {
   }
 
   authHeader() {
-    return this.token$.pipe(
-      map(token => {
-        return {
-          'x-access-token': token
-        }
+    return new Promise((resolve) => {
+      this.token$.subscribe(token => {
+        resolve({ 'x-access-token': token })
       })
-    )
+    })
   }
 
-  all(params?: { query: string, order: string, invert: boolean, limit: number }): any {
-    return this.http.get(`${this.url}/modules?${params && params.query
-      ? `query=${params.query}&`
-      : ''}${params && params.order
-      ? `order=${params.order}&`
-      : ''}${params && params.invert
-      ? `invert=${params.invert}&`
-      : ''}${params && params.limit
-      ? `limit=${params.limit}`
-      : ''}`, {
-      headers: { ...this.authHeader().subscribe(header => header) }
-    }).pipe(catchError(e => Observable.throw(e)))
+  async all(params?: { query: string, order: string, invert: boolean, limit: number }): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.get(`${this.url}/modules?${params && params.query
+        ? `query=${params.query}&`
+        : ''}${params && params.order
+        ? `order=${params.order}&`
+        : ''}${params && params.invert
+        ? `invert=${params.invert}&`
+        : ''}${params && params.limit
+        ? `limit=${params.limit}`
+        : ''}`, {
+        headers: { ...header }
+      }).subscribe(response => {
+        resolve(response['data'])
+      }, e => reject(e.error))
+    })
   }
 
-  // one(id: number): Observable<any> {
-  //   return new Observable<any>(observer => {
-  //     this.getToken().then(() => {
-  //       observer.next(this.http.get(`${this.url}/module/${id}`, {
-  //         headers: { ...this.authHeader }
-  //       }))
-  //       observer.complete()
-  //     }).catch(e => {
-  //       if (e) {
-  //         throw e
-  //       }
-  //     })
-  //   })
-  // }
-  //
-  // create(data: IModuleCreation): Observable<any> {
-  //   return new Observable<any>(observer => {
-  //     this.getToken().then(() => {
-  //       observer.next(this.http.post(`${this.url}/module`, {
-  //         title: data.title,
-  //         description: data.description,
-  //         min_height: data.minHeight,
-  //         min_width: data.minWidth,
-  //         price: data.price
-  //       }))
-  //       observer.complete()
-  //     }).catch(e => {
-  //       if (e) {
-  //         throw e
-  //       }
-  //     })
-  //   })
-  // }
-  //
-  // uploadPackage(data: IModuleUpload): Observable<any> {
-  //   return new Observable<any>(observer => {
-  //     this.getToken().then(() => {
-  //       const headers = new HttpHeaders()
-  //       headers.append('Content-Type', 'multipart/form-data')
-  //
-  //       observer.next(this.http.post(`${this.url}/module/${data.id}/upload`, data.formData, {
-  //         headers: { ...this.authHeader }
-  //       }))
-  //       observer.complete()
-  //     }).catch(e => {
-  //       if (e) {
-  //         throw e
-  //       }
-  //     })
-  //   })
-  // }
-  //
-  // update(id: number, data: IModuleCreation): Observable<any> {
-  //   return new Observable<any>(observer => {
-  //     this.getToken().then(() => {
-  //       observer.next(this.http.put(`${this.url}/module/${id}`, {
-  //         title: data.title,
-  //         description: data.description,
-  //         min_height: data.minHeight,
-  //         min_width: data.minWidth,
-  //         price: data.price
-  //       }, {
-  //         headers: { ...this.authHeader }
-  //       }))
-  //       observer.complete()
-  //     }).catch(e => {
-  //       if (e) {
-  //         throw e
-  //       }
-  //     })
-  //   })
-  // }
-  //
-  // delete(id: number): Observable<any> {
-  //   return new Observable<any>(observer => {
-  //     this.getToken().then(() => {
-  //       observer.next(this.http.delete(`${this.url}/module/${id}`))
-  //       observer.complete()
-  //     })
-  //   })
-  // }
+  async one(id: number): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.get(`${this.url}/module/${id}`, {
+        headers: { ...header }
+      }).subscribe(response => {
+        resolve(response['data'])
+      }, e => reject(e.error))
+    })
+  }
+
+  async create(data: IModuleCreation): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.url}/module`, {
+        title: data.title,
+        description: data.description,
+        min_height: data.minHeight,
+        min_width: data.minWidth,
+        price: data.price
+      }, { headers: { ...header } }).subscribe(response => {
+        resolve(response['data'])
+      }, e => reject(e.error))
+    })
+  }
+
+  async uploadPackage(data: IModuleUpload): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.url}/module/${data.id}/upload`, data.formData, {
+        headers: {
+          ...header,
+          'Content-Type': 'multipart/from-data'
+        }
+      }).subscribe(() => {
+        resolve()
+      }, e => reject(e.error))
+    })
+  }
+
+  async update(module: IModuleUpdate): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.put(`${this.url}/module/${module.id}`, {
+        title: module.title,
+        description: module.description,
+        min_height: module.minHeight,
+        min_width: module.minWidth,
+        price: module.price
+      }, {
+        headers: { ...header }
+      }).subscribe(response => {
+        resolve(response['data'])
+      }, e => reject(e.error))
+    })
+  }
+
+  async delete(module: IModule): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.delete(`${this.url}/module/${module.id}`,
+        {
+          headers: { ...header }
+        }).subscribe(() => {
+        resolve(module)
+      }, e => {
+        reject(e.error)
+      })
+    })
+  }
 }

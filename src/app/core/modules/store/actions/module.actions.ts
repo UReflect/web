@@ -1,5 +1,5 @@
-import { Action }                                  from '@ngrx/store'
-import { IModule, IModuleCreation, IModuleUpload } from '@core/modules/models/module'
+import { Action }                                                 from '@ngrx/store'
+import { IModule, IModuleCreation, IModuleUpdate, IModuleUpload } from '@core/modules/models/module'
 
 export enum ModuleActionTypes {
   LoadAll = '[Modules] Load All',
@@ -61,7 +61,7 @@ export class CreateFailed implements Action {
 export class Update implements Action {
   readonly type = ModuleActionTypes.Update
 
-  constructor(public payload: IModuleCreation) {
+  constructor(public payload: IModuleUpdate) {
   }
 }
 

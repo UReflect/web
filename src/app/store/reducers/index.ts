@@ -33,7 +33,7 @@ export const getRouterState
 
 export function localStorageSyncReducer(reducer: ActionReducer<IState>): ActionReducer<IState> {
   return localStorageSync({
-    keys: ['routerReducer', 'auth', 'layout'],
+    keys: ['routerReducer', 'auth', 'layout', 'modules'],
     rehydrate: true
   })(reducer)
 }

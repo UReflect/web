@@ -13,6 +13,14 @@ const routes: Routes = [
       AuthGuardService,
       fromGuards.ModulesGuard
     ]
+  },
+  {
+    path: 'module/:id',
+    component: fromContainer.ModuleDetailComponent,
+    canActivate: [
+      AuthGuardService,
+      fromGuards.ModuleGuard
+    ]
   }
 ]
 

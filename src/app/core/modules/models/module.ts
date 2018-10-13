@@ -18,6 +18,15 @@ export interface IModuleCreation {
   price: number
 }
 
+export interface IModuleUpdate {
+  id: number,
+  title: string,
+  description: string,
+  minWidth: number,
+  minHeight: number,
+  price: number
+}
+
 export interface IModuleUpload {
   id: number,
   formData: FormData

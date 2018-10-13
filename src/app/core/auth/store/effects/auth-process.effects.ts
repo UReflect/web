@@ -6,7 +6,7 @@ import { Store }                           from '@ngrx/store'
 import { Actions, Effect, ofType }         from '@ngrx/effects'
 import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { Router }                          from '@angular/router'
-import { of }                              from 'rxjs'
+import { from, of }                        from 'rxjs'
 
 @Injectable()
 export class AuthProcessEffects {
@@ -52,16 +52,13 @@ export class AuthProcessEffects {
       })
     )
 
-  @Effect()
+  @Effect({ dispatch: false })
   signOut$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignOut)
-    .pipe(
-      map(() => {
-        this.authService.signout()
-          .pipe(map(() => {
-              this.store.dispatch(new fromAuth.ClearLoggedUser())
-              this.store.dispatch(new fromAuth.ClearToken())
-            })
-          )
+    .pipe(ofType(fromAuth.AuthActionTypes.SignOut),
+      tap(() => {
+        this.store.dispatch(new fromAuth.ClearLoggedUser)
+        this.store.dispatch(new fromAuth.ClearToken)
+        this.store.dispatch(new fromAuth.SignInRedirect)
       })
     )
 
@@ -74,7 +71,7 @@ export class AuthProcessEffects {
     )
 
   @Effect({ dispatch: false })
-  signInRedirect$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignOut)
+  signInRedirect$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignInRedirect)
     .pipe(ofType(fromAuth.AuthActionTypes.SignInRedirect),
       tap(() => {
         this.router.navigate(['/login'])
