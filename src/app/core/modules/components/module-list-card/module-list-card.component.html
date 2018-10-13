@@ -1,23 +1,21 @@
-<a class="block text-center" [routerLink]="['/module', module['ID']]">
-  <div class="block-content block-content-full block-content-sm bg-primary">
-    <span class="font-w600 text-white">{{ module.title }}</span>
-  </div>
-  <div class="block-content block-content-full bg-primary-lighter">
-    <img class="img-avatar img-avatar-thumb" src="assets/media/avatars/avatar7.jpg" alt="">
-  </div>
-  <div class="block-content">
-    <div class="row items-push text-center">
-      <div class="col-6">
-        <div class="mb-5"><i class="si si-wallet fa-2x text-primary"></i></div>
-        <div class="font-size-sm text-muted">$ {{ module.price }}</div>
-      </div>
-      <div class="col-6">
-        <div class="mb-5"><i class="si si-star fa-2x text-primary"></i></div>
-        <div class="font-size-sm text-muted">
-          <i *ngFor="let star of stars" [ngClass]="{'fa-star': star, 'fa-star-o': !star}" class="fa"></i>
-        </div>
-      </div>
+<a class="block block-link-shadow block-rounded ribbon ribbon-bookmark ribbon-left ribbon-success text-center"
+   [routerLink]="['/module', module['ID']]">
+  <div class="ribbon-box">${{ module.price }}</div>
+  <div class="block-content block-content-full">
+    <div class="item item-circle bg-pulse text-pulse-lighter mx-auto my-20">
+      <i class="fa fa-html5"></i>
+    </div>
+    <div class="text-warning">
+      <i *ngFor="let star of stars" [ngClass]="{'fa-star': star, 'fa-star-o': !star}" class="fa"></i>
+    </div>
+    <div class="font-size-sm text-muted">
+      (258 reviews)
     </div>
   </div>
+  <div class="block-content block-content-full block-content-sm bg-body-light">
+    <div class="font-size-sm text-muted">10 lessons &bull; 5 hours</div>
+  </div>
+  <div class="block-content block-content-full">
+    <div class="font-w600">{{ module.title }}</div>
+  </div>
 </a>
-
