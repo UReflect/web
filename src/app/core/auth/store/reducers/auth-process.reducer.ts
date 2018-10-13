@@ -34,6 +34,7 @@ export function reducer(state: IState = initialState, action: AuthActionsUnion):
         pending: false,
         error: action.payload
       }
+    case AuthActionTypes.ClearError:
     case AuthActionTypes.SignInRedirect:
     case AuthActionTypes.PasswordLostSuccess:
       return {

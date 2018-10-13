@@ -10,7 +10,8 @@ export enum AuthActionTypes {
   SignInRedirect = '[Auth] Sign In Redirect',
   PasswordLost = '[Auth] Password Lost',
   PasswordLostSuccess = '[Auth] Password Lost Success',
-  PasswordLostFailure = '[Auth] Password Lost Failure'
+  PasswordLostFailure = '[Auth] Password Lost Failure',
+  ClearError = '[Auth] Clear Error'
 }
 
 export class SignIn implements Action {
@@ -64,6 +65,10 @@ export class PasswordLostFailure implements Action {
   }
 }
 
+export class ClearError implements Action {
+  readonly type = AuthActionTypes.ClearError
+}
+
 export type AuthActionsUnion =
   | SignIn
   | SignUp
@@ -74,3 +79,4 @@ export type AuthActionsUnion =
   | PasswordLost
   | PasswordLostSuccess
   | PasswordLostFailure
+  | ClearError

@@ -28,7 +28,7 @@ export class AuthProcessEffects {
               return new fromAuth.SignInSuccess
             }),
             catchError(e => {
-              return of(new fromAuth.SignInFailure(e.error))
+              return of(new fromAuth.SignInFailure(e.error.error))
             })
           )
       })
@@ -46,7 +46,7 @@ export class AuthProcessEffects {
               return new fromAuth.SignInSuccess
             }),
             catchError(e => {
-              return of(new fromAuth.SignInFailure(e.error))
+              return of(new fromAuth.SignInFailure(e.error.error))
             })
           )
       })
@@ -89,7 +89,7 @@ export class AuthProcessEffects {
               return new fromAuth.PasswordLostSuccess
             }),
             catchError(e => {
-              return of(new fromAuth.PasswordLostFailure(e.error))
+              return of(new fromAuth.PasswordLostFailure(e.error.error))
             })
           )
       })

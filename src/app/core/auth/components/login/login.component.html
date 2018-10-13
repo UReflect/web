@@ -42,3 +42,9 @@
     </div>
   </div>
 </form>
+
+<div class="alert alert-danger" role="alert"
+     *ngIf="(error$ | async) && (error$ | async).length > 0">
+  <h3 class="alert-heading font-size-h4 font-w400">Error</h3>
+  <p class="mb-0">{{ error$ | async }}</p>
+</div>

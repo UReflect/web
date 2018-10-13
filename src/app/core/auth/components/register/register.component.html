@@ -2,11 +2,6 @@
   <div class="block block-themed block-rounded block-shadow">
     <div class="block-header bg-gd-dusk">
       <h3 class="block-title">Please add your details</h3>
-      <!--<div class="block-options">-->
-      <!--<button type="button" class="btn-block-option">-->
-      <!--<i class="si si-wrench"></i>-->
-      <!--</button>-->
-      <!--</div>-->
     </div>
     <div class="block-content text-body-color">
       <div class="form-group row" [ngClass]="{'is-invalid': getName().invalid && getName().touched}">
@@ -54,10 +49,6 @@
       </div>
       <div class="form-group row mb-0">
         <div class="col-sm-6 push">
-          <!--<div class="custom-control custom-checkbox">-->
-          <!--<input type="checkbox" class="custom-control-input" id="signup-terms" name="signup-terms">-->
-          <!--<label class="custom-control-label" for="signup-terms">I agree to Terms &amp; Conditions</label>-->
-          <!--</div>-->
         </div>
         <div class="col-sm-6 text-sm-right push">
           <button type="submit" class="btn btn-alt-primary"
@@ -69,10 +60,6 @@
     </div>
     <div class="block-content bg-body-light">
       <div class="form-group text-center">
-        <!--<a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="#" data-toggle="modal"-->
-        <!--data-target="#modal-terms">-->
-        <!--<i class="fa fa-book text-muted mr-5"></i> Read Terms-->
-        <!--</a>-->
         <a class="link-effect text-muted mr-10 mb-5 d-inline-block" routerLink="/login">
           <i class="fa fa-user text-muted mr-5"></i> Sign In
         </a>
@@ -80,4 +67,9 @@
     </div>
   </div>
 </form>
-<!-- END Sign Up Form -->
+
+<div class="alert alert-danger" role="alert"
+     *ngIf="(error$ | async) && (error$ | async).length > 0">
+  <h3 class="alert-heading font-size-h4 font-w400">Error</h3>
+  <p class="mb-0">{{ error$ | async }}</p>
+</div>

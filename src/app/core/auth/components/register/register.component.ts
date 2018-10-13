@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.pending$ = this.store.pipe(select(fromAuth.getPending))
     this.error$ = this.store.pipe(select(fromAuth.getError))
+    this.store.dispatch(new fromAuth.ClearError())
   }
 
   signupHandler(): any {

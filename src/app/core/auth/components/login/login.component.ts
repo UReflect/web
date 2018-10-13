@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.pending$ = this.store.pipe(select(fromAuth.getPending))
     this.error$ = this.store.pipe(select(fromAuth.getError))
+    this.store.dispatch(new fromAuth.ClearError())
   }
 
   signinHandler(): any {
