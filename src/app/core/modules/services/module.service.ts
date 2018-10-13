@@ -18,7 +18,7 @@ export class ModuleService {
     this.token$ = this.store.select(fromAuth.getToken)
   }
 
-  authHeader() {
+  authHeader(): Promise<any> {
     return new Promise((resolve) => {
       this.token$.subscribe(token => {
         resolve({ 'x-access-token': token })

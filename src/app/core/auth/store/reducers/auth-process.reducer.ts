@@ -15,6 +15,8 @@ export const initialState: IState = {
 export function reducer(state: IState = initialState, action: AuthActionsUnion): IState {
   switch (action.type) {
     case AuthActionTypes.SignIn:
+    case AuthActionTypes.SignUp:
+    case AuthActionTypes.PasswordLost:
       return {
         ...state,
         pending: true
@@ -26,17 +28,14 @@ export function reducer(state: IState = initialState, action: AuthActionsUnion):
         isAuthenticated: true
       }
     case AuthActionTypes.SignInFailure:
+    case AuthActionTypes.PasswordLostFailure:
       return {
         ...state,
         pending: false,
         error: action.payload
       }
-    case AuthActionTypes.SignUp:
-      return {
-        ...state,
-        pending: true
-      }
     case AuthActionTypes.SignInRedirect:
+    case AuthActionTypes.PasswordLostSuccess:
       return {
         ...state,
         pending: false,

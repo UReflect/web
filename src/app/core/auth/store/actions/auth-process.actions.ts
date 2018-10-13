@@ -1,5 +1,5 @@
-import { Action }                                from '@ngrx/store'
-import { IAuthentication, IRegistration, IUser } from '../../models/user'
+import { Action }                                               from '@ngrx/store'
+import { IAuthentication, IPasswordLost, IRegistration, IUser } from '../../models/user'
 
 export enum AuthActionTypes {
   SignIn = '[Auth] Sign In',
@@ -7,7 +7,10 @@ export enum AuthActionTypes {
   SignUp = '[Auth] Sign Up',
   SignInSuccess = '[Auth] Sign In Success',
   SignInFailure = '[Auth] Sign In Failure',
-  SignInRedirect = '[Auth] Sign In Redirect'
+  SignInRedirect = '[Auth] Sign In Redirect',
+  PasswordLost = '[Auth] Password Lost',
+  PasswordLostSuccess = '[Auth] Password Lost Success',
+  PasswordLostFailure = '[Auth] Password Lost Failure'
 }
 
 export class SignIn implements Action {
@@ -43,6 +46,24 @@ export class SignInRedirect implements Action {
   readonly type = AuthActionTypes.SignInRedirect
 }
 
+export class PasswordLost implements Action {
+  readonly type = AuthActionTypes.PasswordLost
+
+  constructor(public payload: IPasswordLost) {
+  }
+}
+
+export class PasswordLostSuccess implements Action {
+  readonly type = AuthActionTypes.PasswordLostSuccess
+}
+
+export class PasswordLostFailure implements Action {
+  readonly type = AuthActionTypes.PasswordLostFailure
+
+  constructor(public payload: any) {
+  }
+}
+
 export type AuthActionsUnion =
   | SignIn
   | SignUp
@@ -50,3 +71,6 @@ export type AuthActionsUnion =
   | SignInFailure
   | SignInRedirect
   | SignInSuccess
+  | PasswordLost
+  | PasswordLostSuccess
+  | PasswordLostFailure

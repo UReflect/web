@@ -77,4 +77,21 @@ export class AuthProcessEffects {
         this.router.navigate(['/login'])
       })
     )
+
+  @Effect()
+  passwordLost = this.actions$.ofType(fromAuth.AuthActionTypes.PasswordLost)
+    .pipe(map((action: fromAuth.PasswordLost) => action.payload),
+      switchMap(credentials => {
+        return this.authService.lost(credentials)
+          .pipe(
+            map(() => {
+              this.store.dispatch(new fromAuth.SignInRedirect)
+              return new fromAuth.PasswordLostSuccess
+            }),
+            catchError(e => {
+              return of(new fromAuth.PasswordLostFailure(e.error))
+            })
+          )
+      })
+    )
 }

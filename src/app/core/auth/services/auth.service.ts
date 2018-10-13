@@ -1,41 +1,27 @@
-import { Injectable }                     from '@angular/core'
-import { HttpClient }                     from '@angular/common/http'
-import { environment }                    from '@env/environment'
-import { Observable }                     from 'rxjs'
-import { IAuthentication, IRegistration } from '@core/auth/models/user'
-import * as fromAuth                      from '@core/auth/store/selectors'
-import * as AuthState                     from '@core/auth/store/reducers'
-import { select, Store }                  from '@ngrx/store'
+import { Injectable }                                    from '@angular/core'
+import { HttpClient }                                    from '@angular/common/http'
+import { environment }                                   from '@env/environment'
+import { Observable }                                    from 'rxjs'
+import { IAuthentication, IPasswordLost, IRegistration } from '@core/auth/models/user'
+import * as fromAuth                                     from '@core/auth/store/selectors'
+import * as AuthState                                    from '@core/auth/store/reducers'
+import { select, Store }                                 from '@ngrx/store'
 
 @Injectable()
 export class AuthService {
   private url: string
-  private authHeader: {}
   private token$: Observable<string>
 
   constructor(private http: HttpClient,
               private store: Store<AuthState.IState>) {
     this.url = environment.apiUrl
     this.token$ = this.store.pipe(select(fromAuth.getToken))
-    this.getToken().then(() => {
-    }).catch(e => {
-      if (e) {
-        throw e
-      }
-    })
   }
 
-  getToken(): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
+  authHeader(): Promise<any> {
+    return new Promise(resolve => {
       this.token$.subscribe(token => {
-        this.authHeader = {
-          'x-access-token': `${token}`
-        }
-        resolve()
-      }, e => {
-        if (e) {
-          reject(e)
-        }
+        resolve({ 'x-access-token': token })
       })
     })
   }
@@ -55,18 +41,21 @@ export class AuthService {
     })
   }
 
-  signout(): Observable<any> {
-    return new Observable<any>(observer => {
-      this.getToken().then(() => {
-        observer.next(this.http.post(`${this.url}/signout`, {}, {
-          headers: { ...this.authHeader }
-        }))
-        observer.complete()
-      }).catch(e => {
-        if (e) {
-          throw e
-        }
-      })
+  async signout(): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.url}/signout`, {}, {
+        headers: { ...header }
+      }).subscribe(response => {
+        resolve(response['data'])
+      }, e => reject(e.error))
+    })
+  }
+
+  lost(credentials: IPasswordLost): Observable<any> {
+    return this.http.post(`${this.url}/lost`, {
+      email: credentials.email
     })
   }
 }

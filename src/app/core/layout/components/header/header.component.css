@@ -4,3 +4,7 @@
   border-color: #212529;
   box-shadow: none;
 }
+
+.content-header {
+  margin: 0;
+}

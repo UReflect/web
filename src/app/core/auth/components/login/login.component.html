@@ -1,15 +1,7 @@
-<!-- Sign In Form -->
-<!-- jQuery Validation (.js-validation-signin class is initialized in js/pages/op_auth_signin.js) -->
-<!-- For more examples you can check out https://github.com/jzaefferer/jquery-validation -->
 <form class="js-validation-signin" [formGroup]="formFields">
   <div class="block block-themed block-rounded block-shadow">
     <div class="block-header bg-gd-dusk">
       <h3 class="block-title">Please Sign In</h3>
-      <!--<div class="block-options">-->
-        <!--<button type="button" class="btn-block-option">-->
-        <!--<i class="si si-wrench"></i>-->
-        <!--</button>-->
-      <!--</div>-->
     </div>
     <div class="block-content text-body-color">
       <div class="form-group row" [ngClass]="{'is-invalid': getEmail().invalid && getEmail().touched}">
@@ -22,7 +14,8 @@
       <div class="form-group row" [ngClass]="{'is-invalid': getPassword().invalid && getPassword().touched}">
         <div class="col-12">
           <label for="login-password">Password</label>
-          <input type="password" class="form-control" id="login-password" name="login-password" formControlName="password">
+          <input type="password" class="form-control" id="login-password" name="login-password"
+                 formControlName="password">
           <div class="invalid-feedback animated fadeInDown" *ngIf="getPassword().invalid">{{ getErrors('password') }}
           </div>
         </div>
@@ -42,11 +35,10 @@
         <a class="link-effect text-muted mr-10 mb-5 d-inline-block" routerLink="/register">
           <i class="fa fa-plus mr-5"></i> Create Account
         </a>
-        <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="op_auth_reminder3.html">
+        <a class="link-effect text-muted mr-10 mb-5 d-inline-block" routerLink="/password-lost">
           <i class="fa fa-warning mr-5"></i> Forgot Password
         </a>
       </div>
     </div>
   </div>
 </form>
-<!-- END Sign In Form -->

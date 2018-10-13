@@ -1,6 +1,6 @@
-import { NgModule }                                  from '@angular/core'
-import { RouterModule, Routes }                      from '@angular/router'
-import { LoginPageComponent, RegisterPageComponent } from '@core/auth/containers'
+import { NgModule }                                                             from '@angular/core'
+import { RouterModule, Routes }                                                 from '@angular/router'
+import { LoginPageComponent, PasswordLostPageComponent, RegisterPageComponent } from '@core/auth/containers'
 
 const routes: Routes = [
   {
@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterPageComponent
+  },
+  {
+    path: 'password-lost',
+    component: PasswordLostPageComponent
   }
 ]
 

@@ -9,6 +9,10 @@ export interface IRegistration {
   name: string
 }
 
+export interface IPasswordLost {
+  email: string
+}
+
 export interface IUser {
   id: number,
   active: boolean,
