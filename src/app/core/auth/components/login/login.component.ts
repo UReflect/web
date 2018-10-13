@@ -1,7 +1,7 @@
 import { Component, OnInit }                                   from '@angular/core'
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Observable }                                          from 'rxjs'
-import { IAuthentication }                                     from '../../models/user'
+import { IAuthentication }                                     from '../../models/auth.model'
 import * as fromAuth                                           from '@core/auth/store'
 import { select, Store }                                       from '@ngrx/store'
 

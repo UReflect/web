@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { Observable }                   from 'rxjs'
-import { IUser }                        from '@core/auth/models/user'
-import { select, Store }                from '@ngrx/store'
-import * as fromAuth                    from '@core/auth/store'
+import { Component, OnInit } from '@angular/core'
+import { Observable }        from 'rxjs'
+import { select, Store }     from '@ngrx/store'
+import * as fromAuth         from '@core/auth/store'
+import { IUser }             from '@core/user/model/user.model'
 
 @Component({
   selector: 'app-sidebar-user',

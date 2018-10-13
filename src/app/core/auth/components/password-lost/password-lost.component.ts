@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Observable }                                          from 'rxjs'
 import * as fromAuth                                           from '@core/auth/store'
 import { select, Store }                                       from '@ngrx/store'
-import { IPasswordLost }                                       from '@core/auth/models/user'
+import { IPasswordLost }                                       from '@core/auth/models/auth.model'
 
 @Component({
   selector: 'app-password-lost',

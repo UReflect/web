@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AuthService }                                         from '@core/auth/services/auth.service'
 import { passwordConfirm, passwordStrength }                   from '@shared/validators'
 import { Observable, Subscription }                            from 'rxjs'
-import { IRegistration }                                       from '@core/auth/models/user'
+import { IRegistration }                                       from '@core/auth/models/auth.model'
 import * as fromAuth                                           from '@core/auth/store'
 import { select, Store }                                       from '@ngrx/store'
 

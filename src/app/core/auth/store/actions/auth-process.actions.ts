@@ -1,5 +1,5 @@
-import { Action }                                               from '@ngrx/store'
-import { IAuthentication, IPasswordLost, IRegistration, IUser } from '../../models/user'
+import { Action }                                        from '@ngrx/store'
+import { IAuthentication, IPasswordLost, IRegistration } from '../../models/auth.model'
 
 export enum AuthActionTypes {
   SignIn = '[Auth] Sign In',
