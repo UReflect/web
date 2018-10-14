@@ -38,7 +38,7 @@ export const getModuleLoading = createSelector(
   fromModules.getLoading
 )
 
-export const getModuleErrors = createSelector(
+export const getModuleError = createSelector(
   getModuleState,
-  fromModules.getErrors
+  fromModules.getError
 )

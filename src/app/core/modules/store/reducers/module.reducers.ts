@@ -3,17 +3,17 @@ import * as fromActions  from '../actions'
 import { DeleteSuccess } from '../actions'
 
 export interface IState {
-  entities: { [id: number]: IModule }
+  entities: { [id: number]: IModule },
   loaded: boolean,
   loading: boolean,
-  errors: any
+  error: any
 }
 
 export const initialState: IState = {
   entities: {},
   loaded: false,
   loading: false,
-  errors: null
+  error: null
 }
 
 export function reducer(state: IState = initialState,
@@ -57,7 +57,7 @@ export function reducer(state: IState = initialState,
       return {
         ...state,
         loading: false,
-        errors: action.payload
+        error: action.payload
       }
     }
     case fromActions.ModuleActionTypes.UpdateSuccess:
@@ -96,4 +96,4 @@ export function reducer(state: IState = initialState,
 export const getEntities = (state: IState) => state.entities
 export const getLoading = (state: IState) => state.loading
 export const getLoaded = (state: IState) => state.loaded
-export const getErrors = (state: IState) => state.errors
+export const getError = (state: IState) => state.error
