@@ -32,10 +32,6 @@ jobs:
         command: yarn lint
 
     - run:
-        name: Testing
-        command: yarn test
-
-    - run:
         name: Building
         command: yarn build
 
