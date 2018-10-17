@@ -6,7 +6,7 @@ import * as fromServices from './services'
   exports: [],
   declarations: [],
   providers: [
-    { ...fromServices.services }
+    ...fromServices.services
   ]
 })
 export class UserModule {
