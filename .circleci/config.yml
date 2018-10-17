@@ -51,8 +51,12 @@ jobs:
     docker:
     - image: circleci/node:8.10
 
-    steps:
+    - restore_cache:
+        keys:
+        - v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
 
+    steps:
+    - run: pwd
     - run: ls -lah
 
     - run:
