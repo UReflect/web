@@ -55,9 +55,16 @@ jobs:
         name: Packaging Theme Assets
         command: tar czf assets.tar.gz ./dist/web/assets
 
+    - run: pwd
+    - run: ls -lahR
+
     - run:
         name: Removing Theme Assets
         command: rm -rf ./dist/web/assets
+
+    - run:
+        name: Removing Remote Files
+        command: ssh root@51.15.206.163 rm -rf /var/www/ur-web/*
 
     - run:
         name: Deploy Over SSH
