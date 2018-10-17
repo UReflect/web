@@ -11,7 +11,7 @@ import { IModule }           from '@core/modules/models/module'
 })
 
 export class ModuleDetailComponent implements OnInit {
-  private module$: Observable<IModule>
+  public module$: Observable<IModule>
 
   constructor(private store: Store<fromStore.IModulesState>) {
     this.module$ = this.store.pipe(select(fromSelectors.getSelectedModule))

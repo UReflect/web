@@ -12,7 +12,7 @@ import * as fromSelectors    from '@core/modules/store/selectors'
 
 export class ModuleListComponent implements OnInit {
   private modulesEntities$: Observable<any>
-  private modules$: Observable<any>
+  public modules$: Observable<any>
 
   constructor(private store: Store<fromStore.IModulesState>) {
     this.modulesEntities$ = this.store.pipe(select(fromSelectors.getModuleEntities))
