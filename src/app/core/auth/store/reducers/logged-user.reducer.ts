@@ -1,5 +1,5 @@
 import { LoggedUserActionsUnion, LoggedUserActionTypes } from '../actions/logged-user.actions'
-import { IUser }                                         from '@core/user/model/user.model'
+import { IUser }                                         from '@core/users/model/user.model'
 
 export interface IState {
   user: IUser

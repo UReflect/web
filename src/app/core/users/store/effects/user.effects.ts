@@ -1,9 +1,7 @@
-import * as userActions   from '@core/user/store/actions'
-import * as routerActions from '@store/actions'
-
+import * as userActions   from '@core/users/store/actions'
 import { Injectable }      from '@angular/core'
 import { Actions, Effect } from '@ngrx/effects'
-import { UserService }     from '@core/user/services'
+import { UserService }     from '@core/users/services'
 import { switchMap }       from 'rxjs/operators'
 import { of }              from 'rxjs'
 

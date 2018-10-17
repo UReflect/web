@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { AuthGuardService }     from '@core/auth/guards/auth-guard.service'
 import * as fromContainer       from './containers'
 import * as fromGuards          from './guards'
+import * as fromUserGuards      from '@core/users/guards'
 import * as fromServices        from './services'
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
     canActivate: [
       AuthGuardService,
       fromGuards.ModulesGuard
+      // fromUserGuards.UsersGuard
     ]
   },
   {

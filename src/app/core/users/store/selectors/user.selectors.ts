@@ -2,7 +2,7 @@ import * as fromFeature   from '../reducers'
 import * as fromUsers     from '../reducers/user.reducer'
 import * as fromRouter    from '@store'
 import { createSelector } from '@ngrx/store'
-import { IUser }          from '@core/user/model/user.model'
+import { IUser }          from '@core/users/model/user.model'
 
 export const getUserState = createSelector(
   fromFeature.getUsersState,

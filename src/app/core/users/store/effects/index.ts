@@ -1,4 +1,4 @@
-import { UserEffects } from '@core/user/store/effects/user.effects'
+import { UserEffects } from '@core/users/store/effects/user.effects'
 
 export * from './user.effects'
 

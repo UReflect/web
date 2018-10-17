@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Observable }        from 'rxjs'
 import { select, Store }     from '@ngrx/store'
 import * as fromAuth         from '@core/auth/store'
-import { IUser }             from '@core/user/model/user.model'
+import { IUser }             from '@core/users/model/user.model'
 
 @Component({
   selector: 'app-sidebar-user',
