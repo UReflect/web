@@ -65,9 +65,11 @@ jobs:
                 command: scp -rfv ./dist/* root@51.15.206.163:/var/www/my_website/
 
 workflows:
-  version: 2
+    version: 2
 
-  build_n_deploy:
-    jobs:
-        - build
-        - deploy
+    workflow:
+        jobs:
+            - build
+            - deploy:
+                requires:
+                    - build
