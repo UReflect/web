@@ -76,7 +76,7 @@ jobs:
 
     - run:
         name: Unpacking Theme Over SSH
-        command: ssh root@51.15.206.163 tar -zxf /var/www/ur-web/assets.tar.gz
+        command: ssh root@51.15.206.163 tar zxvf /var/www/ur-web/assets.tar.gz
 
 workflows:
   version: 2
