@@ -53,7 +53,7 @@ jobs:
 
     - run:
         name: Packaging Theme Assets
-        command: tar -cf - ./dist/web/assets/*
+        command: tar czf assets.tar.gz ./dist/web/assets
 
     - run:
         name: Removing Theme Assets
