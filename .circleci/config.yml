@@ -62,7 +62,7 @@ jobs:
       steps:
             - run:
                 name: Deploy Over SSH
-                command: scp -rv ./dist/* root@51.15.206.163:/var/www/my_website/
+                command: scp -rv -oStrictHostKeyChecking=accept-new ./dist/* root@51.15.206.163:/var/www/my_website/
 
 workflows:
     version: 2
