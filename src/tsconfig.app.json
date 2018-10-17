@@ -33,7 +33,6 @@
   },
   "exclude": [
     "../unit-tests/test.ts",
-    "**/*.spec.ts",
-    "**/assets/js/plugins/**"
+    "**/*.spec.ts"
   ]
 }

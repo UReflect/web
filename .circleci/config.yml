@@ -52,31 +52,12 @@ jobs:
         - v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
 
     - run:
-        name: Packaging Theme Assets
-        command: tar czf dist/web/assets.tar.gz ./dist/web/assets
-
-    - run: pwd
-    - run: ls -lahR
-
-    - run:
-        name: Removing Theme Assets
-        command: rm -rf ./dist/web/assets
-
-    - run:
         name: Removing Remote Files
         command: ssh -oStrictHostKeyChecking=no root@51.15.206.163 rm -rf /var/www/ur-web/*
 
     - run:
         name: Deploy Over SSH
         command: scp -rv ./dist/web/* root@51.15.206.163:/var/www/ur-web/
-
-    - run:
-        name: Debug tar
-        command: ssh root@51.15.206.163 ls -R /var/www/ur-web
-
-    - run:
-        name: Unpacking Theme Over SSH
-        command: ssh root@51.15.206.163 tar zxvf /var/www/ur-web/assets.tar.gz
 
 workflows:
   version: 2
