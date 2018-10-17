@@ -5,10 +5,37 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "@env/*": [
+        "../src/environments/*"
+      ],
+      "@shared/*": [
+        "../src/app/shared/*"
+      ],
+      "@core/*": [
+        "../src/app/core/*"
+      ],
+      "@admin/*": [
+        "../src/app/admin/*"
+      ],
+      "@user/*": [
+        "../src/app/user/*"
+      ],
+      "@dev-console/*": [
+        "../src/app/dev-console/*"
+      ],
+      "@store/*": [
+        "../src/app/store/*"
+      ],
+      "@store": [
+        "../src/app/store"
+      ]
+    }
   },
   "files": [
-    "./test.ts",
+    "../unit-tests/test.ts",
     "../src/polyfills.ts"
   ],
   "include": [

@@ -27,14 +27,13 @@ jobs:
         - node_modules
         key: v1-dependencies-{{ checksum "yarn.lock" }}
 
-    #      - run:
-    #          name: Linting
-    #          command: yarn lint
+    - run:
+        name: Linting
+        command: yarn lint
 
-    # run tests!
-    #      - run:
-    #            name: Testing
-    #            command: yarn test
+    - run:
+        name: Testing
+        command: yarn test
 
     - run:
         name: Building
@@ -55,12 +54,26 @@ jobs:
     - restore_cache:
         keys:
         - v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-    - run: pwd
-    - run: ls -lah
+
+    - run:
+        name: Packaging Theme Assets
+        command: tar -cf ./dist/web/assets
+
+    - run:
+        name: Removing Theme Assets
+        command: rm -rf ./dist/web/assets
 
     - run:
         name: Deploy Over SSH
-        command: scp -rv -oStrictHostKeyChecking=no ./dist/* root@51.15.206.163:/var/www/ur-web/
+        command: scp -rv -oStrictHostKeyChecking=no ./dist/web/* root@51.15.206.163:/var/www/ur-web/
+
+    - run:
+        name: Debug tar
+        command: ssh root@51.15.206.163 ls -R /var/www/ur-web
+
+    - run:
+        name: Unpacking Theme Over SSH
+        command: ssh root@51.15.206.163 tar czf - /var/www/ur-web/assets.tar.gz
 
 workflows:
   version: 2
