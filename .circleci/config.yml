@@ -53,7 +53,7 @@ jobs:
 
     - run:
         name: Packaging Theme Assets
-        command: tar czf assets.tar.gz ./dist/web/assets
+        command: tar czf dist/web/assets.tar.gz ./dist/web/assets
 
     - run: pwd
     - run: ls -lahR
@@ -64,11 +64,11 @@ jobs:
 
     - run:
         name: Removing Remote Files
-        command: ssh root@51.15.206.163 rm -rf /var/www/ur-web/*
+        command: ssh -oStrictHostKeyChecking=no root@51.15.206.163 rm -rf /var/www/ur-web/*
 
     - run:
         name: Deploy Over SSH
-        command: scp -rv -oStrictHostKeyChecking=no ./dist/web/* root@51.15.206.163:/var/www/ur-web/
+        command: scp -rv ./dist/web/* root@51.15.206.163:/var/www/ur-web/
 
     - run:
         name: Debug tar
