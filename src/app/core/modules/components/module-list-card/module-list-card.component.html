@@ -1,15 +1,13 @@
 <a class="block block-rounded ribbon ribbon-bookmark ribbon-left ribbon-success text-center"
-   [routerLink]="['/module', module['ID']]">
+   [routerLink]="['/module', module.ID]">
   <div class="ribbon-box">${{ module.price }}</div>
   <div class="block-content block-content-full">
     <div class="item item-circle bg-pulse text-pulse-lighter mx-auto my-20">
       <i class="fa fa-html5"></i>
     </div>
-    <div class="text-warning">
-      <i *ngFor="let star of stars" [ngClass]="{'fa-star': star, 'fa-star-o': !star}" class="fa"></i>
-    </div>
+    <app-module-stars [rating]="module.rating"></app-module-stars>
     <div class="font-size-sm text-muted">
-      (258 reviews)
+      ({{ ratingNbStr }})
     </div>
   </div>
   <div class="block-content block-content-full block-content-sm bg-body-light">

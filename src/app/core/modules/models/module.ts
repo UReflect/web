@@ -1,33 +1,34 @@
 export interface IModule {
-  id: number,
+  ID: number,
   descriptions: string,
   title: string,
   price: number,
   rating: number,
-  ratingNb: number,
-  userId: number,
-  minHeight: number,
-  minWidth: number
+  rating_nb: number,
+  user_id: number,
+  min_height: number,
+  min_width: number,
+  UpdatedAt: any
 }
 
 export interface IModuleCreation {
   title: string,
   description: string,
-  minWidth: number,
-  minHeight: number,
+  min_height: number,
+  min_width: number,
   price: number
 }
 
 export interface IModuleUpdate {
-  id: number,
+  ID: number,
   title: string,
   description: string,
-  minWidth: number,
-  minHeight: number,
+  min_height: number,
+  min_width: number,
   price: number
 }
 
 export interface IModuleUpload {
-  id: number,
+  ID: number,
   formData: FormData
 }

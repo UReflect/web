@@ -63,8 +63,8 @@ export class ModuleService {
       this.http.post(`${this.url}/module`, {
         title: data.title,
         description: data.description,
-        min_height: data.minHeight,
-        min_width: data.minWidth,
+        min_height: data.min_height,
+        min_width: data.min_width,
         price: data.price
       }, { headers: { ...header } }).subscribe(response => {
         resolve(response['data'])
@@ -76,7 +76,7 @@ export class ModuleService {
     const header: any = await this.authHeader()
 
     return new Promise((resolve, reject) => {
-      this.http.post(`${this.url}/module/${data.id}/upload`, data.formData, {
+      this.http.post(`${this.url}/module/${data.ID}/upload`, data.formData, {
         headers: {
           ...header,
           'Content-Type': 'multipart/from-data'
@@ -91,11 +91,11 @@ export class ModuleService {
     const header: any = await this.authHeader()
 
     return new Promise((resolve, reject) => {
-      this.http.put(`${this.url}/module/${module.id}`, {
+      this.http.put(`${this.url}/module/${module.ID}`, {
         title: module.title,
         description: module.description,
-        min_height: module.minHeight,
-        min_width: module.minWidth,
+        min_height: module.min_height,
+        min_width: module.min_width,
         price: module.price
       }, {
         headers: { ...header }
@@ -109,7 +109,7 @@ export class ModuleService {
     const header: any = await this.authHeader()
 
     return new Promise((resolve, reject) => {
-      this.http.delete(`${this.url}/module/${module.id}`,
+      this.http.delete(`${this.url}/module/${module.ID}`,
         {
           headers: { ...header }
         }).subscribe(() => {

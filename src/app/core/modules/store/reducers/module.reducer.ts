@@ -34,7 +34,7 @@ export function reducer(state: IState = initialState,
         (obj: { [id: number]: IModule }, module: IModule) => {
           return {
             ...obj,
-            [module['ID']]: module
+            [module.ID]: module
           }
         },
         {
@@ -75,7 +75,7 @@ export function reducer(state: IState = initialState,
     }
     case fromActions.ModuleActionTypes.DeleteSuccess: {
       const module = action.payload
-      const { [module.id]: removed, ...entities } = state.entities
+      const { [module.ID]: removed, ...entities } = state.entities
 
       return {
         ...state,

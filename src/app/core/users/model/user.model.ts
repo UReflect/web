@@ -1,7 +1,7 @@
 export interface IUser {
-  id: number,
+  ID: number,
   active: boolean,
   email: string,
-  emailChecked: boolean,
+  email_checked: boolean,
   name: string
 }

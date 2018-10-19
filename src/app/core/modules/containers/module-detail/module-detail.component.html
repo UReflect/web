@@ -1,1 +1,65 @@
-{{ module$ | async | json}}
+<div class="content">
+  <app-module-detail-header
+    [title]="(module$ | async).title"
+    [userId]="(module$ | async).user_id">
+  </app-module-detail-header>
+  <div class="block block-rounded">
+    <app-module-detail-tags>
+      <div tag-type="price">
+        <p class="text-muted">
+          <i class="fa fa-fw fa-money text-muted mr-5"></i>
+          ${{ (module$ | async).price }}
+        </p>
+      </div>
+      <div tag-type="reviews" class="rating">
+        <app-module-stars [rating]="(module$ | async).rating"></app-module-stars>
+        <div class="font-size-sm text-muted ml-10">
+          ( {{ getRatingNbStr((module$ | async).rating_nb) }} )
+        </div>
+      </div>
+      <div tag-type="lastUpdate">
+        <p class="text-muted">
+          <i class="fa fa-fw fa-edit text-muted mr-5"></i>
+          {{ (module$ | async).UpdatedAt | date:'longDate' }}
+        </p>
+      </div>
+      <div tag-type="resizable">
+        <p class="text-muted">
+          <i class="fa fa-fw fa-arrows-alt text-muted mr-5"></i> Maybe
+        </p>
+      </div>
+      <div tag-type="minWidth">
+        <p class="text-muted">
+          <i class="fa fa-fw fa-arrows-h text-muted mr-5"></i>
+          {{ (module$ | async).min_width }}
+        </p>
+      </div>
+      <div tag-type="minHeight">
+        <p class="text-muted">
+          <i class="fa fa-fw fa-arrows-v text-muted mr-5"></i>
+          {{ (module$ | async).min_height }}
+        </p>
+      </div>
+    </app-module-detail-tags>
+    <div class="block-content block-content-full">
+      <div class="row">
+        <!--<app-module-detail-pictures class="col-md-6 order-md-2 py-20">-->
+        <!--</app-module-detail-pictures>-->
+        <div class="col-md-6 order-md-1 py-20 text-muted module-content">
+          {{ (module$ | async).description }}
+          <app-module-detail-comments
+            [moduleId]="(module$ | async).id">
+          </app-module-detail-comments>
+        </div>
+      </div>
+    </div>
+    <!--<div class="block-content block-content-full border-top clearfix">-->
+    <!--<a class="btn btn-hero btn-alt-danger float-right" href="javascript:void(0)">-->
+    <!--<i class="fa fa-heart"></i>-->
+    <!--</a>-->
+    <!--<a class="btn btn-hero btn-alt-primary" href="javascript:void(0)">-->
+    <!--<i class="fa fa-envelope mr-5"></i> Comment-->
+    <!--</a>-->
+    <!--</div>-->
+  </div>
+</div>

@@ -18,10 +18,8 @@ export class ModulesGuard {
 
   checkStore(): Observable<boolean> {
     return this.store.pipe(select(fromStore.getModuleLoaded)).pipe(
-      tap(loaded => {
-        if (!loaded) {
-          this.store.dispatch(new fromStore.LoadAll)
-        }
+      tap(() => {
+        this.store.dispatch(new fromStore.LoadAll)
       }),
       filter(loaded => loaded),
       take(1)

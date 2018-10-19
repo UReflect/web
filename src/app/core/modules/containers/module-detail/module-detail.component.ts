@@ -7,16 +7,23 @@ import { IModule }           from '@core/modules/models/module'
 
 @Component({
   selector: 'app-module-detail',
-  templateUrl: 'module-detail.component.html'
+  templateUrl: 'module-detail.component.html',
+  styleUrls: ['module-detail.component.scss']
 })
 
 export class ModuleDetailComponent implements OnInit {
-  public module$: Observable<IModule>
+  module$: Observable<IModule>
 
   constructor(private store: Store<fromStore.IModulesState>) {
     this.module$ = this.store.pipe(select(fromSelectors.getSelectedModule))
   }
 
   ngOnInit() {
+  }
+
+  getRatingNbStr(ratingNb: number): string {
+    return ratingNb === 1
+      ? '1 review'
+      : `${ratingNb} reviews`
   }
 }

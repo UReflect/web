@@ -31,7 +31,7 @@ export function reducer(state: IState = initialState,
         (obj: { [id: number]: IUser }, user: IUser) => {
           return {
             ...obj,
-            [user['ID']]: user
+            [user.ID]: user
           }
         },
         {
@@ -59,7 +59,7 @@ export function reducer(state: IState = initialState,
       const user = action.payload
       const entities = {
         ...state.entities,
-        [user.id]: user
+        [user.ID]: user
       }
       return {
         ...state,
