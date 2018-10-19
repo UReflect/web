@@ -1,4 +1,4 @@
-import { UsersGuard } from '@core/users/guards/users.guard'
+import { UsersGuard } from './users.guard'
 
 export * from './users.guard'
 

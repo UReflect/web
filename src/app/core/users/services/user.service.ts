@@ -1,9 +1,9 @@
-import { Injectable }  from '@angular/core'
-import { HttpClient }  from '@angular/common/http'
-import { Observable }  from 'rxjs'
-import { Store }       from '@ngrx/store'
-import * as fromAuth   from '@core/auth/store'
-import { environment } from '@env/environment'
+import { Injectable }    from '@angular/core'
+import { HttpClient }    from '@angular/common/http'
+import { Observable }    from 'rxjs'
+import { select, Store } from '@ngrx/store'
+import * as fromAuth     from '@core/auth/store'
+import { environment }   from '@env/environment'
 
 @Injectable()
 export class UserService {
@@ -13,7 +13,7 @@ export class UserService {
   constructor(private http: HttpClient,
               private store: Store<fromAuth.IState>) {
     this.url = environment.apiUrl
-    this.token$ = this.store.select(fromAuth.getToken)
+    this.token$ = this.store.pipe(select(fromAuth.getToken))
   }
 
   authHeader(): Promise<any> {

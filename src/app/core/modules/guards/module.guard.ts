@@ -1,5 +1,5 @@
 import { Injectable }                        from '@angular/core'
-import { Store }                             from '@ngrx/store'
+import { select, Store }                     from '@ngrx/store'
 import * as fromStore                        from '@core/modules/store'
 import { Observable }                        from 'rxjs'
 import { filter, map, switchMap, take, tap } from 'rxjs/operators'
@@ -21,8 +21,7 @@ export class ModuleGuard {
   }
 
   hasModule(id: number): Observable<boolean> {
-    return this.store
-      .select(fromStore.getModuleEntities)
+    return this.store.pipe(select(fromStore.getModuleEntities))
       .pipe(
         map((entities: { [key: number]: IModule }) => !!entities[id]),
         take(1)
@@ -30,14 +29,15 @@ export class ModuleGuard {
   }
 
   checkStore(): Observable<boolean> {
-    return this.store.select(fromStore.getModuleLoaded).pipe(
-      tap(loaded => {
-        if (!loaded) {
-          this.store.dispatch(new fromStore.LoadAll())
-        }
-      }),
-      filter(loaded => loaded),
-      take(1)
-    )
+    return this.store.pipe(select(fromStore.getModuleLoaded))
+      .pipe(
+        tap(loaded => {
+          if (!loaded) {
+            this.store.dispatch(new fromStore.LoadAll())
+          }
+        }),
+        filter(loaded => loaded),
+        take(1)
+      )
   }
 }

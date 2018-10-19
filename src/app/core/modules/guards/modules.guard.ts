@@ -1,5 +1,5 @@
 import { Injectable }                               from '@angular/core'
-import { Store }                                    from '@ngrx/store'
+import { select, Store }                            from '@ngrx/store'
 import * as fromStore                               from '@core/modules/store'
 import { Observable, of }                           from 'rxjs'
 import { catchError, filter, switchMap, take, tap } from 'rxjs/operators'
@@ -17,7 +17,7 @@ export class ModulesGuard {
   }
 
   checkStore(): Observable<boolean> {
-    return this.store.select(fromStore.getModuleLoaded).pipe(
+    return this.store.pipe(select(fromStore.getModuleLoaded)).pipe(
       tap(loaded => {
         if (!loaded) {
           this.store.dispatch(new fromStore.LoadAll)

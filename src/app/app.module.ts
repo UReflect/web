@@ -24,7 +24,7 @@ import { EffectsModule }                                      from '@ngrx/effect
       stateKey: 'router'
     }),
     StoreDevtoolsModule.instrument({
-      name: 'NgRx uReflect StoreLoggedUser Devtools',
+      name: 'NgRx uReflect Devtools',
       logOnly: environment.production
     }),
     EffectsModule.forRoot(effects),

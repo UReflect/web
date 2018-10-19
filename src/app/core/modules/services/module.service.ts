@@ -1,9 +1,7 @@
 import { Injectable }                                             from '@angular/core'
 import { environment }                                            from '@env/environment'
-import { HttpClient, HttpHeaders, HttpResponse }                  from '@angular/common/http'
-import { Observable }                                             from 'rxjs'
+import { HttpClient }                                             from '@angular/common/http'
 import { IModule, IModuleCreation, IModuleUpdate, IModuleUpload } from '@core/modules/models/module'
-import { catchError, map }                                        from 'rxjs/operators'
 import * as fromAuth                                              from '@core/auth/store'
 import { select, Store }                                          from '@ngrx/store'
 
@@ -15,7 +13,7 @@ export class ModuleService {
   constructor(private http: HttpClient,
               private store: Store<fromAuth.IState>) {
     this.url = environment.apiUrl
-    this.token$ = this.store.select(fromAuth.getToken)
+    this.token$ = this.store.pipe(select(fromAuth.getToken))
   }
 
   authHeader(): Promise<any> {

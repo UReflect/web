@@ -1,4 +1,4 @@
-import * as fromModules                            from './module.reducers'
+import * as fromModules                            from './module.reducer'
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store'
 
 export interface IModulesState {

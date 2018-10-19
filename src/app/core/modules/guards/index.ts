@@ -1,5 +1,5 @@
 import { ModulesGuard } from './modules.guard'
-import { ModuleGuard } from '@core/modules/guards/module.guard'
+import { ModuleGuard }  from './module.guard'
 
 export * from './modules.guard'
 export * from './module.guard'

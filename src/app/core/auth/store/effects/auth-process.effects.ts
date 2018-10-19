@@ -6,7 +6,7 @@ import { Store }                           from '@ngrx/store'
 import { Actions, Effect, ofType }         from '@ngrx/effects'
 import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { Router }                          from '@angular/router'
-import { from, of }                        from 'rxjs'
+import { of }                              from 'rxjs'
 
 @Injectable()
 export class AuthProcessEffects {
@@ -17,7 +17,7 @@ export class AuthProcessEffects {
   }
 
   @Effect()
-  signIn$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignIn)
+  signIn$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignIn))
     .pipe(map((action: fromAuth.SignIn) => action.payload),
       switchMap(credentials => {
         return this.authService.signin(credentials)
@@ -35,7 +35,7 @@ export class AuthProcessEffects {
     )
 
   @Effect()
-  signUp$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignUp)
+  signUp$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignUp))
     .pipe(map((action: fromAuth.SignUp) => action.payload),
       switchMap(credentials => {
         return this.authService.signup(credentials)
@@ -53,7 +53,7 @@ export class AuthProcessEffects {
     )
 
   @Effect({ dispatch: false })
-  signOut$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignOut)
+  signOut$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignOut))
     .pipe(ofType(fromAuth.AuthActionTypes.SignOut),
       tap(() => {
         this.store.dispatch(new fromAuth.ClearLoggedUser)
@@ -63,7 +63,7 @@ export class AuthProcessEffects {
     )
 
   @Effect({ dispatch: false })
-  signInSuccess$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignInSuccess)
+  signInSuccess$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignInSuccess))
     .pipe(ofType(fromAuth.AuthActionTypes.SignInSuccess),
       tap(() => {
         this.router.navigate(['/modules'])
@@ -71,7 +71,7 @@ export class AuthProcessEffects {
     )
 
   @Effect({ dispatch: false })
-  signInRedirect$ = this.actions$.ofType(fromAuth.AuthActionTypes.SignInRedirect)
+  signInRedirect$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignInRedirect))
     .pipe(ofType(fromAuth.AuthActionTypes.SignInRedirect),
       tap(() => {
         this.router.navigate(['/login'])
@@ -79,7 +79,7 @@ export class AuthProcessEffects {
     )
 
   @Effect()
-  passwordLost = this.actions$.ofType(fromAuth.AuthActionTypes.PasswordLost)
+  passwordLost = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.PasswordLost))
     .pipe(map((action: fromAuth.PasswordLost) => action.payload),
       switchMap(credentials => {
         return this.authService.lost(credentials)

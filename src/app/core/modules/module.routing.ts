@@ -12,8 +12,8 @@ const routes: Routes = [
     component: fromContainer.ModuleListComponent,
     canActivate: [
       AuthGuardService,
-      fromGuards.ModulesGuard
-      // fromUserGuards.UsersGuard
+      fromGuards.ModulesGuard,
+      fromUserGuards.UsersGuard
     ]
   },
   {

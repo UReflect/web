@@ -1,9 +1,9 @@
-import * as userActions   from '@core/users/store/actions'
-import { Injectable }      from '@angular/core'
-import { Actions, Effect } from '@ngrx/effects'
-import { UserService }     from '@core/users/services'
-import { switchMap }       from 'rxjs/operators'
-import { of }              from 'rxjs'
+import * as userActions            from '@core/users/store/actions'
+import { Injectable }              from '@angular/core'
+import { Actions, Effect, ofType } from '@ngrx/effects'
+import { UserService }             from '@core/users/services'
+import { switchMap }               from 'rxjs/operators'
+import { of }                      from 'rxjs'
 
 @Injectable()
 export class UserEffects {
@@ -12,7 +12,7 @@ export class UserEffects {
   }
 
   @Effect()
-  loadUsers$ = this.actions$.ofType(userActions.UserActionTypes.LoadAll)
+  loadUsers$ = this.actions$.pipe(ofType(userActions.UserActionTypes.LoadAll))
     .pipe(
       switchMap(() => {
         return this.userService.all()

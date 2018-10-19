@@ -1,5 +1,5 @@
 import { Injectable }                               from '@angular/core'
-import { Store }                                    from '@ngrx/store'
+import { select, Store }                            from '@ngrx/store'
 import * as fromStore                               from '@core/users/store'
 import { Observable, of }                           from 'rxjs'
 import { catchError, filter, switchMap, take, tap } from 'rxjs/operators'
@@ -17,9 +17,8 @@ export class UsersGuard {
   }
 
   checkStore(): Observable<boolean> {
-    return this.store.select(fromStore.getUserLoaded).pipe(
+    return this.store.pipe(select(fromStore.getUserLoaded)).pipe(
       tap(loaded => {
-        console.log('user', loaded)
         if (!loaded) {
           this.store.dispatch(new fromStore.LoadAll)
         }

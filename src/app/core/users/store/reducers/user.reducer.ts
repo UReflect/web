@@ -74,6 +74,8 @@ export function reducer(state: IState = initialState,
         entities
       }
     }
+    default:
+      return state
   }
 }
 

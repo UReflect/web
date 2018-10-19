@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store'
 import * as fromFeature   from '../reducers'
-import * as fromModules   from '../reducers/module.reducers'
+import * as fromModules   from '../reducers/module.reducer'
 import * as fromRouter    from '@store'
 import { IModule }        from '@core/modules/models/module'
 

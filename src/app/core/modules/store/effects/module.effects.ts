@@ -1,5 +1,5 @@
 import { Injectable }                                             from '@angular/core'
-import { Actions, Effect }                                        from '@ngrx/effects'
+import { Actions, Effect, ofType }                                from '@ngrx/effects'
 import { ModuleService }                                          from '@core/modules/services/module.service'
 import * as moduleActions                                         from '@core/modules/store/actions'
 import { catchError, map, switchMap }                             from 'rxjs/operators'
@@ -14,7 +14,7 @@ export class ModuleEffects {
   }
 
   @Effect()
-  loadModules$ = this.actions$.ofType(moduleActions.ModuleActionTypes.LoadAll)
+  loadModules$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.LoadAll))
     .pipe(
       switchMap(() => {
         return this.moduleService.all()
@@ -24,18 +24,17 @@ export class ModuleEffects {
     )
 
   @Effect()
-  createModule$ = this.actions$.ofType(
-    moduleActions.ModuleActionTypes.Create
-  ).pipe(
-    switchMap((module: IModuleCreation) => {
-      return this.moduleService.create(module)
-        .then(newModule => new moduleActions.CreateSuccess(newModule))
-        .catch(e => of(new moduleActions.CreateFailed(e)))
-    })
-  )
+  createModule$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Create))
+    .pipe(
+      switchMap((module: IModuleCreation) => {
+        return this.moduleService.create(module)
+          .then(newModule => new moduleActions.CreateSuccess(newModule))
+          .catch(e => of(new moduleActions.CreateFailed(e)))
+      })
+    )
 
   @Effect()
-  deleteModule$ = this.actions$.ofType(moduleActions.ModuleActionTypes.Delete)
+  deleteModule$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Delete))
     .pipe(
       switchMap((module: IModule) => {
         return this.moduleService.delete(module)
@@ -45,7 +44,7 @@ export class ModuleEffects {
     )
 
   @Effect()
-  update$ = this.actions$.ofType(moduleActions.ModuleActionTypes.Update)
+  update$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Update))
     .pipe(
       switchMap((module: IModuleUpdate) => {
         return this.moduleService.update(module)
@@ -55,7 +54,7 @@ export class ModuleEffects {
     )
 
   @Effect()
-  uploadModule$ = this.actions$.ofType(moduleActions.ModuleActionTypes.Upload)
+  uploadModule$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Upload))
     .pipe(
       switchMap((form: IModuleUpload) => {
         return this.moduleService.uploadPackage(form)
@@ -65,9 +64,9 @@ export class ModuleEffects {
     )
 
   @Effect()
-  createModuleSuccess$ = this.actions$.ofType(
+  createModuleSuccess$ = this.actions$.pipe(ofType(
     moduleActions.ModuleActionTypes.CreateSuccess,
-    moduleActions.ModuleActionTypes.UpdateSuccess)
+    moduleActions.ModuleActionTypes.UpdateSuccess))
     .pipe(
       map((action: moduleActions.CreateSuccess) => action.payload),
       map(module => {
@@ -78,7 +77,8 @@ export class ModuleEffects {
     )
 
   @Effect()
-  deleteModuleSuccess$ = this.actions$.ofType(moduleActions.ModuleActionTypes.DeleteSuccess)
+  deleteModuleSuccess$ = this.actions$.pipe(ofType(
+    moduleActions.ModuleActionTypes.DeleteSuccess))
     .pipe(
       map(() => {
         return new routerActions.Go({
