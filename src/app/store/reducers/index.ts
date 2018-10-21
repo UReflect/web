@@ -29,11 +29,13 @@ export function logger(reducer: ActionReducer<IState>): ActionReducer<IState> {
 }
 
 export const getRouterState
-  = createFeatureSelector<fromRouter.RouterReducerState<IRouterStateUrl>>('routerReducer')
+  = createFeatureSelector<fromRouter.RouterReducerState<IRouterStateUrl>>
+('routerReducer')
 
 export function localStorageSyncReducer(reducer: ActionReducer<IState>): ActionReducer<IState> {
   return localStorageSync({
-    keys: ['routerReducer', 'auth', 'layout', 'modules', 'users'],
+    keys: ['routerReducer', 'auth', 'layout', 'modules', 'users',
+      'comments'],
     rehydrate: true
   })(reducer)
 }

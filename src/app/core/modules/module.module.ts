@@ -8,13 +8,15 @@ import { components }          from '@core/modules/components'
 import { containers }          from '@core/modules/containers'
 import { services }            from '@core/modules/services'
 import { guards }              from '@core/modules/guards'
+import { CommentModule }       from '@core/comments/comment.module'
 
 @NgModule({
   imports: [
     CommonModule,
     ModuleRoutingModule,
     StoreModule.forFeature('modules', reducers),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
+    CommentModule
   ],
   exports: [
     ...components,

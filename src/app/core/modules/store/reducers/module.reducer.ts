@@ -1,6 +1,5 @@
-import { IModule }       from '@core/modules/models/module'
-import * as fromActions  from '../actions'
-import { DeleteSuccess } from '../actions'
+import { IModule }      from '@core/modules/models/module'
+import * as fromActions from '../actions'
 
 export interface IState {
   entities: { [id: number]: IModule },
@@ -65,7 +64,7 @@ export function reducer(state: IState = initialState,
       const module = action.payload
       const entities = {
         ...state.entities,
-        [module.id]: module
+        [module.ID]: module
       }
 
       return {

@@ -2,7 +2,7 @@ import { Injectable }                                             from '@angular
 import { Actions, Effect, ofType }                                from '@ngrx/effects'
 import { ModuleService }                                          from '@core/modules/services/module.service'
 import * as moduleActions                                         from '@core/modules/store/actions'
-import { catchError, map, switchMap }                             from 'rxjs/operators'
+import { map, switchMap }                                         from 'rxjs/operators'
 import { of }                                                     from 'rxjs'
 import { IModule, IModuleCreation, IModuleUpdate, IModuleUpload } from '@core/modules/models/module'
 import * as routerActions                                         from '@store/actions'

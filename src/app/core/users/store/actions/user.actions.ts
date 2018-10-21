@@ -2,18 +2,18 @@ import { Action } from '@ngrx/store'
 import { IUser }  from '@core/users/model/user.model'
 
 export enum UserActionTypes {
-  LoadAll = '[User] Load All User',
-  LoadAllSuccess = '[User] Load All User Success',
-  LoadAllFailure = '[User] Load All User Failure',
-  Create = '[User] Create User',
-  CreateSuccess = '[User] Create User Success',
-  CreateFailure = '[User] Create User Failure',
-  Update = '[User] Update User',
-  UpdateSuccess = '[User] Update User Success',
-  UpdateFailure = '[User] Update User Failure',
-  Delete = '[User] Delete User',
-  DeleteSuccess = '[User] Delete User Success',
-  DeleteFailure = '[User] Delete User Failure'
+  LoadAll = '[User] Load All',
+  LoadAllSuccess = '[User] Load All Success',
+  LoadAllFailure = '[User] Load All Failure',
+  Create = '[User] Create',
+  CreateSuccess = '[User] Create Success',
+  CreateFailure = '[User] Create Failure',
+  Update = '[User] Update',
+  UpdateSuccess = '[User] Update Success',
+  UpdateFailure = '[User] Update Failure',
+  Delete = '[User] Delete',
+  DeleteSuccess = '[User] Delete Success',
+  DeleteFailure = '[User] Delete Failure'
 }
 
 export class LoadAll implements Action {

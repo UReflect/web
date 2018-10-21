@@ -5,6 +5,7 @@ import * as fromContainer       from './containers'
 import * as fromGuards          from './guards'
 import * as fromUserGuards      from '@core/users/guards'
 import * as fromServices        from './services'
+import * as fromCommentGuards   from '@core/comments/guards/comments.guard'
 
 const routes: Routes = [
   {
@@ -21,7 +22,9 @@ const routes: Routes = [
     component: fromContainer.ModuleDetailComponent,
     canActivate: [
       AuthGuardService,
-      fromGuards.ModuleGuard
+      fromGuards.ModuleGuard,
+      fromUserGuards.UsersGuard,
+      fromCommentGuards.CommentsGuard
     ]
   }
 ]

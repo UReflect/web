@@ -47,9 +47,9 @@
         <!--</app-module-detail-pictures>-->
         <div class="col-md-6 order-md-1 py-20 text-muted module-content">
           {{ (module$ | async).description }}
-          <app-module-detail-comments
-            [moduleId]="(module$ | async).id">
-          </app-module-detail-comments>
+          <app-comments
+            [moduleId]="(module$ | async).ID">
+          </app-comments>
         </div>
       </div>
     </div>
