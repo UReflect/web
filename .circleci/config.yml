@@ -53,11 +53,11 @@ jobs:
 
     - run:
         name: Removing Remote Files
-        command: ssh -oStrictHostKeyChecking=no root@51.15.206.163 rm -rf /var/www/ur-web/*
+        command: ssh -oStrictHostKeyChecking=no $SSH_USER@$SSH_HOST rm -rf /var/www/ur-web/*
 
     - run:
         name: Deploy Over SSH
-        command: scp -rv ./dist/web/* root@51.15.206.163:/var/www/ur-web/
+        command: scp -rv ./dist/web/* $SSH_USER@$SSH_HOST:/var/www/ur-web/
 
 workflows:
   version: 2
