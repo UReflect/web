@@ -1,4 +1,8 @@
-<div>
-  <span>{{ (user$ | async).name }} - {{ comment.UpdatedAt | date:'longDate' }}</span>
-  <p>{{ comment.value }}</p>
+<div class="comment">
+  <div class="title">
+    <span class="user">{{ (user$ | async).name }}</span>
+    <span class="dash"> - </span>
+    <span class="date">{{ comment.UpdatedAt | date:'longDate' }}</span>
+  </div>
+  <p class="value">{{ comment.value }}</p>
 </div>

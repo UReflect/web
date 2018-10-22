@@ -1,0 +1,22 @@
+.comment {
+  .title {
+    display: flex;
+    align-items: center;
+
+    .user {
+      font-weight: 700;
+    }
+
+    .dash {
+      margin: 0 5px;
+    }
+
+    .date {
+      font-size: 0.75em;
+    }
+  }
+
+  .value {
+    padding-left: 5px;
+  }
+}
