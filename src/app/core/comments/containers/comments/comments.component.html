@@ -1,4 +1,4 @@
-<div class="comments">
+<div class="comments" *ngIf="(comments$ | async).length > 0">
   <h5 class="title">Comments</h5>
   <ul *ngFor="let comment of comments$ | async; let i = index">
     <li *ngIf="i < 4">

@@ -11,6 +11,7 @@ import { environment }                                        from '@env/environ
 import { HttpClientModule }                                   from '@angular/common/http'
 import { LayoutModule }                                       from '@core/layout/layout.module'
 import { EffectsModule }                                      from '@ngrx/effects'
+import { SharedModule }                                       from '@shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { EffectsModule }                                      from '@ngrx/effect
     }),
     EffectsModule.forRoot(effects),
     CoreModule,
+    SharedModule,
     HttpClientModule,
     LayoutModule
   ],

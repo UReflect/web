@@ -14,11 +14,13 @@ export const getCommentEntities = createSelector(
 
 export const getCommentsByModuleID = createSelector(
   getCommentEntities, (entities, module_id) => {
-    return Object.keys(entities).map(id => {
+    const comments = []
+    Object.keys(entities).map(id => {
       if (entities[id].module_id === module_id) {
-        return entities[id]
+        comments.push(entities[id])
       }
     })
+    return comments
   }
 )
 

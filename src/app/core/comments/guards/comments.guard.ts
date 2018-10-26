@@ -8,8 +8,7 @@ import * as fromRouter                              from '@store'
 
 @Injectable()
 export class CommentsGuard {
-  constructor(private store: Store<fromStore.ICommentState>,
-              private route: ActivatedRoute) {
+  constructor(private store: Store<fromStore.ICommentState>) {
   }
 
   canActivate(): Observable<boolean> {
@@ -24,6 +23,7 @@ export class CommentsGuard {
       tap(() => {
         return this.store.pipe(select(fromRouter.getRouterState)).subscribe(
           router => {
+            console.log(router)
             this.store.dispatch(new fromStore.Load(router.state.params.id))
           }
         )

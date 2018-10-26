@@ -22,7 +22,7 @@
         <div class="sidebar-content">
           <app-sidebar-logo></app-sidebar-logo>
 
-          <app-sidebar-user></app-sidebar-user>
+          <app-sidebar-user *ngIf="(isAuthenticated$ | async)"></app-sidebar-user>
 
           <app-sidenav></app-sidenav>
         </div>

@@ -3,7 +3,6 @@ import * as commentActions         from '../actions'
 import { Actions, Effect, ofType } from '@ngrx/effects'
 import { CommentService }          from '@core/comments/services'
 import { map, switchMap }          from 'rxjs/operators'
-import { of }                      from 'rxjs'
 
 @Injectable()
 export class CommentEffects {
@@ -18,7 +17,7 @@ export class CommentEffects {
       switchMap(id => {
         return this.commentService.all(id)
           .then(comments => new commentActions.LoadSuccess(comments))
-          .catch(e => of(new commentActions.LoadFailure(e)))
+          .catch(e => new commentActions.LoadFailure(e))
       })
     )
 }

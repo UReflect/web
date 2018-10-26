@@ -29,12 +29,9 @@ export class CommentService {
     return new Promise((resolve, reject) => {
       this.http.get(`${this.url}/module/${moduleID}/comments`, {
         headers: { ...header }
-      }).subscribe(response => {
-        resolve(response['data'])
-      }, e => {
-        reject(e.error)
-      })
+      }).subscribe(
+        response => resolve(response['data']),
+        e => reject(e.error))
     })
   }
-
 }
