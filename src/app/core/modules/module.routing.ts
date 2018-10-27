@@ -18,6 +18,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'module/new',
+    component: fromContainer.ModuleNewComponent,
+    canActivate: [
+      AuthGuardService
+    ]
+  },
+  {
     path: 'module/:id',
     component: fromContainer.ModuleDetailComponent,
     canActivate: [

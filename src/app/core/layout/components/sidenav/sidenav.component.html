@@ -3,7 +3,7 @@
   <ul class="nav-main">
     <li>
       <a [routerLinkActive]="'active'">
-        <i class="si si-cup"></i>
+        <i class="si si-grid"></i>
         <span class="sidebar-mini-hide">Dashboard</span>
       </a>
     </li>
@@ -11,24 +11,30 @@
       <span class="sidebar-mini-hidden">Modules</span>
     </li>
     <li>
+      <a [routerLinkActive]="'active'" [routerLink]="['/module/new']">
+        <i class="si si-plus"></i>
+        <span class="sidebar-mini-hide">Create</span>
+      </a>
+    </li>
+    <li>
       <a [routerLinkActive]="'active'" [routerLink]="['/modules']">
-        <i class="si si-cup"></i>
+        <i class="si si-puzzle"></i>
         <span class="sidebar-mini-hide">List</span>
       </a>
     </li>
     <!--<li>-->
-      <!--<a class="nav-submenu" data-toggle="nav-submenu" href="#">-->
-        <!--<i class="si si-puzzle"></i>-->
-        <!--<span class="sidebar-mini-hide">Dropdown</span>-->
-      <!--</a>-->
-      <!--<ul>-->
-        <!--<li>-->
-          <!--<a href="javascript:void(0)">Link #1</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="javascript:void(0)">Link #2</a>-->
-        <!--</li>-->
-      <!--</ul>-->
+    <!--<a class="nav-submenu" data-toggle="nav-submenu" href="#">-->
+    <!--<i class="si si-puzzle"></i>-->
+    <!--<span class="sidebar-mini-hide">Dropdown</span>-->
+    <!--</a>-->
+    <!--<ul>-->
+    <!--<li>-->
+    <!--<a href="javascript:void(0)">Link #1</a>-->
+    <!--</li>-->
+    <!--<li>-->
+    <!--<a href="javascript:void(0)">Link #2</a>-->
+    <!--</li>-->
+    <!--</ul>-->
     <!--</li>-->
   </ul>
 </div>

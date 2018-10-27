@@ -23,8 +23,9 @@ export class CommentsGuard {
       tap(() => {
         return this.store.pipe(select(fromRouter.getRouterState)).subscribe(
           router => {
-            console.log(router)
-            this.store.dispatch(new fromStore.Load(router.state.params.id))
+            if (router.state.params && router.state.params.id) {
+              this.store.dispatch(new fromStore.Load(router.state.params.id))
+            }
           }
         )
       }),
