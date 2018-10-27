@@ -1,0 +1,139 @@
+<form [formGroup]="mainFields">
+  <h2 class="content-heading text-black">General Information</h2>
+  <div class="row items-push">
+    <div class="col-lg-3">
+      <p class="text-muted">
+        Pay extra attention since this is the data which customers will see first.
+      </p>
+    </div>
+    <div class="col-lg-7 offset-lg-1">
+      <div class="form-group text-body"
+           [ngClass]="{'is-invalid': title().invalid && title().touched}">
+        <label for="module-add-title">Title *</label>
+        <input type="text" class="form-control form-control-lg" id="module-add-title"
+               placeholder="Module Title" formControlName="title">
+        <div class="invalid-feedback animated fadeInDown"
+             *ngIf="title().invalid">{{ getErrors('title') }}
+        </div>
+      </div>
+      <div class="form-group text-body"
+           [ngClass]="{'is-invalid': description().invalid && description().touched}">
+        <label for="module-add-desc">Description *</label>
+        <textarea class="form-control form-control-lg" id="module-add-desc"
+                  rows="8" placeholder="Please add a description for your module."
+                  formControlName="description"></textarea>
+        <div class="invalid-feedback animated fadeInDown"
+             *ngIf="description().invalid">{{ getErrors('description') }}
+        </div>
+      </div>
+      <div class="form-group row text-body"
+           [ngClass]="{'is-invalid': price().invalid && price().touched}">
+        <div class="col-md-4">
+          <label for="module-add-pricing">Price (in USD) *</label>
+          <input type="text" class="form-control form-control-lg" id="module-add-pricing"
+                 placeholder="5.00" formControlName="price">
+          <div class="invalid-feedback animated fadeInDown"
+               *ngIf="price().invalid">{{ getErrors('price') }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="content-heading text-black">Additional Information</h2>
+  <div class="row items-push">
+    <div class="col-lg-3">
+      <p class="text-muted">
+        Add more details, such as minimum size for your module.
+        0 means the module is not resizable
+      </p>
+    </div>
+    <div class="col-lg-7 offset-lg-1">
+      <div class="form-group row text-body"
+           [ngClass]="{'is-invalid': minWidth().invalid && minWidth().touched}">
+        <div class="col-md-8">
+          <label for="module-add-minwidth">Minimum Width *</label>
+          <select class="form-control form-control-lg" id="module-add-minwidth"
+                  formControlName="min_width">
+            <option value="-1">Please select</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+          <div class="invalid-feedback animated fadeInDown"
+               *ngIf="minWidth().invalid">{{ getErrors('min_width') }}
+          </div>
+        </div>
+      </div>
+      <div class="form-group row text-body"
+           [ngClass]="{'is-invalid': minHeight().invalid && minHeight().touched}">
+        <div class="col-md-8">
+          <label for="module-add-minheight">Minimum Height *</label>
+          <select class="form-control form-control-lg" id="module-add-minheight"
+                  formControlName="min_height">
+            <option value="-1">Please select</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+          <div class="invalid-feedback animated fadeInDown"
+               *ngIf="minHeight().invalid">{{ getErrors('min_height') }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="content-heading text-black">Module ZIP</h2>
+  <div class="row items-push">
+    <div class="col-lg-3">
+      <p class="text-muted">
+        Please upload your module archive.<br>
+        The name of your ZIP should be : [name].v[major]-[minor].zip
+      </p>
+    </div>
+    <div class="col-lg-7 offset-lg-1">
+      <div class="form-group text-body"
+           [ngClass]="{'is-invalid': minHeight().invalid}">
+        <div class="custom-file form">
+          <input type="file" class="custom-file-input" id="module-add-upload"
+                 (change)="fileHandler($event)">
+          <label class="custom-file-label" for="module-add-upload">
+            {{ fileName().value && fileName().value.length > 0 ? fileName().value : 'Choose file *'}}
+          </label>
+          <div class="invalid-feedback animated fadeInDown"
+               *ngIf="fileName().invalid">{{ getErrors('fileName') }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row items-push">
+    <div class="col-lg-7 offset-lg-4">
+      <div class="form-group">
+        <button type="submit" class="btn btn-alt-success"
+                (click)="submitHandler()" [disabled]="mainFields.invalid">
+          <i class="fa fa-plus mr-5"></i>
+          Add Module
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

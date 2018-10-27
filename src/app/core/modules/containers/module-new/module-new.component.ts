@@ -11,4 +11,8 @@ export class ModuleNewComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  createHandler(event) {
+    console.log(event)
+  }
 }
