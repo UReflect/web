@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output }             from '@angular/core'
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { moduleZipName, priceFormat }                          from '@shared/validators'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { AbstractControl, FormGroup }                     from '@angular/forms'
+import * as JSZip                                         from 'jszip'
+import { ManifestService }                                from '@core/modules/services'
 
 @Component({
   selector: 'app-module-form',
@@ -9,17 +10,11 @@ import { moduleZipName, priceFormat }                          from '@shared/val
 
 export class ModuleFormComponent implements OnInit {
   @Output() submit = new EventEmitter()
-  mainFields: FormGroup
+  @Input() formFields: FormGroup
+  err = []
+  private formData: FormData = new FormData()
 
-  constructor(private fb: FormBuilder) {
-    this.mainFields = this.fb.group({
-      title: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      price: ['', [Validators.required, priceFormat()]],
-      min_width: ['', [Validators.required, Validators.min(0), Validators.max(10)]],
-      min_height: ['', [Validators.required, Validators.min(0), Validators.max(10)]],
-      fileName: ['', [Validators.required, moduleZipName()]]
-    })
+  constructor(private manifestService: ManifestService) {
   }
 
   ngOnInit() {
@@ -29,8 +24,73 @@ export class ModuleFormComponent implements OnInit {
   }
 
   fileHandler(event) {
+    const re = new RegExp(/^([\w-]{1,50})\.v([\d]+)-([\d]+)\.zip$/)
     const payload = event.target.files[0] || event.srcElement.files[0]
+    if (!payload) {
+      return
+    }
+    const cut = payload.name.match(re)
+
     this.fileName().patchValue(payload.name)
+    this.formData.append('file', payload)
+    this.formData.append('major', cut[2])
+    this.formData.append('minor', cut[3])
+
+    JSZip.loadAsync(payload).then(zip => {
+      this.checkArchive(zip, this.fileName().value
+        .slice(0, this.fileName().value.length - 4))
+        .then(() => {
+        })
+        .catch(e => {
+          this.err = e
+        })
+    })
+  }
+
+  checkArchive(zip: JSZip, zipName: string): Promise<any> {
+    return new Promise<string>((resolve, reject) => {
+      if (!zip.folder(`${zipName}/`)) {
+        reject({
+          scope: 'zip',
+          error: `files must be in a folder named \'${zipName}\'`
+        })
+      }
+      if (zip.file(`${zipName}/manifest.json`)) {
+        zip.file(`${zipName}/manifest.json`).async('text')
+          .then(manifest => {
+            const err = this.manifestService.checkManifest(manifest)
+            if (err.length <= 0) {
+              if (!zip.file(`${zipName}/${this.manifestService.getEntryFile()}`)) {
+                err.push({
+                  scope: 'zip',
+                  error: `entry_file \'${this.manifestService.getEntryFile()}\' not found`
+                })
+              }
+              if (!zip.file(`${zipName}/${this.manifestService.getCSSFile()}`)) {
+                err.push({
+                  scope: 'zip',
+                  error: `css_file \'${this.manifestService.getCSSFile()}\' not found`
+                })
+              }
+              if (err.length > 0) {
+                reject(err)
+              } else {
+                resolve()
+              }
+            } else {
+              reject(err)
+            }
+          })
+          .catch(e => {
+            reject(e)
+          })
+      } else {
+        reject([{
+          scope: 'zip',
+          error: 'manifest.json not found'
+        }])
+      }
+    })
   }
 
   getErrors(field: string): string {
@@ -65,26 +125,26 @@ export class ModuleFormComponent implements OnInit {
   }
 
   title(): AbstractControl {
-    return this.mainFields.get('title')
+    return this.formFields.get('title')
   }
 
   description(): AbstractControl {
-    return this.mainFields.get('description')
+    return this.formFields.get('description')
   }
 
   price(): AbstractControl {
-    return this.mainFields.get('price')
+    return this.formFields.get('price')
   }
 
   minWidth(): AbstractControl {
-    return this.mainFields.get('min_width')
+    return this.formFields.get('min_width')
   }
 
   minHeight(): AbstractControl {
-    return this.mainFields.get('min_height')
+    return this.formFields.get('min_height')
   }
 
   fileName(): AbstractControl {
-    return this.mainFields.get('fileName')
+    return this.formFields.get('fileName')
   }
 }
