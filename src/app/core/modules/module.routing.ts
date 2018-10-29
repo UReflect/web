@@ -1,11 +1,12 @@
-import { NgModule }             from '@angular/core'
-import { RouterModule, Routes } from '@angular/router'
-import { AuthGuardService }     from '@core/auth/guards/auth-guard.service'
-import * as fromContainer       from './containers'
-import * as fromGuards          from './guards'
-import * as fromUserGuards      from '@core/users/guards'
-import * as fromServices        from './services'
-import * as fromCommentGuards   from '@core/comments/guards/comments.guard'
+import { NgModule }                  from '@angular/core'
+import { RouterModule, Routes }      from '@angular/router'
+import { AuthGuardService }          from '@core/auth/guards/auth-guard.service'
+import * as fromContainer            from './containers'
+import * as fromServices             from './services'
+import * as fromGuards               from './guards'
+import { ModuleGuard, ModulesGuard } from './guards'
+import { UsersGuard }                from '@core/users/guards'
+import { CommentsGuard }             from '@core/comments/guards'
 
 const routes: Routes = [
   {
@@ -13,8 +14,8 @@ const routes: Routes = [
     component: fromContainer.ModuleListComponent,
     canActivate: [
       AuthGuardService,
-      fromGuards.ModulesGuard,
-      fromUserGuards.UsersGuard
+      ModulesGuard,
+      UsersGuard
     ]
   },
   {
@@ -29,9 +30,9 @@ const routes: Routes = [
     component: fromContainer.ModuleDetailComponent,
     canActivate: [
       AuthGuardService,
-      fromGuards.ModuleGuard,
-      fromUserGuards.UsersGuard,
-      fromCommentGuards.CommentsGuard
+      ModuleGuard,
+      UsersGuard,
+      CommentsGuard
     ]
   }
 ]
