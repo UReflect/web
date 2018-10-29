@@ -35,10 +35,15 @@ jobs:
         name: Building
         command: yarn build --prod
 
-    - save-cache:
+    - save_cache:
         key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
         paths:
         - dist
+
+    - save_cache:
+        key: v1-src-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+        - src
 
   deploy:
     working_directory: ~/ur-web
@@ -59,6 +64,25 @@ jobs:
         name: Deploy Over SSH
         command: scp -rv ./dist/web/* $SSH_USER@$SSH_HOST:/var/www/ur-web/
 
+  doc:
+    working_directory: ~/ur-web
+
+    docker:
+    - image: circleci/node:8.10
+
+    steps:
+    - restore_cache:
+        keys:
+        - v1-src-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+
+    - run:
+        name: Generating Documentation
+        command: yarn compodoc
+
+    - run:
+        name: Deploy Documentation
+        command: rsync -rv .doc/* $SSH_USER@$SSH_HOST:/var/www/ur-web/doc
+
 workflows:
   version: 2
 
@@ -66,5 +90,8 @@ workflows:
     jobs:
     - build
     - deploy:
+        requires:
+        - build
+    - doc:
         requires:
         - build
