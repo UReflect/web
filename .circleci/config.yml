@@ -81,7 +81,7 @@ jobs:
 
     - run:
         name: Removing Remote Files
-        command: ssh $SSH_USER@$SSH_HOST rm -rf /var/www/ur-web/*
+        command: ssh -oStrictHostKeyChecking=no $SSH_USER@$SSH_HOST rm -rf /var/www/ur-web/*
 
     - run:
         name: Deploy Documentation
