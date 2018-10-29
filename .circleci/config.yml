@@ -84,7 +84,7 @@ jobs:
         command: ssh -oStrictHostKeyChecking=no $SSH_USER@$SSH_HOST rm -rf /var/www/ur-web/*
 
     - run:
-        name: Deploy Documentation
+        name: Deploy Documentation Over SSH
         command: scp -rv ./doc/* $SSH_USER@$SSH_HOST:/var/www/doc/
 
 workflows:
