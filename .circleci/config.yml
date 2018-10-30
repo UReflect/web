@@ -97,18 +97,18 @@ workflows:
   workflow:
     jobs:
     - build:
-      branches:
-        ignores:
-        - develop
+        branches:
+          ignores:
+          - develop
     - deploy:
-      requires:
-      - build
-      branches:
-        ignores:
-        - develop
+        requires:
+        - build
+        branches:
+          ignores:
+          - develop
     - doc:
-      requires:
-      - build
-      branches:
-        ignores:
-        - develop
+        requires:
+        - build
+        branches:
+          ignores:
+          - develop
