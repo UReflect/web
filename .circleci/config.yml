@@ -31,9 +31,9 @@ jobs:
         name: Linting
         command: yarn lint
 
-    - run:
-        name: Testing
-        command: yarn test --browsers ChromeHeadless --progress=false --watch=false
+#    - run:
+#        name: Testing
+#        command: yarn test --browsers ChromeHeadless --progress=false --watch=false
 
     - run:
         name: Building
