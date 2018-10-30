@@ -32,6 +32,10 @@ jobs:
         command: yarn lint
 
     - run:
+        name: Testing
+        command: yarn test --browsers ChromeHeadless --progress=false --watch=false
+
+    - run:
         name: Building
         command: yarn build --prod
 
@@ -92,10 +96,19 @@ workflows:
 
   workflow:
     jobs:
-    - build
+    - build:
+      branches:
+        ignores:
+        - develop
     - deploy:
-        requires:
-        - build
+      requires:
+      - build
+      branches:
+        ignores:
+        - develop
     - doc:
-        requires:
-        - build
+      requires:
+      - build
+      branches:
+        ignores:
+        - develop
