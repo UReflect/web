@@ -19,17 +19,17 @@ export class ModuleEffects {
       switchMap(() => {
         return this.moduleService.all()
           .then(modules => new moduleActions.LoadAllSuccess(modules))
-          .catch(e => of(new moduleActions.LoadAllFailed(e)))
+          .catch(e => new moduleActions.LoadAllFailed(e))
       })
     )
 
   @Effect()
   createModule$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Create))
-    .pipe(
+    .pipe(map((action: moduleActions.Create) => action.payload),
       switchMap((module: IModuleCreation) => {
         return this.moduleService.create(module)
           .then(newModule => new moduleActions.CreateSuccess(newModule))
-          .catch(e => of(new moduleActions.CreateFailed(e)))
+          .catch(e => new moduleActions.CreateFailed(e))
       })
     )
 
@@ -55,11 +55,11 @@ export class ModuleEffects {
 
   @Effect()
   uploadModule$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Upload))
-    .pipe(
+    .pipe(map((action: moduleActions.Upload) => action.payload),
       switchMap((form: IModuleUpload) => {
         return this.moduleService.uploadPackage(form)
           .then(() => new moduleActions.UploadSuccess)
-          .catch(e => of(new moduleActions.UploadFailed(e)))
+          .catch(e => new moduleActions.UploadFailed(e))
       })
     )
 
@@ -71,7 +71,7 @@ export class ModuleEffects {
       map((action: moduleActions.CreateSuccess) => action.payload),
       map(module => {
         return new routerActions.Go({
-          path: ['/modules', module.id]
+          path: ['/module', module.ID]
         })
       })
     )

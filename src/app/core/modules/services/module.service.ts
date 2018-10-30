@@ -66,9 +66,10 @@ export class ModuleService {
         min_height: data.min_height,
         min_width: data.min_width,
         price: data.price
-      }, { headers: { ...header } }).subscribe(response => {
-        resolve(response['data'])
-      }, e => reject(e.error))
+      }, { headers: { ...header } }).subscribe(
+        response => resolve(response['data']),
+        e => reject(e.error)
+      )
     })
   }
 
@@ -77,10 +78,7 @@ export class ModuleService {
 
     return new Promise((resolve, reject) => {
       this.http.post(`${this.url}/module/${data.ID}/upload`, data.formData, {
-        headers: {
-          ...header,
-          'Content-Type': 'multipart/from-data'
-        }
+        headers: { ...header }
       }).subscribe(() => {
         resolve()
       }, e => reject(e.error))

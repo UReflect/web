@@ -1,6 +1,9 @@
 import { Component, OnInit }                  from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { moduleZipName, priceFormat }         from '@shared/validators'
+import * as fromStore                         from '@core/modules/store'
+import { Action, ActionsSubject, Store }      from '@ngrx/store'
+import { IModuleUpload }                      from '@core/modules/models/module'
 
 @Component({
   selector: 'app-module-new',
@@ -10,27 +13,29 @@ import { moduleZipName, priceFormat }         from '@shared/validators'
 export class ModuleNewComponent implements OnInit {
   formFields: FormGroup
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private store: Store<fromStore.IModulesState>,
+              private actionsSubject$: ActionsSubject) {
   }
 
   ngOnInit() {
     this.formFields = this.fb.group({
-      title: ['', [
+      title: ['Test Aurelien', [
         Validators.required
       ]],
-      description: ['', [
+      description: ['test', [
         Validators.required
       ]],
-      price: ['', [
+      price: ['0', [
         Validators.required,
         priceFormat()
       ]],
-      min_width: ['', [
+      min_width: ['1', [
         Validators.required,
         Validators.min(0),
         Validators.max(10)
       ]],
-      min_height: ['', [
+      min_height: ['2', [
         Validators.required,
         Validators.min(0),
         Validators.max(10)
@@ -42,7 +47,16 @@ export class ModuleNewComponent implements OnInit {
     })
   }
 
-  createHandler(event) {
-    console.log(event)
+  createHandler(data) {
+    this.store.dispatch(new fromStore.Create(data.form))
+    this.actionsSubject$.subscribe((action: Action) => {
+      if (action.type === fromStore.ModuleActionTypes.CreateSuccess) {
+        const form: IModuleUpload = {
+          ID: action['payload'].ID,
+          formData: data.formData
+        }
+        this.store.dispatch(new fromStore.Upload(form))
+      }
+    })
   }
 }

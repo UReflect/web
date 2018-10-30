@@ -1,5 +1,8 @@
-import { Action }                                                 from '@ngrx/store'
-import { IModule, IModuleCreation, IModuleUpdate, IModuleUpload } from '@core/modules/models/module'
+import { Action } from '@ngrx/store'
+import {
+  IModule, IModuleCreation,
+  IModuleUpdate, IModuleUpload
+}                 from '@core/modules/models/module'
 
 export enum ModuleActionTypes {
   LoadAll = '[Modules] Load All',

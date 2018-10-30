@@ -3,7 +3,6 @@ import { Injectable }              from '@angular/core'
 import { Actions, Effect, ofType } from '@ngrx/effects'
 import { UserService }             from '@core/users/services'
 import { switchMap }               from 'rxjs/operators'
-import { of }                      from 'rxjs'
 
 @Injectable()
 export class UserEffects {
@@ -17,7 +16,7 @@ export class UserEffects {
       switchMap(() => {
         return this.userService.all()
           .then(users => new userActions.LoadAllSuccess(users))
-          .catch(e => of(new userActions.LoadAllFailure(e)))
+          .catch(e => new userActions.LoadAllFailure(e))
       })
     )
 }

@@ -26,11 +26,21 @@ export class ManifestService {
       }]
     }
 
-    err.push(this.checkVersion())
-    err.push(this.checkName())
-    err.push(this.checkAuthor())
-    err.push(this.checkEntryFile())
-    err.push(this.checkCSSFile())
+    if (this.checkVersion() !== null) {
+      err.push(this.checkVersion())
+    }
+    if (this.checkName() !== null) {
+      err.push(this.checkName())
+    }
+    if (this.checkAuthor() !== null) {
+      err.push(this.checkAuthor())
+    }
+    if (this.checkEntryFile() !== null) {
+      err.push(this.checkEntryFile())
+    }
+    if (this.checkCSSFile() !== null) {
+      err.push(this.checkCSSFile())
+    }
     return err
   }
 

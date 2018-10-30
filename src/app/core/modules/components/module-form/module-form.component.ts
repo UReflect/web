@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { AbstractControl, FormGroup }                     from '@angular/forms'
 import * as JSZip                                         from 'jszip'
 import { ManifestService }                                from '@core/modules/services'
+import { IModuleCreation }                                from '@core/modules/models/module'
 
 @Component({
   selector: 'app-module-form',
@@ -9,7 +10,7 @@ import { ManifestService }                                from '@core/modules/se
 })
 
 export class ModuleFormComponent implements OnInit {
-  @Output() submit = new EventEmitter()
+  @Output() submitForm = new EventEmitter()
   @Input() formFields: FormGroup
   err = []
   private formData: FormData = new FormData()
@@ -21,6 +22,17 @@ export class ModuleFormComponent implements OnInit {
   }
 
   submitHandler() {
+    const form: IModuleCreation = {
+      title: this.title().value,
+      description: this.description().value,
+      min_width: parseInt(this.minWidth().value, 10),
+      min_height: parseInt(this.minHeight().value, 10),
+      price: parseFloat(this.price().value)
+    }
+    this.submitForm.emit({
+      form: form,
+      formData: this.formData
+    })
   }
 
   fileHandler(event) {
@@ -32,6 +44,9 @@ export class ModuleFormComponent implements OnInit {
     const cut = payload.name.match(re)
 
     this.fileName().patchValue(payload.name)
+    if (!re.test(payload.name)) {
+      return
+    }
     this.formData.append('file', payload)
     this.formData.append('major', cut[2])
     this.formData.append('minor', cut[3])
@@ -43,6 +58,7 @@ export class ModuleFormComponent implements OnInit {
         })
         .catch(e => {
           this.err = e
+          this.fileName().setErrors({ invalidZip: true })
         })
     })
   }
@@ -118,7 +134,8 @@ export class ModuleFormComponent implements OnInit {
       case 'fileName':
         return this.fileName().hasError('required') ? 'Please select a ZIP file'
           : this.fileName().hasError('name') ? 'Please enter a valid name'
-            : 'Unknown error on file upload field'
+            : this.fileName().hasError('invalidZip') ? 'Please check errors below'
+              : 'Unknown error on file upload field'
       default:
         return 'Unknown error'
     }
