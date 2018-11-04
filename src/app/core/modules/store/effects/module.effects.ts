@@ -35,11 +35,11 @@ export class ModuleEffects {
 
   @Effect()
   deleteModule$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Delete))
-    .pipe(
+    .pipe(map((action: moduleActions.Delete) => action.payload),
       switchMap((module: IModule) => {
         return this.moduleService.delete(module)
           .then(deletedModule => new moduleActions.DeleteSuccess(deletedModule))
-          .catch(e => of(new moduleActions.DeleteSuccess(e)))
+          .catch(e => new moduleActions.DeleteSuccess(e))
       })
     )
 

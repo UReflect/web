@@ -40,6 +40,11 @@
           {{ (module$ | async).min_height }}
         </p>
       </div>
+      <div btn-type="delete" *ngIf="(user$ | async).ID === module.user_id">
+        <button type="button" class="btn btn-danger mr-5 mb-5" (click)="deleteHandler()">
+          <i class="fa fa-times mr-5"></i>Delete
+        </button>
+      </div>
     </app-module-detail-tags>
     <div class="block-content block-content-full">
       <div class="row">
