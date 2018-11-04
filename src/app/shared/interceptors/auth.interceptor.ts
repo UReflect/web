@@ -6,6 +6,9 @@ import { catchError }                                                           
 import * as fromStore                                                              from '@core/auth/store'
 import { Store }                                                                   from '@ngrx/store'
 
+/**
+ * Checks if the user is authenticated
+ */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router,

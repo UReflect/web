@@ -1,5 +1,8 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms'
 
+/**
+ * Validator for price inputs
+ */
 export function priceFormat(): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
     const re = /^\d+(?:[.,]\d{1,2})?$/

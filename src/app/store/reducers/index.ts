@@ -9,8 +9,17 @@ import { ActivatedRouteSnapshot, Params, RouterStateSnapshot }                 f
  * Router url app state
  */
 export interface IRouterStateUrl {
+  /**
+   * Router url
+   */
   url: string,
+  /**
+   * Router query parameters
+   */
   queryParams: Params,
+  /**
+   * Router parameters
+   */
   params: Params
 }
 
