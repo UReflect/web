@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import * as fromStore        from '@core/modules/store'
 import * as fromSelectors    from '@core/modules/store/selectors'
 import * as fromAuth         from '@core/auth/store'
+import * as fromRouter from '@store'
 import { select, Store }     from '@ngrx/store'
 import { Observable }        from 'rxjs'
 import { IModule }           from '@core/modules/models/module'
@@ -36,5 +37,11 @@ export class ModuleDetailComponent implements OnInit {
 
   deleteHandler() {
     this.store.dispatch(new fromStore.Delete(this.module))
+  }
+
+  editHandler() {
+    this.store.dispatch(new fromRouter.Go({
+      path: [`/module/${this.module.ID}/edit`]
+    }))
   }
 }

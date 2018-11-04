@@ -1,0 +1,15 @@
+<div class="content">
+  <div class="my-50 text-center">
+    <h2 class="font-w700 text-body-color-light mb-10">
+      <i class="fa fa-pencil text-muted mr-5"></i> Edit Module
+    </h2>
+  </div>
+  <div class="block block-rounded">
+    <div class="block-content">
+      <app-module-form (submitForm)="updateHandler($event)"
+                       [formFields]="formFields"
+                       [btnText]="'Save Module'"
+                       [btnIcon]="'fa-pencil'"></app-module-form>
+    </div>
+  </div>
+</div>

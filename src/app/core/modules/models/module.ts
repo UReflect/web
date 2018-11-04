@@ -1,6 +1,6 @@
 export interface IModule {
   ID: number,
-  descriptions: string,
+  description: string,
   title: string,
   price: number,
   rating: number,

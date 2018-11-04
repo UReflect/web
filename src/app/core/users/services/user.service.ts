@@ -32,7 +32,7 @@ export class UserService {
         headers: { ...header }
       }).subscribe(response => {
         resolve(response['data'])
-      }, e => reject(e.error.error))
+      }, e => reject(e.error))
     })
   }
 }

@@ -6,7 +6,10 @@
   </div>
   <div class="block block-rounded">
     <div class="block-content">
-      <app-module-form (submitForm)="createHandler($event)" [formFields]="formFields"></app-module-form>
+      <app-module-form (submitForm)="createHandler($event)"
+                       [formFields]="formFields"
+                       [btnText]="'Add Module'"
+                       [btnIcon]="'fa-plus'"></app-module-form>
     </div>
   </div>
 </div>

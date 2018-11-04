@@ -17,14 +17,45 @@ export class ModuleOwnerGuard {
     return this.checkStore().pipe(
       switchMap(() => {
         const id = parseInt(route.params.id, 10)
-        return this.hasModule(id) && this.isOwner(id)
+        return this.hasModule(id) && this.isOwnerGuard()
       })
     )
   }
 
-  isOwner(id: number): Observable<boolean> {
-    return this.store.pipe(select(fromAuth.getLoggedUser))
-      .pipe(map((user: IUser) => id === user.ID))
+  isOwnerGuard(): Observable<boolean> {
+    return new Observable(observer => {
+      this.isOwner().then(response => {
+        observer.next(response)
+        observer.complete()
+      })
+    })
+  }
+
+  getLoggedUserId(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.store.pipe(select(fromAuth.getLoggedUser))
+        .subscribe((user: IUser) => {
+          resolve(user.ID)
+        })
+    })
+  }
+
+  getModuleLoaded(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.store.pipe(select(fromStore.getSelectedModule))
+        .subscribe((module: IModule) => {
+          resolve(module)
+        })
+    })
+  }
+
+  async isOwner(): Promise<any> {
+    const module: IModule = await this.getModuleLoaded()
+    const userId: number = await this.getLoggedUserId()
+
+    return new Promise(resolve => {
+      resolve(module.user_id === userId)
+    })
   }
 
   hasModule(id: number): Observable<boolean> {

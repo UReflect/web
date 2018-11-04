@@ -88,6 +88,7 @@ export class ModuleService {
   async update(module: IModuleUpdate): Promise<any> {
     const header: any = await this.authHeader()
 
+    console.log(module)
     return new Promise((resolve, reject) => {
       this.http.put(`${this.url}/module/${module.ID}`, {
         title: module.title,

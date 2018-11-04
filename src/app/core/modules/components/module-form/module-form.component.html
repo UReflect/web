@@ -45,7 +45,7 @@
     <div class="col-lg-3">
       <p class="text-muted">
         Add more details, such as minimum size for your module.
-        0 means the module is not resizable
+        <!--0 means the module is not resizable-->
       </p>
     </div>
     <div class="col-lg-7 offset-lg-1">
@@ -56,7 +56,7 @@
           <select class="form-control form-control-lg" id="module-add-minwidth"
                   formControlName="min_width" type="number">
             <option value="-1">Please select</option>
-            <option value="0">0</option>
+            <!--<option value="0">0</option>-->
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -80,7 +80,7 @@
           <select class="form-control form-control-lg" id="module-add-minheight"
                   formControlName="min_height" type="number">
             <option value="-1">Please select</option>
-            <option value="0">0</option>
+            <!--<option value="0">0</option>-->
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -145,8 +145,8 @@
       <div class="form-group">
         <button class="btn btn-alt-success"
                 (click)="submitHandler()" [disabled]="formFields.invalid">
-          <i class="fa fa-plus mr-5"></i>
-          Add Module
+          <i class="fa {{btnIcon}} mr-5"></i>
+          {{ btnText }}
         </button>
       </div>
     </div>

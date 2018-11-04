@@ -12,6 +12,8 @@ import { IModuleCreation }                                from '@core/modules/mo
 export class ModuleFormComponent implements OnInit {
   @Output() submitForm = new EventEmitter()
   @Input() formFields: FormGroup
+  @Input() btnText: string
+  @Input() btnIcon: string
   err = []
   private formData: FormData = new FormData()
 
@@ -123,12 +125,12 @@ export class ModuleFormComponent implements OnInit {
             : 'Unknown error on price field'
       case 'min_width':
         return this.minWidth().hasError('required') ? 'Please fill the minimum width'
-          : this.minWidth().hasError('min') ? 'The minimum value is 0'
+          : this.minWidth().hasError('min') ? 'The minimum value is 1'
             : this.minWidth().hasError('max') ? 'The maximum value is 10'
               : 'Unknown error on min_width field'
       case 'min_height':
         return this.minHeight().hasError('required') ? 'Please fill the minimum width'
-          : this.minHeight().hasError('min') ? 'The minimum value is 0'
+          : this.minHeight().hasError('min') ? 'The minimum value is 1'
             : this.minHeight().hasError('max') ? 'The maximum value is 10'
               : 'Unknown error on min_height field'
       case 'fileName':

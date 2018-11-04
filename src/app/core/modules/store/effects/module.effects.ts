@@ -45,11 +45,11 @@ export class ModuleEffects {
 
   @Effect()
   update$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Update))
-    .pipe(
+    .pipe(map((action: moduleActions.Update) => action.payload),
       switchMap((module: IModuleUpdate) => {
         return this.moduleService.update(module)
           .then(updatedModule => new moduleActions.UpdateSuccess(updatedModule))
-          .catch(e => of(new moduleActions.UpdateFailed(e)))
+          .catch(e => new moduleActions.UpdateFailed(e))
       })
     )
 

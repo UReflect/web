@@ -1,12 +1,12 @@
-import { NgModule }                  from '@angular/core'
-import { RouterModule, Routes }      from '@angular/router'
-import { AuthGuardService }          from '@core/auth/guards/auth-guard.service'
-import * as fromContainer            from './containers'
-import * as fromServices             from './services'
-import * as fromGuards               from './guards'
-import { ModuleGuard, ModulesGuard } from './guards'
-import { UsersGuard }                from '@core/users/guards'
-import { CommentsGuard }             from '@core/comments/guards'
+import { NgModule }                                    from '@angular/core'
+import { RouterModule, Routes }                        from '@angular/router'
+import { AuthGuardService }                            from '@core/auth/guards/auth-guard.service'
+import * as fromContainer                              from './containers'
+import * as fromServices                               from './services'
+import * as fromGuards                                 from './guards'
+import { ModuleGuard, ModuleOwnerGuard, ModulesGuard } from './guards'
+import { UsersGuard }                                  from '@core/users/guards'
+import { CommentsGuard }                               from '@core/comments/guards'
 
 const routes: Routes = [
   {
@@ -23,6 +23,14 @@ const routes: Routes = [
     component: fromContainer.ModuleNewComponent,
     canActivate: [
       AuthGuardService
+    ]
+  },
+  {
+    path: 'module/:id/edit',
+    component: fromContainer.ModuleEditComponent,
+    canActivate: [
+      AuthGuardService,
+      ModuleOwnerGuard
     ]
   },
   {

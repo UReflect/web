@@ -32,12 +32,12 @@ export class ModuleNewComponent implements OnInit {
       ]],
       min_width: ['', [
         Validators.required,
-        Validators.min(0),
+        Validators.min(1),
         Validators.max(10)
       ]],
       min_height: ['', [
         Validators.required,
-        Validators.min(0),
+        Validators.min(1),
         Validators.max(10)
       ]],
       fileName: ['', [
