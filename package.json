@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "compodoc": "./node_modules/.bin/compodoc src -p tsconfig.json -d ./doc -n 'uReflect Web Documentation'"
+    "compodoc": "./node_modules/.bin/compodoc src -p tsconfig.json -d ./doc -n 'uReflect Web Documentation'",
+    "release": "standard-version && git push --follow-tags origin master"
   },
   "private": false,
   "dependencies": {
@@ -53,6 +54,7 @@
     "ngrx-store-freeze": "^0.2.4",
     "ngrx-store-localstorage": "^5.0.1",
     "protractor": "~5.4.0",
+    "standard-version": "^4.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~2.9.2"
