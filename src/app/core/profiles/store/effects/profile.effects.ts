@@ -22,7 +22,7 @@ export class ProfileEffects {
    * Load all profiles using HTTP service
    */
   @Effect()
-  loadMineProfiles$ = this.actions$.pipe(ofType(this.profileActions.ProfileActionTypes.LoadMine))
+  loadMineProfiles$ = this.actions$.pipe(ofType(profileActions.ProfileActionTypes.LoadMine))
     .pipe(
       switchMap(() => {
         return this.profileService.mine()
