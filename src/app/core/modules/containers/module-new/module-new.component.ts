@@ -20,22 +20,22 @@ export class ModuleNewComponent implements OnInit {
 
   ngOnInit() {
     this.formFields = this.fb.group({
-      title: ['Test Aurelien', [
+      title: ['', [
         Validators.required
       ]],
-      description: ['test', [
+      description: ['', [
         Validators.required
       ]],
-      price: ['0', [
+      price: ['', [
         Validators.required,
         priceFormat()
       ]],
-      min_width: ['1', [
+      min_width: ['', [
         Validators.required,
         Validators.min(0),
         Validators.max(10)
       ]],
-      min_height: ['2', [
+      min_height: ['', [
         Validators.required,
         Validators.min(0),
         Validators.max(10)
