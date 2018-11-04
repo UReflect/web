@@ -1,5 +1,6 @@
 import { NgModule }          from '@angular/core'
 import { InterceptorModule } from '@shared/interceptors/interceptor.module'
+import { services }          from '@shared/services'
 
 @NgModule({
   imports: [
@@ -9,7 +10,9 @@ import { InterceptorModule } from '@shared/interceptors/interceptor.module'
     InterceptorModule
   ],
   declarations: [],
-  providers: []
+  providers: [
+    ...services
+  ]
 })
 export class SharedModule {
 }
