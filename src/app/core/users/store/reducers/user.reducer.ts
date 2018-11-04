@@ -1,13 +1,32 @@
 import { IUser }        from '../../model/user.model'
 import * as fromActions from '../actions'
 
+/**
+ * State interface which defines user store
+ */
 export interface IState {
+  /**
+   * User entities
+   * Formatted using { userID: user, ... }
+   */
   entities: { [id: number]: IUser },
+  /**
+   * Is users loaded
+   */
   loaded: boolean,
+  /**
+   * Is user loading
+   */
   loading: boolean,
+  /**
+   * Are there any errors related to user store
+   */
   error: any
 }
 
+/**
+ * Initial state for user store
+ */
 export const initialState: IState = {
   entities: {},
   loaded: false,
@@ -15,6 +34,11 @@ export const initialState: IState = {
   error: null
 }
 
+/**
+ * Reducer for user store
+ * @param state Current state of the user store
+ * @param action Action received
+ */
 export function reducer(state: IState = initialState,
                         action: fromActions.UserActionsUnion) {
   switch (action.type) {
@@ -79,8 +103,24 @@ export function reducer(state: IState = initialState,
   }
 }
 
+/**
+ * Returns entities contained in user store
+ * @param state Current state of the user store
+ */
 export const getEntities = (state: IState) => state.entities
+/**
+ * Returns current loading status of the user store
+ * @param state Current state of the user store
+ */
 export const getLoading = (state: IState) => state.loading
+/**
+ * Returns current loaded state of the user store
+ * @param state Current state of the user store
+ */
 export const getLoaded = (state: IState) => state.loaded
+/**
+ * Returns current errors related to the user store
+ * @param state Current state of the user store
+ */
 export const getError = (state: IState) => state.error
 
