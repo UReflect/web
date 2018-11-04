@@ -9,8 +9,6 @@ import * as profileActions         from '../actions'
  */
 @Injectable()
 export class ProfileEffects {
-  private profileActions: any
-
   /**
    * Profile effects constructor
    * @param actions$ Action triggered
