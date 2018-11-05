@@ -19,7 +19,7 @@ export class ProfileService {
   /**
    * Token Observable from auth store
    */
-  private token$: any
+  private token$: Observable<any>
 
   /**
    * Constructor
