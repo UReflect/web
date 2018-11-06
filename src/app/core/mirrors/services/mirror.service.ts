@@ -1,9 +1,10 @@
 import { Injectable }                 from '@angular/core'
 import { Observable }                 from 'rxjs'
 import { HttpClient }                 from '@angular/common/http'
-import { Store }                      from '@ngrx/store'
+import { select, Store }              from '@ngrx/store'
 import * as fromAuth                  from '@core/auth/store'
 import { IMirrorJoin, IMirrorUpdate } from '@core/mirrors/models'
+import { environment }                from '@env/environment'
 
 /**
  * Mirror HTTP service
@@ -26,6 +27,8 @@ export class MirrorService {
    */
   constructor(private http: HttpClient,
               private store: Store<fromAuth.IState>) {
+    this.url = environment.apiUrl
+    this.token$ = this.store.pipe(select(fromAuth.getToken))
   }
 
   /**

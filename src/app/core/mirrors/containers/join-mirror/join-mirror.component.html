@@ -1,1 +1,6 @@
-<app-numpad (submit)="codeHandler($event)"></app-numpad>
+<div class="container">
+  <app-numpad (submit)="codeHandler($event)"></app-numpad>
+  <div class="text-danger">
+    {{ error$ | async }}
+  </div>
+</div>
