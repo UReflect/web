@@ -4,6 +4,8 @@ import { AuthModule }    from '@core/auth/auth.module'
 import { ModuleModule }  from '@core/modules/module.module'
 import { UserModule }    from '@core/users/user.module'
 import { CommentModule } from '@core/comments/comment.module'
+import { ProfileModule } from '@core/profiles/profile.module'
+import { MirrorModule }  from '@core/mirrors/mirror.module'
 
 @NgModule({
   imports: [
@@ -11,14 +13,18 @@ import { CommentModule } from '@core/comments/comment.module'
     AuthModule,
     ModuleModule,
     UserModule,
-    CommentModule
+    CommentModule,
+    ProfileModule,
+    MirrorModule
   ],
   exports: [
     LayoutModule,
     AuthModule,
     ModuleModule,
     UserModule,
-    CommentModule
+    CommentModule,
+    ProfileModule,
+    MirrorModule
   ],
   declarations: [],
   providers: []

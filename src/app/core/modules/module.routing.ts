@@ -2,8 +2,6 @@ import { NgModule }                                    from '@angular/core'
 import { RouterModule, Routes }                        from '@angular/router'
 import { AuthGuardService }                            from '@core/auth/guards/auth-guard.service'
 import * as fromContainer                              from './containers'
-import * as fromServices                               from './services'
-import * as fromGuards                                 from './guards'
 import { ModuleGuard, ModuleOwnerGuard, ModulesGuard } from './guards'
 import { UsersGuard }                                  from '@core/users/guards'
 import { CommentsGuard }                               from '@core/comments/guards'
@@ -53,10 +51,7 @@ const routes: Routes = [
     RouterModule
   ],
   declarations: [],
-  providers: [
-    ...fromServices.services,
-    ...fromGuards.guards
-  ]
+  providers: []
 })
 export class ModuleRoutingModule {
 }

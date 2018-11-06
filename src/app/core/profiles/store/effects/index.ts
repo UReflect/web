@@ -1,4 +1,4 @@
-import { ProfileEffects } from '@core/profiles/store'
+import { ProfileEffects } from '@core/profiles/store/effects/profile.effects'
 
 export * from './profile.effects'
 

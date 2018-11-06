@@ -1,0 +1,20 @@
+<div class="numpad-container">
+  <div class="form-control-plaintext">{{ code }}</div>
+  <div>
+    <div *ngFor="let i of [1, 2, 3, 4]" class="numpad-row">
+      <div *ngFor="let j of [1, 2, 3]" class="numpad-cell"
+           (click)="inputHandler((3 * i - 3) + j)">
+        <div>
+          <span *ngIf="((3 * i - 3) + j) <= 9">{{ (3 * i - 3) + j }}</span>
+          <span *ngIf="((3 * i - 3) + j) === 10">
+          <i class="si si-arrow-left"></i>
+        </span>
+          <span *ngIf="((3 * i - 3) + j) === 11">0</span>
+          <span *ngIf="((3 * i - 3) + j) === 12">
+          <i class="si si-arrow-right" *ngIf="code.length === 4"></i>
+        </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
