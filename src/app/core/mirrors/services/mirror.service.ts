@@ -43,7 +43,7 @@ export class MirrorService {
   }
 
   /**
-   * Get the user's profiles
+   * Get the user's mirrors
    */
   async mine(): Promise<any> {
     const header: any = await this.authHeader()
@@ -58,16 +58,17 @@ export class MirrorService {
   }
 
   /**
-   * Update the provided profile
-   * @param data Info used to update the profile
+   * Update the provided mirror
+   * @param data Info used to update the mirror
    */
   async update(data: IMirrorUpdate): Promise<any> {
     const header: any = await this.authHeader()
 
     return new Promise((resolve, reject) => {
-      this.http.put(`${this.url}/profile/${data.id}`, {
+      this.http.put(`${this.url}/mirror/${data.id}`, {
         name: data.name,
-        location: data.location
+        location: data.location,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
       }, {
         headers: { ...header }
       }).subscribe(response => {
