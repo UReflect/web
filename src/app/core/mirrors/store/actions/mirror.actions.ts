@@ -10,11 +10,12 @@ export enum MirrorActionTypes {
   UpdateFailure = '[Mirror] Update Failure',
   Join = '[Mirror] Join',
   JoinSuccess = '[Mirror] Join Success',
-  JoinFailure = '[Mirror] Join Failure'
+  JoinFailure = '[Mirror] Join Failure',
+  ClearError = '[Mirror] Clear Error'
 }
 
 /**
- * Load mine profiles action
+ * Load mine mirrors action
  */
 export class LoadMine implements Action {
   /**
@@ -25,7 +26,7 @@ export class LoadMine implements Action {
 }
 
 /**
- * Load mine profile success action
+ * Load mine mirror success action
  */
 export class LoadMineSuccess implements Action {
   /**
@@ -36,7 +37,7 @@ export class LoadMineSuccess implements Action {
 
   /**
    * Constructor
-   * @param payload Contains received profiles
+   * @param payload Contains received mirrors
    */
   constructor(public payload: IMirror[]) {
   }
@@ -61,7 +62,7 @@ export class LoadMineFailure implements Action {
 }
 
 /**
- * Update profile action
+ * Update mirror action
  */
 export class Update implements Action {
   /**
@@ -72,14 +73,14 @@ export class Update implements Action {
 
   /**
    * Constructor
-   * @param payload Contains profile info used to update
+   * @param payload Contains mirror info used to update
    */
   constructor(public payload: IMirrorUpdate) {
   }
 }
 
 /**
- * Update profile success action
+ * Update mirror success action
  */
 export class UpdateSuccess implements Action {
   /**
@@ -90,19 +91,19 @@ export class UpdateSuccess implements Action {
 
   /**
    * Constructor
-   * @param payload Contains new profile info
+   * @param payload Contains new mirror info
    */
   constructor(public payload: IMirror) {
   }
 }
 
 /**
- * Update profile failure action
+ * Update mirror failure action
  */
 export class UpdateFailure implements Action {
   /**
    * Action type
-   * '[User] Update Failure'
+   * '[Mirror] Update Failure'
    */
   readonly type = MirrorActionTypes.UpdateFailure
 
@@ -115,30 +116,30 @@ export class UpdateFailure implements Action {
 }
 
 /**
- * Join profile action
+ * Join mirror action
  */
 export class Join implements Action {
   /**
    * Action type
-   * '[User] Join'
+   * '[Mirror] Join'
    */
   readonly type = MirrorActionTypes.Join
 
   /**
    * Constructor
-   * @param payload Contains profile to delete
+   * @param payload Contains mirror to delete
    */
   constructor(public payload: IMirrorJoin) {
   }
 }
 
 /**
- * Join profile success
+ * Join mirror success
  */
 export class JoinSuccess implements Action {
   /**
    * Action type
-   * '[User] Join Success'
+   * '[Mirror] Join Success'
    */
   readonly type = MirrorActionTypes.JoinSuccess
 
@@ -151,12 +152,12 @@ export class JoinSuccess implements Action {
 }
 
 /**
- * Join profile failure
+ * Join mirror failure
  */
 export class JoinFailure implements Action {
   /**
    * Action type
-   * '[User] Join Failure'
+   * '[Mirror] Join Failure'
    */
   readonly type = MirrorActionTypes.JoinFailure
 
@@ -166,6 +167,17 @@ export class JoinFailure implements Action {
    */
   constructor(public payload: any) {
   }
+}
+
+/**
+ * Clear mirror error
+ */
+export class ClearError implements Action {
+  /**
+   * Action type
+   * '[Mirror] Clear Error'
+   */
+  readonly type = MirrorActionTypes.ClearError
 }
 
 export type MirrorActionsUnion =
@@ -178,3 +190,4 @@ export type MirrorActionsUnion =
   | Join
   | JoinSuccess
   | JoinFailure
+  | ClearError

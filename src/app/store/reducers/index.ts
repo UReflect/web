@@ -68,7 +68,7 @@ export function localStorageSyncReducer(
   reducer: ActionReducer<IState>): ActionReducer<IState> {
   return localStorageSync({
     keys: ['routerReducer', 'auth', 'layout', 'modules', 'users',
-      'comments'],
+      'comments', 'mirrors', 'profiles'],
     rehydrate: true
   })(reducer)
 }

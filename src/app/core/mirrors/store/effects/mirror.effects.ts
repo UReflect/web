@@ -4,6 +4,7 @@ import { map, switchMap }          from 'rxjs/operators'
 import { MirrorService }           from '@core/mirrors/services/mirror.service'
 import * as mirrorActions          from '../actions'
 import { IMirrorUpdate }           from '@core/mirrors/models'
+import * as routerActions          from '@store/actions'
 
 /**
  * Mirror effects
@@ -58,4 +59,17 @@ export class MirrorEffects {
       })
     )
 
+  /**
+   * Route newly joined mirror to setup
+   */
+  @Effect()
+  joinMirrorSuccess$ = this.actions$.pipe(ofType(mirrorActions.MirrorActionTypes.JoinSuccess))
+    .pipe(
+      map((action: mirrorActions.JoinSuccess) => action.payload),
+      map(mirror => {
+        return new routerActions.Go({
+          path: [`/mirror/${mirror.ID}/set`]
+        })
+      })
+    )
 }
