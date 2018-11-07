@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { AbstractControl, FormGroup }                     from '@angular/forms'
 import { IMirrorUpdate }                                  from '@core/mirrors/models'
 import { ActivatedRoute }                                 from '@angular/router'
+import * as fromStore                                     from '@core/mirrors/store'
+import { select, Store }                                  from '@ngrx/store'
+import { Observable }                                     from 'rxjs'
 
 @Component({
   selector: 'app-mirror-form',
@@ -13,11 +16,14 @@ export class MirrorFormComponent implements OnInit {
   @Input() btnText: string
   @Input() btnIcon: string
   @Output() submit = new EventEmitter<IMirrorUpdate>()
+  err$: Observable<any>
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private store: Store<fromStore.IMirrorState>) {
   }
 
   ngOnInit() {
+    this.err$ = this.store.pipe(select(fromStore.getMirrorError))
   }
 
   submitHandler() {

@@ -29,6 +29,20 @@
   </div>
 
   <div class="row items-push">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-7 offset-lg-1">
+      <div class="form-group text-body">
+        <div class="alert alert-danger" role="alert"
+             *ngIf="(err$ | async)">
+          <h3 class="alert-heading font-size-h4 font-w400">Mirror Update Error</h3>
+          <p class="mb-0">{{ err$ | async }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row items-push">
     <div class="col-lg-7 offset-lg-4">
       <div class="form-group">
         <button class="btn btn-alt-success"

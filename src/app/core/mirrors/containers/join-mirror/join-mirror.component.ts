@@ -16,6 +16,7 @@ export class JoinMirrorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(new fromStore.ClearError())
     this.error$ = this.store.pipe(select(fromStore.getMirrorError))
   }
 

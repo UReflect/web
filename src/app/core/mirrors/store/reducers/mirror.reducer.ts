@@ -73,6 +73,7 @@ export function reducer(state: IState = initialState,
         ...state,
         loading: false,
         loaded: true,
+        error: null,
         entities
       }
     }
@@ -85,9 +86,17 @@ export function reducer(state: IState = initialState,
       }
       return {
         ...state,
+        loading: false,
+        loaded: true,
+        error: null,
         entities
       }
     }
+    case fromActions.MirrorActionTypes.ClearError:
+      return {
+        ...state,
+        error: null
+      }
     default:
       return state
   }
