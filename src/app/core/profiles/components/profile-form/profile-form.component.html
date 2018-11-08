@@ -3,26 +3,17 @@
   <div class="row items-push">
     <div class="col-lg-3">
       <p class="text-muted">
-        Name your mirror and enter its location in your home.
+        Name your profile.
       </p>
     </div>
     <div class="col-lg-7 offset-lg-1">
       <div class="form-group text-body"
-           [ngClass]="{'is-invalid': name().invalid && name().touched}">
-        <label for="module-add-name">Name *</label>
-        <input type="text" class="form-control form-control-lg" id="module-add-name"
-               placeholder="Mirror Name" formControlName="name">
+           [ngClass]="{'is-invalid': title().invalid && title().touched}">
+        <label for="module-add-title">Title *</label>
+        <input type="text" class="form-control form-control-lg" id="module-add-title"
+               placeholder="Profile Title" formControlName="title">
         <div class="invalid-feedback animated fadeInDown"
-             *ngIf="name().invalid">{{ getErrors('name') }}
-        </div>
-      </div>
-      <div class="form-group text-body"
-           [ngClass]="{'is-invalid': location().invalid && location().touched}">
-        <label for="module-add-location">Location *</label>
-        <input type="text" class="form-control form-control-lg" id="module-add-location"
-               placeholder="Mirror Location" formControlName="location">
-        <div class="invalid-feedback animated fadeInDown"
-             *ngIf="location().invalid">{{ getErrors('location') }}
+             *ngIf="title().invalid">{{ getErrors('title') }}
         </div>
       </div>
     </div>

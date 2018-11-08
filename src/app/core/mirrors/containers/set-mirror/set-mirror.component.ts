@@ -24,7 +24,7 @@ export class SetMirrorComponent implements OnInit {
 
   setupHandler(data) {
     if (data.id) {
-      this.store.dispatch(new fromStore.Update(data))
+      this.store.dispatch(new fromStore.Setup(data))
     }
   }
 }

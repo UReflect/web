@@ -12,6 +12,9 @@ export enum MirrorActionTypes {
   Join = '[Mirror] Join',
   JoinSuccess = '[Mirror] Join Success',
   JoinFailure = '[Mirror] Join Failure',
+  Setup = '[Mirror] Setup',
+  SetupSuccess = '[Mirror] Setup Success',
+  SetupFailure = '[Mirror] Setup Failure',
   LinkProfile = '[Mirror] Link Profile',
   LinkProfileSuccess = '[Mirror] Link Profile Success',
   LinkProfileFailure = '[Mirror] Link Profile Failure',
@@ -231,6 +234,60 @@ export class LinkProfileFailure implements Action {
   }
 }
 
+/**
+ * Setup mirror action
+ */
+export class Setup implements Action {
+  /**
+   * Action type
+   * '[Mirror] Setup'
+   */
+  readonly type = MirrorActionTypes.Setup
+
+  /**
+   * Constructor
+   * @param payload Contains mirror info used to update
+   */
+  constructor(public payload: IMirrorUpdate) {
+  }
+}
+
+/**
+ * Setup mirror success action
+ */
+export class SetupSuccess implements Action {
+  /**
+   * Action type
+   * '[Mirror] Setup Success'
+   */
+  readonly type = MirrorActionTypes.SetupSuccess
+
+  /**
+   * Constructor
+   * @param payload Contains new mirror info
+   */
+  constructor(public payload: IMirror) {
+  }
+}
+
+/**
+ * Setup mirror failure action
+ */
+export class SetupFailure implements Action {
+  /**
+   * Action type
+   * '[Mirror] Setup Failure'
+   */
+  readonly type = MirrorActionTypes.SetupFailure
+
+  /**
+   * Constructor
+   * @param payload Contains received errors
+   */
+  constructor(public payload: any) {
+  }
+}
+
 export type MirrorActionsUnion =
   | LoadMine
   | LoadMineSuccess
@@ -245,3 +302,6 @@ export type MirrorActionsUnion =
   | LinkProfile
   | LinkProfileSuccess
   | LinkProfileFailure
+  | Setup
+  | SetupSuccess
+  | SetupFailure

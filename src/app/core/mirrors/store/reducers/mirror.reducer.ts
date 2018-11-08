@@ -46,6 +46,7 @@ export function reducer(state: IState = initialState,
     case fromActions.MirrorActionTypes.LoadMine:
     case fromActions.MirrorActionTypes.Join:
     case fromActions.MirrorActionTypes.LinkProfile:
+    case fromActions.MirrorActionTypes.Setup:
       return {
         ...state,
         loading: true
@@ -54,6 +55,7 @@ export function reducer(state: IState = initialState,
     case fromActions.MirrorActionTypes.LoadMineFailure:
     case fromActions.MirrorActionTypes.JoinFailure:
     case fromActions.MirrorActionTypes.LinkProfileFailure:
+    case fromActions.MirrorActionTypes.SetupFailure:
       return {
         ...state,
         loading: false,
@@ -80,6 +82,7 @@ export function reducer(state: IState = initialState,
       }
     }
     case fromActions.MirrorActionTypes.JoinSuccess:
+    case fromActions.MirrorActionTypes.SetupSuccess:
     case fromActions.MirrorActionTypes.UpdateSuccess: {
       const mirror = action.payload
       const entities = {

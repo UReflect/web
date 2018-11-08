@@ -5,6 +5,7 @@ import { MirrorService }                     from '@core/mirrors/services/mirror
 import * as mirrorActions                    from '../actions'
 import { IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
 import * as routerActions                    from '@store/actions'
+import { ActivatedRoute }                    from '@angular/router'
 
 /**
  * Mirror effects
@@ -15,9 +16,11 @@ export class MirrorEffects {
    * Mirror effects constructor
    * @param actions$ Action triggered
    * @param mirrorService HTTP service
+   * @param route Router state
    */
   constructor(private actions$: Actions,
-              private mirrorService: MirrorService) {
+              private mirrorService: MirrorService,
+              private route: ActivatedRoute) {
   }
 
   /**
@@ -50,12 +53,27 @@ export class MirrorEffects {
    * Updates mirror using HTTP service
    */
   @Effect()
-  update$ = this.actions$.pipe(ofType(mirrorActions.MirrorActionTypes.Update))
+  update$ = this.actions$
+    .pipe(ofType(mirrorActions.MirrorActionTypes.Update))
     .pipe(map((action: mirrorActions.Update) => action.payload),
       switchMap((mirror: IMirrorUpdate) => {
         return this.mirrorService.update(mirror)
           .then(updatedMirror => new mirrorActions.UpdateSuccess(updatedMirror))
           .catch(e => new mirrorActions.UpdateFailure(e))
+      })
+    )
+
+  /**
+   * Updates mirror using HTTP service
+   */
+  @Effect()
+  setup$ = this.actions$
+    .pipe(ofType(mirrorActions.MirrorActionTypes.Setup))
+    .pipe(map((action: mirrorActions.Setup) => action.payload),
+      switchMap((mirror: IMirrorUpdate) => {
+        return this.mirrorService.update(mirror)
+          .then(updatedMirror => new mirrorActions.SetupSuccess(updatedMirror))
+          .catch(e => new mirrorActions.SetupFailure(e))
       })
     )
 
@@ -72,6 +90,19 @@ export class MirrorEffects {
         })
       })
     )
+
+  /**
+   * Route to first profile setup
+   */
+  @Effect()
+  setupSuccess$ = this.actions$
+    .pipe(ofType(mirrorActions.MirrorActionTypes.SetupSuccess))
+    .pipe(map((action: mirrorActions.SetupSuccess) => action.payload),
+      map(mirror => {
+        return new routerActions.Go({
+          path: [`/mirror/${mirror.ID}/first-profile`]
+        })
+      }))
 
   /**
    * Link profile to mirror using HTTP service
