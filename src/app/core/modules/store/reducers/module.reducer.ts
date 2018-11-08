@@ -1,20 +1,55 @@
 import { IModule }      from '@core/modules/models/module'
 import * as fromActions from '../actions'
 
+/**
+ * Module state interface
+ */
 export interface IState {
+  /**
+   * Module entities
+   */
   entities: { [id: number]: IModule },
+  /**
+   * Module loaded status
+   */
   loaded: boolean,
+  /**
+   * Module loading status
+   */
   loading: boolean,
+  /**
+   * Module error
+   */
   error: any
 }
 
+/**
+ * Module initial state definition
+ */
 export const initialState: IState = {
+  /**
+   * Initial state for entities
+   */
   entities: {},
+  /**
+   * Initial state for loaded
+   */
   loaded: false,
+  /**
+   * Initial state for loading
+   */
   loading: false,
+  /**
+   * Initial state for error
+   */
   error: null
 }
 
+/**
+ * Module reducer
+ * @param state State of modules
+ * @param action Action triggered
+ */
 export function reducer(state: IState = initialState,
                         action: fromActions.ModuleActionsUnion) {
   switch (action.type) {
@@ -92,7 +127,23 @@ export function reducer(state: IState = initialState,
   }
 }
 
+/**
+ * Module entities getter
+ * @param state Current module state
+ */
 export const getEntities = (state: IState) => state.entities
+/**
+ * Module loading getter
+ * @param state Current module state
+ */
 export const getLoading = (state: IState) => state.loading
+/**
+ * Module loaded getter
+ * @param state Current module state
+ */
 export const getLoaded = (state: IState) => state.loaded
+/**
+ * Module error getter
+ * @param state Current module state
+ */
 export const getError = (state: IState) => state.error

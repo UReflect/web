@@ -5,19 +5,34 @@ import * as fromStore                         from '@core/modules/store'
 import { Action, ActionsSubject, Store }      from '@ngrx/store'
 import { IModuleUpload }                      from '@core/modules/models/module'
 
+/**
+ * Module new component
+ */
 @Component({
   selector: 'app-module-new',
   templateUrl: 'module-new.component.html'
 })
 
 export class ModuleNewComponent implements OnInit {
+  /**
+   * Form fields definition
+   */
   formFields: FormGroup
 
+  /**
+   * Constructor
+   * @param fb Form builder
+   * @param store Module store
+   * @param actionsSubject$ Actions triggered
+   */
   constructor(private fb: FormBuilder,
               private store: Store<fromStore.IModulesState>,
               private actionsSubject$: ActionsSubject) {
   }
 
+  /**
+   * Init form
+   */
   ngOnInit() {
     this.formFields = this.fb.group({
       title: ['', [
@@ -47,6 +62,10 @@ export class ModuleNewComponent implements OnInit {
     })
   }
 
+  /**
+   * Creates module using infor received from ModuleFormComponent
+   * @param data Module info
+   */
   createHandler(data) {
     this.store.dispatch(new fromStore.Create(data.form))
     this.actionsSubject$.subscribe((action: Action) => {

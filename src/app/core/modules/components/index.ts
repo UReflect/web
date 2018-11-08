@@ -12,6 +12,9 @@ export * from './module-detail-tags/module-detail-tags.component'
 export * from './module-stars/module-stars.component'
 export * from './module-form/module-form.component'
 
+/**
+ * Exports all components
+ */
 export const components: any[] = [
   ModuleListCardComponent,
   ModuleDetailHeaderComponent,

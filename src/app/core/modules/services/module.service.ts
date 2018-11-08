@@ -5,17 +5,34 @@ import { IModule, IModuleCreation, IModuleUpdate, IModuleUpload } from '@core/mo
 import * as fromAuth                                              from '@core/auth/store'
 import { select, Store }                                          from '@ngrx/store'
 
+/**
+ * Module HTTP Service
+ */
 @Injectable()
 export class ModuleService {
+  /**
+   * API Url
+   */
   private url: string
+  /**
+   * Token$ Observable
+   */
   private token$: any
 
+  /**
+   * Constructor
+   * @param http HttpClient used to make HTTP queries
+   * @param store Auth Store
+   */
   constructor(private http: HttpClient,
               private store: Store<fromAuth.IState>) {
     this.url = environment.apiUrl
     this.token$ = this.store.pipe(select(fromAuth.getToken))
   }
 
+  /**
+   * Async method to get token from auth store
+   */
   authHeader(): Promise<any> {
     return new Promise((resolve) => {
       this.token$.subscribe(token => {
@@ -24,6 +41,10 @@ export class ModuleService {
     })
   }
 
+  /**
+   * Load all mirrors from API
+   * @param params Filtering parameters
+   */
   async all(params?: { query: string, order: string, invert: boolean, limit: number }): Promise<any> {
     const header: any = await this.authHeader()
 
@@ -44,6 +65,10 @@ export class ModuleService {
     })
   }
 
+  /**
+   * Load one mirror from API
+   * @param id Mirror ID
+   */
   async one(id: number): Promise<any> {
     const header: any = await this.authHeader()
 
@@ -56,6 +81,10 @@ export class ModuleService {
     })
   }
 
+  /**
+   * Create mirror
+   * @param data Mirror info
+   */
   async create(data: IModuleCreation): Promise<any> {
     const header: any = await this.authHeader()
 
@@ -73,6 +102,10 @@ export class ModuleService {
     })
   }
 
+  /**
+   * Upload ZIP Archive for mirror
+   * @param data ZIP Archive data
+   */
   async uploadPackage(data: IModuleUpload): Promise<any> {
     const header: any = await this.authHeader()
 
@@ -85,10 +118,13 @@ export class ModuleService {
     })
   }
 
+  /**
+   * Update module
+   * @param module Module data
+   */
   async update(module: IModuleUpdate): Promise<any> {
     const header: any = await this.authHeader()
 
-    console.log(module)
     return new Promise((resolve, reject) => {
       this.http.put(`${this.url}/module/${module.ID}`, {
         title: module.title,
@@ -104,6 +140,10 @@ export class ModuleService {
     })
   }
 
+  /**
+   * Delete module from API
+   * @param module Module to delete
+   */
   async delete(module: IModule): Promise<any> {
     const header: any = await this.authHeader()
 

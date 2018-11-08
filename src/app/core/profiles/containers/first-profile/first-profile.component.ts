@@ -6,14 +6,27 @@ import { ActivatedRoute }                     from '@angular/router'
 import * as fromProfile                       from '@core/profiles/store'
 import { IMIrrorLinkProfile }                 from '@core/mirrors/models'
 
+/**
+ * First profile creation container
+ */
 @Component({
   selector: 'app-first-profile',
   templateUrl: 'first-profile.component.html'
 })
 
 export class FirstProfileComponent implements OnInit {
+  /**
+   * Form declaration
+   */
   formFields: FormGroup
 
+  /**
+   * Constructor
+   * @param fb FormBuilder
+   * @param store Profile store
+   * @param route Current route
+   * @param actionsSubject$ Action observable to catch emitted actions
+   */
   constructor(private fb: FormBuilder,
               private store: Store<fromProfile.IProfileState>,
               private route: ActivatedRoute,
@@ -23,9 +36,16 @@ export class FirstProfileComponent implements OnInit {
     })
   }
 
+  /**
+   * ngOnInit
+   */
   ngOnInit() {
   }
 
+  /**
+   * Handles @Output from ProfileFormComponent
+   * @param data Data sent from ProfileFormComponent
+   */
   linkHandler(data) {
     if (data.title) {
       this.store.dispatch(new fromProfile.Create(data))

@@ -4,6 +4,9 @@ import { MirrorFormComponent } from '@core/mirrors/components/mirror-form/mirror
 export * from './numpad/numpad.component'
 export * from './mirror-form/mirror-form.component'
 
+/**
+ * Export all components
+ */
 export const components: any[] = [
   NumpadComponent,
   MirrorFormComponent

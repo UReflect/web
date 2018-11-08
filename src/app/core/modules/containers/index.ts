@@ -8,6 +8,9 @@ export * from './module-detail/module-detail.component'
 export * from './module-new/module-new.component'
 export * from './module-edit/module-edit.component'
 
+/**
+ * Exports all containers
+ */
 export const containers: any[] = [
   ModuleListComponent,
   ModuleDetailComponent,

@@ -6,12 +6,23 @@ import { map, switchMap }                                         from 'rxjs/ope
 import { IModule, IModuleCreation, IModuleUpdate, IModuleUpload } from '@core/modules/models/module'
 import * as routerActions                                         from '@store/actions'
 
+/**
+ * Module effects
+ */
 @Injectable()
 export class ModuleEffects {
+  /**
+   * Constructor
+   * @param actions$ Actions
+   * @param moduleService Http module service
+   */
   constructor(private actions$: Actions,
               private moduleService: ModuleService) {
   }
 
+  /**
+   * Load module effect
+   */
   @Effect()
   loadModules$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.LoadAll))
     .pipe(
@@ -22,6 +33,9 @@ export class ModuleEffects {
       })
     )
 
+  /**
+   * Create module effect
+   */
   @Effect()
   createModule$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Create))
     .pipe(map((action: moduleActions.Create) => action.payload),
@@ -32,6 +46,9 @@ export class ModuleEffects {
       })
     )
 
+  /**
+   * Delete module effect
+   */
   @Effect()
   deleteModule$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Delete))
     .pipe(map((action: moduleActions.Delete) => action.payload),
@@ -42,8 +59,11 @@ export class ModuleEffects {
       })
     )
 
+  /**
+   * Update module effect
+   */
   @Effect()
-  update$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Update))
+  updateModule$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Update))
     .pipe(map((action: moduleActions.Update) => action.payload),
       switchMap((module: IModuleUpdate) => {
         return this.moduleService.update(module)
@@ -52,6 +72,9 @@ export class ModuleEffects {
       })
     )
 
+  /**
+   * Upload module ZIP archive effect
+   */
   @Effect()
   uploadModule$ = this.actions$.pipe(ofType(moduleActions.ModuleActionTypes.Upload))
     .pipe(map((action: moduleActions.Upload) => action.payload),
@@ -62,6 +85,9 @@ export class ModuleEffects {
       })
     )
 
+  /**
+   * Create module success effect
+   */
   @Effect()
   createModuleSuccess$ = this.actions$.pipe(ofType(
     moduleActions.ModuleActionTypes.CreateSuccess,
@@ -75,6 +101,9 @@ export class ModuleEffects {
       })
     )
 
+  /**
+   * Delete module success effect
+   */
   @Effect()
   deleteModuleSuccess$ = this.actions$.pipe(ofType(
     moduleActions.ModuleActionTypes.DeleteSuccess))

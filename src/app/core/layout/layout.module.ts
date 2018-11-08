@@ -1,13 +1,10 @@
-import { NgModule }             from '@angular/core'
-import { SidebarLogoComponent } from './components/sidebar-logo/sidebar-logo.component'
-import { LayoutComponent }      from './containers/layout.component'
-import { RouterModule }         from '@angular/router'
-import { SidebarUserComponent } from './components/sidebar-user/sidebar-user.component'
-import { SidenavComponent }     from './components/sidenav/sidenav.component'
-import { HeaderComponent }      from './components/header/header.component'
-import { CommonModule }         from '@angular/common'
-import { StoreModule }          from '@ngrx/store'
-import { reducers }             from './store/reducers'
+import { NgModule }     from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { CommonModule } from '@angular/common'
+import { StoreModule }  from '@ngrx/store'
+import { reducers }     from './store/reducers'
+import { components }   from '@core/layout/components'
+import { containers }   from '@core/layout/containers'
 
 @NgModule({
   imports: [
@@ -16,18 +13,12 @@ import { reducers }             from './store/reducers'
     StoreModule.forFeature('layout', reducers)
   ],
   exports: [
-    SidebarLogoComponent,
-    SidebarUserComponent,
-    SidenavComponent,
-    HeaderComponent,
-    LayoutComponent
+    ...components,
+    ...containers
   ],
   declarations: [
-    SidebarLogoComponent,
-    SidebarUserComponent,
-    SidenavComponent,
-    HeaderComponent,
-    LayoutComponent
+    ...components,
+    ...containers
   ],
   providers: []
 })

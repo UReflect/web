@@ -4,12 +4,23 @@ import { map, take }     from 'rxjs/operators'
 import * as fromAuth     from '../store/index'
 import { Router }        from '@angular/router'
 
+/**
+ * Auth guard
+ */
 @Injectable()
 export class AuthGuardService {
+  /**
+   * Constructor
+   * @param store Auth store
+   * @param router Router
+   */
   constructor(private store: Store<fromAuth.IState>,
               private router: Router) {
   }
 
+  /**
+   * Check if route can be activated
+   */
   canActivate() {
     return this.store.pipe(select(fromAuth.getIsAuthenticated),
       map(authenticated => {

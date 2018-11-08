@@ -2,14 +2,24 @@ import { ErrorHandler, Injectable } from '@angular/core'
 import * as Sentry                  from '@sentry/browser'
 import { environment }              from '@env/environment'
 
+/**
+ * Integration of Sentry service
+ */
 @Injectable()
 export class SentryService implements ErrorHandler {
+  /**
+   * Init the Sentry service
+   */
   constructor() {
     Sentry.init({
-      dsn: 'https://d3063663ac374a60914a3dfb9c3835fb@sentry.io/1315508'
+      dsn: environment.sentryDsn
     })
   }
 
+  /**
+   * Catch errors and send them to Sentry
+   * @param error Catch error
+   */
   handleError(error) {
     if (environment.production) {
       Sentry.captureException(error.originalError || error)
