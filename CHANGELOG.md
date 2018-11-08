@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/UReflect/web/compare/v0.1.0...v0.2.0) (2018-11-08)
+
+
+### Bug Fixes
+
+* **modules:** Fix missing attribute in module update interface ([b418dff](https://github.com/UReflect/web/commit/b418dff))
+* **profiles:** Fixed typo ([c81973a](https://github.com/UReflect/web/commit/c81973a))
+* **profiles:** Removed forgotten attribute in effects ([2e59951](https://github.com/UReflect/web/commit/2e59951))
+
+
+### Features
+
+* **Add First Profile view:** Add components and containers. Add Setup Actions in mirror store to en ([9490bce](https://github.com/UReflect/web/commit/9490bce))
+* **mirror:** Mirror models + http service ([ef87ebb](https://github.com/UReflect/web/commit/ef87ebb))
+* **mirrors:** Add error managment + reset errors on /mirror/join ([dc75237](https://github.com/UReflect/web/commit/dc75237))
+* **mirrors:** Add LinkProfile ([df7a6e3](https://github.com/UReflect/web/commit/df7a6e3))
+* **mirrors:** Add mirror first setup ([d2cae2f](https://github.com/UReflect/web/commit/d2cae2f))
+* **mirrors:** Added Store ([ca386f7](https://github.com/UReflect/web/commit/ca386f7))
+* **mirrors:** Update store and HTTP service ([43451a7](https://github.com/UReflect/web/commit/43451a7))
+* **profiles:** Added ProfileService ([9515b45](https://github.com/UReflect/web/commit/9515b45))
+* **profiles:** Added store ([a798634](https://github.com/UReflect/web/commit/a798634))
+* **setup-process:** Add mirror join feature ([a4a1a46](https://github.com/UReflect/web/commit/a4a1a46))
+* **setup-process:** Add numpad component ([b6ea13d](https://github.com/UReflect/web/commit/b6ea13d))
+
+
+
 <a name="0.1.0"></a>
 # 0.1.0 (2018-11-04)
 
