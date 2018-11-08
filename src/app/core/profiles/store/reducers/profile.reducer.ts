@@ -87,6 +87,8 @@ export function reducer(state: IState = initialState,
       }
       return {
         ...state,
+        loading: false,
+        loaded: true,
         entities
       }
     }

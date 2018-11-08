@@ -103,7 +103,7 @@ export class MirrorService {
     const header: any = await this.authHeader()
 
     return new Promise((resolve, reject) => {
-      this.http.post(`${this.url}/mirror/${data.id}/profile`, {
+      this.http.post(`${this.url}/mirrors/${data.id}/profile`, {
         profile_id: data.profile_id
       }, {
         headers: { ...header }

@@ -109,10 +109,10 @@ export class MirrorEffects {
    */
   @Effect()
   linkProfileSuccess = this.actions$
-    .pipe(ofType(mirrorActions.MirrorActionTypes.LinkProfileSuccess))
+    .pipe(ofType(mirrorActions.MirrorActionTypes.LinkProfile))
     .pipe(map((action: mirrorActions.LinkProfile) => action.payload),
-      map((data: IMIrrorLinkProfile) => {
-        this.mirrorService.linkProfile(data)
+      switchMap((data: IMIrrorLinkProfile) => {
+        return this.mirrorService.linkProfile(data)
           .then(() => new mirrorActions.LinkProfileSuccess())
           .catch(e => new mirrorActions.LinkProfileFailure(e))
       }))
