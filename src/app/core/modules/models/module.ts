@@ -75,6 +75,10 @@ export interface IModuleCreation {
  */
 export interface IModuleUpdate {
   /**
+   * Module ID
+   */
+  ID: number,
+  /**
    * Module title
    */
   title: string,
