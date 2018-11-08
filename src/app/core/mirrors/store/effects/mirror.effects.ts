@@ -1,10 +1,10 @@
-import { Injectable }              from '@angular/core'
-import { Actions, Effect, ofType } from '@ngrx/effects'
-import { map, switchMap }          from 'rxjs/operators'
-import { MirrorService }           from '@core/mirrors/services/mirror.service'
-import * as mirrorActions          from '../actions'
-import { IMirrorUpdate }           from '@core/mirrors/models'
-import * as routerActions          from '@store/actions'
+import { Injectable }                        from '@angular/core'
+import { Actions, Effect, ofType }           from '@ngrx/effects'
+import { map, switchMap }                    from 'rxjs/operators'
+import { MirrorService }                     from '@core/mirrors/services/mirror.service'
+import * as mirrorActions                    from '../actions'
+import { IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
+import * as routerActions                    from '@store/actions'
 
 /**
  * Mirror effects
@@ -63,13 +63,26 @@ export class MirrorEffects {
    * Route newly joined mirror to setup
    */
   @Effect()
-  joinMirrorSuccess$ = this.actions$.pipe(ofType(mirrorActions.MirrorActionTypes.JoinSuccess))
-    .pipe(
-      map((action: mirrorActions.JoinSuccess) => action.payload),
+  joinMirrorSuccess$ = this.actions$
+    .pipe(ofType(mirrorActions.MirrorActionTypes.JoinSuccess))
+    .pipe(map((action: mirrorActions.JoinSuccess) => action.payload),
       map(mirror => {
         return new routerActions.Go({
           path: [`/mirror/${mirror.ID}/set`]
         })
       })
     )
+
+  /**
+   * Link profile to mirror using HTTP service
+   */
+  @Effect()
+  linkProfileSuccess = this.actions$
+    .pipe(ofType(mirrorActions.MirrorActionTypes.LinkProfileSuccess))
+    .pipe(map((action: mirrorActions.LinkProfile) => action.payload),
+      map((data: IMIrrorLinkProfile) => {
+        this.mirrorService.linkProfile(data)
+          .then(() => new mirrorActions.LinkProfileSuccess())
+          .catch(e => new mirrorActions.LinkProfileFailure(e))
+      }))
 }

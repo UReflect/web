@@ -1,5 +1,6 @@
-import { Action }                              from '@ngrx/store'
-import { IMirror, IMirrorJoin, IMirrorUpdate } from '@core/mirrors/models/mirror.model'
+import { Action }                                                  from '@ngrx/store'
+import { IMirror, IMirrorJoin, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models/mirror.model'
+import { IProfile }                                                from '@core/profiles/models'
 
 export enum MirrorActionTypes {
   LoadMine = '[Mirror] Load Mine',
@@ -11,6 +12,9 @@ export enum MirrorActionTypes {
   Join = '[Mirror] Join',
   JoinSuccess = '[Mirror] Join Success',
   JoinFailure = '[Mirror] Join Failure',
+  LinkProfile = '[Mirror] Link Profile',
+  LinkProfileSuccess = '[Mirror] Link Profile Success',
+  LinkProfileFailure = '[Mirror] Link Profile Failure',
   ClearError = '[Mirror] Clear Error'
 }
 
@@ -180,6 +184,53 @@ export class ClearError implements Action {
   readonly type = MirrorActionTypes.ClearError
 }
 
+/**
+ * Link profile to mirror
+ */
+export class LinkProfile implements Action {
+  /**
+   * Action type
+   * '[Mirror] Link Profile'
+   */
+  readonly type = MirrorActionTypes.LinkProfile
+
+  /**
+   * Constructor
+   * @param payload Contains profile to link and mirror ID
+   */
+  constructor(public payload: IMIrrorLinkProfile) {
+  }
+}
+
+/**
+ * Link profile mirror success
+ */
+export class LinkProfileSuccess implements Action {
+  /**
+   * Action type
+   * '[Mirror] Link Profile Success'
+   */
+  readonly type = MirrorActionTypes.LinkProfileSuccess
+}
+
+/**
+ * Link profile mirror failure
+ */
+export class LinkProfileFailure implements Action {
+  /**
+   * Action type
+   * '[Mirror] Link Profile Failure'
+   */
+  readonly type = MirrorActionTypes.LinkProfileFailure
+
+  /**
+   * Constructor
+   * @param payload Contains received error
+   */
+  constructor(public payload: any) {
+  }
+}
+
 export type MirrorActionsUnion =
   | LoadMine
   | LoadMineSuccess
@@ -191,3 +242,6 @@ export type MirrorActionsUnion =
   | JoinSuccess
   | JoinFailure
   | ClearError
+  | LinkProfile
+  | LinkProfileSuccess
+  | LinkProfileFailure
