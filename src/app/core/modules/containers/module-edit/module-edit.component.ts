@@ -4,23 +4,40 @@ import { Action, ActionsSubject, select, Store } from '@ngrx/store'
 import * as fromStore                            from '@core/modules/store'
 import { moduleZipName, priceFormat }            from '@shared/validators'
 import { IModule, IModuleUpload }                from '@core/modules/models/module'
-import { Observable }                            from 'rxjs'
 
+/**
+ * Module edit component
+ */
 @Component({
   selector: 'app-module-edit',
   templateUrl: 'module-edit.component.html'
 })
 
 export class ModuleEditComponent implements OnInit {
+  /**
+   * Form field
+   */
   formFields: FormGroup
-  module$: Observable<IModule>
+  /**
+   * Module to edit
+   */
   private module: IModule
 
+  /**
+   * Constructor
+   * @param fb Form builder
+   * @param store Module store
+   * @param actionsSubject$ Action triggered
+   */
   constructor(private fb: FormBuilder,
               private store: Store<fromStore.IModulesState>,
               private actionsSubject$: ActionsSubject) {
   }
 
+  /**
+   * Init form with module data
+   * Fill module variable
+   */
   ngOnInit() {
     this.store.pipe(select(fromStore.getSelectedModule)).subscribe((module: IModule) => {
       if (module) {
@@ -55,6 +72,10 @@ export class ModuleEditComponent implements OnInit {
     })
   }
 
+  /**
+   * Updates module with new data
+   * @param data Module info
+   */
   updateHandler(data) {
     data.form.ID = this.module.ID
     this.store.dispatch(new fromStore.Update(data.form))

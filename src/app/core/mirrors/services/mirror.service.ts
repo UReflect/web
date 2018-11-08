@@ -1,10 +1,10 @@
-import { Injectable }                 from '@angular/core'
-import { Observable }                 from 'rxjs'
-import { HttpClient }                 from '@angular/common/http'
-import { select, Store }              from '@ngrx/store'
-import * as fromAuth                  from '@core/auth/store'
-import { IMirrorJoin, IMirrorUpdate } from '@core/mirrors/models'
-import { environment }                from '@env/environment'
+import { Injectable }                                     from '@angular/core'
+import { Observable }                                     from 'rxjs'
+import { HttpClient }                                     from '@angular/common/http'
+import { select, Store }                                  from '@ngrx/store'
+import * as fromAuth                                      from '@core/auth/store'
+import { IMirrorJoin, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
+import { environment }                                    from '@env/environment'
 
 /**
  * Mirror HTTP service
@@ -87,6 +87,24 @@ export class MirrorService {
     return new Promise((resolve, reject) => {
       this.http.post(`${this.url}/mirror/join`, {
         join_code: data.join_code
+      }, {
+        headers: { ...header }
+      }).subscribe(response => {
+        resolve(response['data'])
+      }, e => reject(e.error))
+    })
+  }
+
+  /**
+   * Link a profile to a mirror
+   * @param data Info used to link profile to mirror
+   */
+  async linkProfile(data: IMIrrorLinkProfile): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.url}/mirrors/${data.id}/profile`, {
+        profile_id: data.profile_id
       }, {
         headers: { ...header }
       }).subscribe(response => {

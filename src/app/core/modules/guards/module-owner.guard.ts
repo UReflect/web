@@ -8,11 +8,22 @@ import { ActivatedRouteSnapshot }            from '@angular/router'
 import { IModule }                           from '@core/modules/models/module'
 import { IUser }                             from '@core/users/model/user.model'
 
+/**
+ * Module owner guard
+ */
 @Injectable()
 export class ModuleOwnerGuard {
+  /**
+   * Constructor
+   * @param store Module store
+   */
   constructor(private store: Store<fromStore.IModulesState>) {
   }
 
+  /**
+   * Checks if route can be activated
+   * @param route Current route
+   */
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.checkStore().pipe(
       switchMap(() => {
@@ -22,6 +33,9 @@ export class ModuleOwnerGuard {
     )
   }
 
+  /**
+   * Checks if user is owner
+   */
   isOwnerGuard(): Observable<boolean> {
     return new Observable(observer => {
       this.isOwner().then(response => {
@@ -31,6 +45,9 @@ export class ModuleOwnerGuard {
     })
   }
 
+  /**
+   * Get currently logged user
+   */
   getLoggedUserId(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.store.pipe(select(fromAuth.getLoggedUser))
@@ -40,6 +57,9 @@ export class ModuleOwnerGuard {
     })
   }
 
+  /**
+   * Get asked module
+   */
   getModuleLoaded(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.store.pipe(select(fromStore.getSelectedModule))
@@ -49,6 +69,9 @@ export class ModuleOwnerGuard {
     })
   }
 
+  /**
+   * Asynchronously checks if user is owner
+   */
   async isOwner(): Promise<any> {
     const module: IModule = await this.getModuleLoaded()
     const userId: number = await this.getLoggedUserId()
@@ -58,6 +81,10 @@ export class ModuleOwnerGuard {
     })
   }
 
+  /**
+   * Checks if module exists in store
+   * @param id Module ID
+   */
   hasModule(id: number): Observable<boolean> {
     return this.store.pipe(select(fromStore.getModuleEntities))
       .pipe(
@@ -66,6 +93,9 @@ export class ModuleOwnerGuard {
       )
   }
 
+  /**
+   * Checks if store contains any module
+   */
   checkStore(): Observable<boolean> {
     return this.store.pipe(select(fromStore.getModuleLoaded))
       .pipe(

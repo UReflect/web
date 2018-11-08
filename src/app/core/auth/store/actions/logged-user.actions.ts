@@ -6,14 +6,32 @@ export enum LoggedUserActionTypes {
   ClearLoggedUser = '[Logged User] Clear User'
 }
 
+/**
+ * Store logged user action
+ */
 export class StoreLoggedUser implements Action {
+  /**
+   * Action type
+   * '[Logged User] Store Logged User'
+   */
   readonly type = LoggedUserActionTypes.StoreLoggedUser
 
+  /**
+   * Constructor
+   * @param payload Logged user
+   */
   constructor(public payload: IUser) {
   }
 }
 
+/**
+ * Clear logged user action
+ */
 export class ClearLoggedUser implements Action {
+  /**
+   * Action type
+   * '[Logged User] Clear Logged User'
+   */
   readonly type = LoggedUserActionTypes.ClearLoggedUser
 }
 

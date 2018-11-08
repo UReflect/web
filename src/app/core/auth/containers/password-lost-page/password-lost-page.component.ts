@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 
+/**
+ * Password lost component
+ */
 @Component({
   selector: 'app-password-lost-page',
   templateUrl: 'password-lost-page.component.html',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core'
 })
 
 export class PasswordLostPageComponent implements OnInit {
+  /**
+   * Constructor
+   */
   constructor() {
   }
 
+  /**
+   * ngOnInit
+   */
   ngOnInit() {
   }
 }

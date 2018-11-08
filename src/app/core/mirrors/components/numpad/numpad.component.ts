@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 
+/**
+ * Numpad component
+ */
 @Component({
   selector: 'app-numpad',
   templateUrl: 'numpad.component.html',
@@ -7,16 +10,32 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 })
 
 export class NumpadComponent implements OnInit {
+  /**
+   * Sends join code
+   */
   @Output() submit: EventEmitter<string> = new EventEmitter<string>()
+  /**
+   * Join code
+   */
   code: string
 
+  /**
+   * Constructor
+   */
   constructor() {
   }
 
+  /**
+   * Init code string with empty value
+   */
   ngOnInit() {
     this.code = ''
   }
 
+  /**
+   * Fills join code string with numpad value
+   * @param value Value received from numpad
+   */
   inputHandler(value) {
     if (value === 10) {
       this.deleteHandler()
@@ -31,6 +50,9 @@ export class NumpadComponent implements OnInit {
     }
   }
 
+  /**
+   * Delete number from string
+   */
   deleteHandler() {
     if (this.code.length !== 0) {
       this.code = this.code.slice(0, this.code.length - 1)

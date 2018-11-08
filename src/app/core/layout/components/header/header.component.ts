@@ -1,25 +1,40 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
-import { select, Store }                from '@ngrx/store'
-import * as fromRoot                    from '@store'
-import { Observable, Subscription }     from 'rxjs'
-import * as fromAuthProcess             from '@core/auth/store/reducers/auth-process.reducer'
-import * as fromLayout                  from '@core/layout/store/reducers/layout.reducer'
-import * as LayoutActions               from '@core/layout/store/actions/layout.actions'
+import { Component, OnInit } from '@angular/core'
+import { select, Store }     from '@ngrx/store'
+import * as fromRoot         from '@store'
+import { Observable }        from 'rxjs'
+import * as fromAuthProcess  from '@core/auth/store/reducers/auth-process.reducer'
+import * as fromLayout       from '@core/layout/store/reducers/layout.reducer'
+import * as LayoutActions    from '@core/layout/store/actions/layout.actions'
 
+/**
+ * Header component
+ */
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['header.component.css']
 })
 
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
+  /**
+   * Sidenav Observable status from store
+   */
   showSidenav$: Observable<boolean>
+  /**
+   * isAuthenticated Observable from store
+   */
   isAuthenticated$: Observable<boolean>
-  private subscriptions: Subscription = new Subscription()
 
+  /**
+   * Constructor
+   * @param store App store
+   */
   constructor(private store: Store<fromRoot.IState>) {
   }
 
+  /**
+   * Gets sidenav status and isAuthenticated Observables from store
+   */
   ngOnInit() {
     this.showSidenav$ = this.store.pipe(
       select(fromLayout.getShowSidenav))
@@ -27,11 +42,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       select(fromAuthProcess.getIsAuthenticated))
   }
 
+  /**
+   * Toggles sidenav state
+   */
   toggleSidebar() {
     this.store.dispatch(new LayoutActions.ToggleSidenav())
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe()
   }
 }

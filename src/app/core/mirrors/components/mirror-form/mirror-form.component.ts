@@ -6,26 +6,55 @@ import * as fromStore                                     from '@core/mirrors/st
 import { select, Store }                                  from '@ngrx/store'
 import { Observable }                                     from 'rxjs'
 
+/**
+ * Mirror form component
+ */
 @Component({
   selector: 'app-mirror-form',
   templateUrl: 'mirror-form.component.html'
 })
 
 export class MirrorFormComponent implements OnInit {
+  /**
+   * Form field
+   */
   @Input() formFields: FormGroup
+  /**
+   * Submit button text
+   */
   @Input() btnText: string
+  /**
+   * Submit button icon
+   */
   @Input() btnIcon: string
+  /**
+   * Submit event emitter
+   */
   @Output() submit = new EventEmitter<IMirrorUpdate>()
+  /**
+   * Error Observable from store
+   */
   err$: Observable<any>
 
+  /**
+   * Constructor
+   * @param route Current route
+   * @param store Mirror store
+   */
   constructor(private route: ActivatedRoute,
               private store: Store<fromStore.IMirrorState>) {
   }
 
+  /**
+   * Init err$ Observable with store selector
+   */
   ngOnInit() {
     this.err$ = this.store.pipe(select(fromStore.getMirrorError))
   }
 
+  /**
+   * Submits data through @Output
+   */
   submitHandler() {
     this.submit.emit({
       id: parseInt(this.route.snapshot.paramMap.get('id'), 10),
@@ -34,6 +63,10 @@ export class MirrorFormComponent implements OnInit {
     })
   }
 
+  /**
+   * Returns error strings for form validation
+   * @param field Field to check
+   */
   getErrors(field: string): string {
     switch (field) {
       case 'name':
@@ -47,10 +80,16 @@ export class MirrorFormComponent implements OnInit {
     }
   }
 
+  /**
+   * Getter for AbstractControl name
+   */
   name(): AbstractControl {
     return this.formFields.get('name')
   }
 
+  /**
+   * Getter for AbstractControl location
+   */
   location(): AbstractControl {
     return this.formFields.get('location')
   }

@@ -6,6 +6,9 @@ export * from './login-page/login-page.component'
 export * from './register-page/register-page.component'
 export * from './password-lost-page/password-lost-page.component'
 
+/**
+ * Exports all containers
+ */
 export const containers: any[] = [
   LoginPageComponent,
   RegisterPageComponent,

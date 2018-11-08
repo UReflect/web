@@ -4,25 +4,56 @@ import * as JSZip                                         from 'jszip'
 import { ManifestService }                                from '@core/modules/services'
 import { IModuleCreation }                                from '@core/modules/models/module'
 
+/**
+ * Module form component
+ */
 @Component({
   selector: 'app-module-form',
   templateUrl: 'module-form.component.html'
 })
 
 export class ModuleFormComponent implements OnInit {
+  /**
+   * Submit event with form data
+   */
   @Output() submitForm = new EventEmitter()
+  /**
+   * Form fields
+   */
   @Input() formFields: FormGroup
+  /**
+   * Submit button text
+   */
   @Input() btnText: string
+  /**
+   * Submit button icon
+   */
   @Input() btnIcon: string
+  /**
+   * Errors
+   */
   err = []
+  /**
+   * Module ZIP archive FormData
+   */
   private formData: FormData = new FormData()
 
+  /**
+   * Constructor
+   * @param manifestService HTTP manifest service
+   */
   constructor(private manifestService: ManifestService) {
   }
 
+  /**
+   * ngOnInit
+   */
   ngOnInit() {
   }
 
+  /**
+   * Submit form data through EventEmitter
+   */
   submitHandler() {
     const form: IModuleCreation = {
       title: this.title().value,
@@ -37,6 +68,10 @@ export class ModuleFormComponent implements OnInit {
     })
   }
 
+  /**
+   * Checks ZIP archive name
+   * @param event Data from (change) event on file input
+   */
   fileHandler(event) {
     const re = new RegExp(/^([\w-]{1,50})\.v([\d]+)-([\d]+)\.zip$/)
     const payload = event.target.files[0] || event.srcElement.files[0]
@@ -65,6 +100,11 @@ export class ModuleFormComponent implements OnInit {
     })
   }
 
+  /**
+   * Checks ZIP content
+   * @param zip ZIP file
+   * @param zipName ZIP name
+   */
   checkArchive(zip: JSZip, zipName: string): Promise<any> {
     return new Promise<string>((resolve, reject) => {
       if (!zip.folder(`${zipName}/`)) {
@@ -111,6 +151,10 @@ export class ModuleFormComponent implements OnInit {
     })
   }
 
+  /**
+   * Returns string errors for form validation
+   * @param field Field to check
+   */
   getErrors(field: string): string {
     switch (field) {
       case 'title':
@@ -143,26 +187,44 @@ export class ModuleFormComponent implements OnInit {
     }
   }
 
+  /**
+   * Getter for AbstractControl title
+   */
   title(): AbstractControl {
     return this.formFields.get('title')
   }
 
+  /**
+   * Getter for AbstractControl description
+   */
   description(): AbstractControl {
     return this.formFields.get('description')
   }
 
+  /**
+   * Getter for AbstractControl price
+   */
   price(): AbstractControl {
     return this.formFields.get('price')
   }
 
+  /**
+   * Getter for AbstractControl min_width
+   */
   minWidth(): AbstractControl {
     return this.formFields.get('min_width')
   }
 
+  /**
+   * Getter for AbstractControl min_height
+   */
   minHeight(): AbstractControl {
     return this.formFields.get('min_height')
   }
 
+  /**
+   * Getter for AbstractControl fileName
+   */
   fileName(): AbstractControl {
     return this.formFields.get('fileName')
   }

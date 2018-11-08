@@ -3,14 +3,23 @@ import { select, Store }                            from '@ngrx/store'
 import * as fromStore                               from '../store'
 import { Observable, of }                           from 'rxjs'
 import { catchError, filter, switchMap, take, tap } from 'rxjs/operators'
-import { ActivatedRoute }                           from '@angular/router'
 import * as fromRouter                              from '@store'
 
+/**
+ * Comments guard
+ */
 @Injectable()
 export class CommentsGuard {
+  /**
+   * Constructor
+   * @param store Comment store
+   */
   constructor(private store: Store<fromStore.ICommentState>) {
   }
 
+  /**
+   * Checks if route can be activated
+   */
   canActivate(): Observable<boolean> {
     return this.checkStore().pipe(
       switchMap(() => of(true)),
@@ -18,6 +27,9 @@ export class CommentsGuard {
     )
   }
 
+  /**
+   * Checks if comments are in store
+   */
   checkStore(): Observable<boolean> {
     return this.store.pipe(select(fromStore.getCommentLoaded)).pipe(
       tap(() => {

@@ -63,3 +63,17 @@ export interface IMirrorUpdate {
    */
   location: string
 }
+
+/**
+ * Interface which defines mirror and profile linking
+ */
+export interface IMIrrorLinkProfile {
+  /**
+   * Mirror ID
+   */
+  id: number,
+  /**
+   * Profile ID
+   */
+  profile_id: number
+}

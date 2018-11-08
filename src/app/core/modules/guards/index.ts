@@ -6,6 +6,9 @@ export * from './modules.guard'
 export * from './module.guard'
 export * from './module-owner.guard'
 
+/**
+ * Exports all module guards
+ */
 export const guards: any[] = [
   ModulesGuard,
   ModuleGuard,

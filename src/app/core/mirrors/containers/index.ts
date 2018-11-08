@@ -4,6 +4,9 @@ import { SetMirrorComponent }  from '@core/mirrors/containers/set-mirror/set-mir
 export * from './join-mirror/join-mirror.component'
 export * from './set-mirror/set-mirror.component'
 
+/**
+ * Exports all containers
+ */
 export const containers: any[] = [
   JoinMirrorComponent,
   SetMirrorComponent

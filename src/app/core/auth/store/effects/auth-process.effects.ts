@@ -8,14 +8,27 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { Router }                          from '@angular/router'
 import { of }                              from 'rxjs'
 
+/**
+ * Auth process effects
+ */
 @Injectable()
 export class AuthProcessEffects {
+  /**
+   * Constructor
+   * @param actions$ Action received
+   * @param authService Auth HTTP service
+   * @param store Auth store
+   * @param router Router
+   */
   constructor(private actions$: Actions,
               private authService: AuthService,
               private store: Store<AuthState.IState>,
               private router: Router) {
   }
 
+  /**
+   * Signin effect
+   */
   @Effect()
   signIn$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignIn))
     .pipe(map((action: fromAuth.SignIn) => action.payload),
@@ -34,6 +47,9 @@ export class AuthProcessEffects {
       })
     )
 
+  /**
+   * Signup effect
+   */
   @Effect()
   signUp$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignUp))
     .pipe(map((action: fromAuth.SignUp) => action.payload),
@@ -52,6 +68,9 @@ export class AuthProcessEffects {
       })
     )
 
+  /**
+   * Signout effect
+   */
   @Effect({ dispatch: false })
   signOut$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignOut))
     .pipe(ofType(fromAuth.AuthActionTypes.SignOut),
@@ -62,6 +81,9 @@ export class AuthProcessEffects {
       })
     )
 
+  /**
+   * Signin success effect
+   */
   @Effect({ dispatch: false })
   signInSuccess$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignInSuccess))
     .pipe(ofType(fromAuth.AuthActionTypes.SignInSuccess),
@@ -70,6 +92,9 @@ export class AuthProcessEffects {
       })
     )
 
+  /**
+   * Signin redirect effect
+   */
   @Effect({ dispatch: false })
   signInRedirect$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignInRedirect))
     .pipe(ofType(fromAuth.AuthActionTypes.SignInRedirect),
@@ -78,6 +103,9 @@ export class AuthProcessEffects {
       })
     )
 
+  /**
+   * Password lost effect
+   */
   @Effect()
   passwordLost = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.PasswordLost))
     .pipe(map((action: fromAuth.PasswordLost) => action.payload),

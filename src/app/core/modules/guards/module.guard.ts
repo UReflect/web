@@ -6,11 +6,22 @@ import { filter, map, switchMap, take, tap } from 'rxjs/operators'
 import { ActivatedRouteSnapshot }            from '@angular/router'
 import { IModule }                           from '@core/modules/models/module'
 
+/**
+ * Single Module guard
+ */
 @Injectable()
 export class ModuleGuard {
+  /**
+   * Constructor
+   * @param store Module store
+   */
   constructor(private store: Store<fromStore.IModulesState>) {
   }
 
+  /**
+   * Checks if route can be activated
+   * @param route Current route
+   */
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.checkStore().pipe(
       switchMap(() => {
@@ -20,6 +31,10 @@ export class ModuleGuard {
     )
   }
 
+  /**
+   * Checks if requested module exists in store
+   * @param id Module ID
+   */
   hasModule(id: number): Observable<boolean> {
     return this.store.pipe(select(fromStore.getModuleEntities))
       .pipe(
@@ -28,6 +43,9 @@ export class ModuleGuard {
       )
   }
 
+  /**
+   * Checks if any module is in store
+   */
   checkStore(): Observable<boolean> {
     return this.store.pipe(select(fromStore.getModuleLoaded))
       .pipe(

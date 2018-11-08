@@ -11,7 +11,7 @@
            [ngClass]="{'is-invalid': name().invalid && name().touched}">
         <label for="module-add-name">Name *</label>
         <input type="text" class="form-control form-control-lg" id="module-add-name"
-               placeholder="Module Name" formControlName="name">
+               placeholder="Mirror Name" formControlName="name">
         <div class="invalid-feedback animated fadeInDown"
              *ngIf="name().invalid">{{ getErrors('name') }}
         </div>
@@ -20,7 +20,7 @@
            [ngClass]="{'is-invalid': location().invalid && location().touched}">
         <label for="module-add-location">Location *</label>
         <input type="text" class="form-control form-control-lg" id="module-add-location"
-               placeholder="Module Location" formControlName="location">
+               placeholder="Mirror Location" formControlName="location">
         <div class="invalid-feedback animated fadeInDown"
              *ngIf="location().invalid">{{ getErrors('location') }}
         </div>

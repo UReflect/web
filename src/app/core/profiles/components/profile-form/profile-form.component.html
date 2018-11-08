@@ -1,0 +1,47 @@
+<form [formGroup]="formFields">
+  <h2 class="content-heading text-black">General Information</h2>
+  <div class="row items-push">
+    <div class="col-lg-3">
+      <p class="text-muted">
+        Name your profile.
+      </p>
+    </div>
+    <div class="col-lg-7 offset-lg-1">
+      <div class="form-group text-body"
+           [ngClass]="{'is-invalid': title().invalid && title().touched}">
+        <label for="module-add-title">Title *</label>
+        <input type="text" class="form-control form-control-lg" id="module-add-title"
+               placeholder="Profile Title" formControlName="title">
+        <div class="invalid-feedback animated fadeInDown"
+             *ngIf="title().invalid">{{ getErrors('title') }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row items-push">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-7 offset-lg-1">
+      <div class="form-group text-body">
+        <div class="alert alert-danger" role="alert"
+             *ngIf="(err$ | async)">
+          <h3 class="alert-heading font-size-h4 font-w400">Mirror Update Error</h3>
+          <p class="mb-0">{{ err$ | async }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row items-push">
+    <div class="col-lg-7 offset-lg-4">
+      <div class="form-group">
+        <button class="btn btn-alt-success"
+                (click)="submitHandler()" [disabled]="formFields.invalid">
+          <i class="fa {{btnIcon}} mr-5"></i>
+          {{ btnText }}
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

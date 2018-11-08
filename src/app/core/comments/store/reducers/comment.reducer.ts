@@ -1,20 +1,55 @@
 import { IComment }     from '@core/comments/models/comment'
 import * as fromActions from '../actions'
 
+/**
+ * Comment state interface
+ */
 export interface IState {
+  /**
+   * Comment entities
+   */
   entities: { [id: number]: IComment },
+  /**
+   * Comment loaded
+   */
   loaded: boolean,
+  /**
+   * Comment loading
+   */
   loading: boolean,
+  /**
+   * Comment error
+   */
   error: any
 }
 
+/**
+ * Initial state for comment state
+ */
 export const initialState: IState = {
+  /**
+   * Initial comment entities state
+   */
   entities: {},
+  /**
+   * Initial comment loaded state
+   */
   loaded: false,
+  /**
+   * Initial comment loading state
+   */
   loading: false,
+  /**
+   * Initial comment error state
+   */
   error: null
 }
 
+/**
+ * Comment reducer
+ * @param state Current or initial state
+ * @param action Action received
+ */
 export function reducer(state: IState = initialState,
                         action: fromActions.CommentActionsUnion) {
   switch (action.type) {
@@ -68,7 +103,23 @@ export function reducer(state: IState = initialState,
   }
 }
 
+/**
+ * Entities getter
+ * @param state Current state
+ */
 export const getEntities = (state: IState) => state.entities
+/**
+ * Loading getter
+ * @param state Current state
+ */
 export const getLoading = (state: IState) => state.loading
+/**
+ * Loaded getter
+ * @param state Current state
+ */
 export const getLoaded = (state: IState) => state.loaded
+/**
+ * Error getter
+ * @param state Current state
+ */
 export const getError = (state: IState) => state.error

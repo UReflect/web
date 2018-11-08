@@ -1,14 +1,14 @@
 import { NgModule }                         from '@angular/core'
-import { AuthService }                      from './services/auth.service'
 import { AuthRoutingModule }                from '@core/auth/auth.routing'
 import { CommonModule }                     from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { AuthGuardService }                 from '@core/auth/guards/auth-guard.service'
 import { StoreModule }                      from '@ngrx/store'
 import { reducers, effects }                from './store'
 import { EffectsModule }                    from '@ngrx/effects'
 import * as fromComponents                  from './components'
 import * as fromContainers                  from './containers'
+import { services }                         from '@core/auth/services'
+import { guards }                           from '@core/auth/guards'
 
 @NgModule({
   imports: [
@@ -28,8 +28,8 @@ import * as fromContainers                  from './containers'
     ...fromContainers.containers
   ],
   providers: [
-    AuthService,
-    AuthGuardService
+    ...services,
+    ...guards
   ]
 })
 export class AuthModule {
