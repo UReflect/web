@@ -10,6 +10,13 @@
   </div>
   <!-- END Header -->
 
-  <app-register></app-register>
-
+  <app-auth-form
+  [title]="'Please add your details'"
+  [mode]="'signup'"
+  [footer]="footer"
+  [fields]="fields"
+  [submitBtn]="submitBtn"
+  [formFields]="formFields"
+  (submit)="signupHandler($event)">
+  </app-auth-form>
 </div>

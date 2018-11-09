@@ -41,7 +41,7 @@ export class AuthProcessEffects {
               return new fromAuth.SignInSuccess
             }),
             catchError(e => {
-              return of(new fromAuth.SignInFailure(e.error.error))
+              return of(new fromAuth.SignInFailure(e.error))
             })
           )
       })
@@ -62,7 +62,7 @@ export class AuthProcessEffects {
               return new fromAuth.SignInSuccess
             }),
             catchError(e => {
-              return of(new fromAuth.SignInFailure(e.error.error))
+              return of(new fromAuth.SignInFailure(e.error))
             })
           )
       })
@@ -88,7 +88,7 @@ export class AuthProcessEffects {
   signInSuccess$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignInSuccess))
     .pipe(ofType(fromAuth.AuthActionTypes.SignInSuccess),
       tap(() => {
-        this.router.navigate(['/modules'])
+        this.router.navigate(['/'])
       })
     )
 
@@ -115,9 +115,8 @@ export class AuthProcessEffects {
             map(() => {
               this.store.dispatch(new fromAuth.SignInRedirect)
               return new fromAuth.PasswordLostSuccess
-            }),
-            catchError(e => {
-              return of(new fromAuth.PasswordLostFailure(e.error.error))
+            }), catchError(e => {
+              return of(new fromAuth.PasswordLostFailure(e.error))
             })
           )
       })

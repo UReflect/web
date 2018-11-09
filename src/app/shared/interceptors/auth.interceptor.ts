@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
-    if (err.status === 401) {
+    if (err.status === 401 && err.url.indexOf('/signin') <= 0) {
       this.store.dispatch(new fromStore.SignOut())
       return new Observable()
     }

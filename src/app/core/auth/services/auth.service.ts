@@ -6,6 +6,7 @@ import { IAuthentication, IPasswordLost, IRegistration } from '@core/auth/models
 import * as fromAuth                                     from '@core/auth/store/selectors'
 import * as AuthState                                    from '@core/auth/store/reducers'
 import { select, Store }                                 from '@ngrx/store'
+import { catchError, map }                               from 'rxjs/operators'
 
 /**
  * Auth HTTP service

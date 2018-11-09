@@ -10,6 +10,13 @@
   </div>
   <!-- END Header -->
 
-  <app-login></app-login>
-
+  <app-auth-form
+    [title]="'Please Sign In'"
+    [mode]="'signin'"
+    [footer]="footer"
+    [fields]="fields"
+    [submitBtn]="submitBtn"
+    [formFields]="formFields"
+    (submit)="signinHandler($event)">
+  </app-auth-form>
 </div>
