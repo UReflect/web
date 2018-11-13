@@ -9,31 +9,35 @@ export interface IMirror {
   /**
    * Mirror join code
    */
-  JoinCode: string,
+  joinCode: string,
   /**
    * Is mirror joined
    */
-  Joined: boolean,
+  joined: boolean,
   /**
    * Is mirror active
    */
-  Active: boolean,
+  active: boolean,
   /**
    * Mirror Location
    */
-  Location: string,
+  location: string,
   /**
    * Mirror name
    */
-  Name: string,
+  name: string,
   /**
    * Mirror Serial
    */
-  Serial: string,
+  serial: string,
   /**
    * User ID of the owner of the mirror
    */
-  userID: number
+  user_id: number,
+  /**
+   * Mirror timezone
+   */
+  timezone: string
 }
 
 /**

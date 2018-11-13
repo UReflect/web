@@ -3,6 +3,7 @@ import { RouterModule, Routes }                    from '@angular/router'
 import { JoinMirrorComponent, SetMirrorComponent } from '@core/mirrors/containers'
 import { AuthGuardService }                        from '@core/auth/guards/auth-guard.service'
 import { FirstProfileComponent }                   from '@core/profiles/containers'
+import { MirrorJoinedGuard }                       from '@core/mirrors/guards'
 
 const routes: Routes = [
   {
@@ -16,8 +17,8 @@ const routes: Routes = [
     path: 'mirror/:id/set',
     component: SetMirrorComponent,
     canActivate: [
-      AuthGuardService
-      // Todo: Check if mirror joined
+      AuthGuardService,
+      MirrorJoinedGuard
     ]
   },
   {
