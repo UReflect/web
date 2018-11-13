@@ -7,9 +7,12 @@
   <div class="block block-rounded">
     <div class="block-content">
       <app-module-form (submitForm)="updateHandler($event)"
+                       (submitDelete)="deleteHandler()"
                        [formFields]="formFields"
                        [btnText]="'Save Module'"
-                       [btnIcon]="'fa-pencil'"></app-module-form>
+                       [btnIcon]="'fa-pencil'"
+                       [userId]="module.user_id">
+      </app-module-form>
     </div>
   </div>
 </div>

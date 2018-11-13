@@ -61,13 +61,6 @@ export class ModuleDetailComponent implements OnInit {
   }
 
   /**
-   * Deletes module
-   */
-  deleteHandler() {
-    this.store.dispatch(new fromStore.Delete(this.module))
-  }
-
-  /**
    * Edits module
    */
   editHandler() {

@@ -1,8 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { AbstractControl, FormGroup }                     from '@angular/forms'
-import * as JSZip                                         from 'jszip'
-import { ManifestService }                                from '@core/modules/services'
-import { IModuleCreation }                                from '@core/modules/models/module'
+import { Component, EventEmitter, Input, OnInit, Output }      from '@angular/core'
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import * as JSZip                                              from 'jszip'
+import { ManifestService }                                     from '@core/modules/services'
+import { IModuleCreation }                                     from '@core/modules/models/module'
+import { Observable }                                          from 'rxjs'
+import { IUser }                                               from '@core/users/model/user.model'
+import { select, Store }                                       from '@ngrx/store'
+import * as fromAuth                                           from '@core/auth/store'
 
 /**
  * Module form component
@@ -18,6 +22,10 @@ export class ModuleFormComponent implements OnInit {
    */
   @Output() submitForm = new EventEmitter()
   /**
+   * Submit event for deletion
+   */
+  @Output() submitDelete = new EventEmitter()
+  /**
    * Form fields
    */
   @Input() formFields: FormGroup
@@ -30,25 +38,50 @@ export class ModuleFormComponent implements OnInit {
    */
   @Input() btnIcon: string
   /**
+   * Module user's ID
+   */
+  @Input() userId: number
+  /**
    * Errors
    */
   err = []
   /**
+   * Module name
+   */
+  moduleName: string
+  /**
    * Module ZIP archive FormData
+   */
+  user$: Observable<IUser>
+  /**
+   * Form used to activate delete button
+   */
+  formDelete: FormGroup
+  /**
+   * ZIP archive FormData
    */
   private formData: FormData = new FormData()
 
   /**
    * Constructor
    * @param manifestService HTTP manifest service
+   * @param store Auth store
+   * @param fb FormBuilder
    */
-  constructor(private manifestService: ManifestService) {
+  constructor(private store: Store<fromAuth.IState>,
+              private manifestService: ManifestService,
+              private fb: FormBuilder) {
   }
 
   /**
-   * ngOnInit
+   * Init loggedUser Observable from Auth store
    */
   ngOnInit() {
+    this.user$ = this.store.pipe(select(fromAuth.getLoggedUser))
+    this.moduleName = this.formFields.get('title').value
+    this.formDelete = this.fb.group({
+      name: ['', Validators.required]
+    })
   }
 
   /**
@@ -66,6 +99,13 @@ export class ModuleFormComponent implements OnInit {
       form: form,
       formData: this.formData
     })
+  }
+
+  /**
+   * Emits delete event
+   */
+  deleteHandler() {
+    this.submitDelete.emit()
   }
 
   /**
@@ -227,5 +267,12 @@ export class ModuleFormComponent implements OnInit {
    */
   fileName(): AbstractControl {
     return this.formFields.get('fileName')
+  }
+
+  /**
+   * Getter for AbstractControl name
+   */
+  deleteName(): AbstractControl {
+    return this.formDelete.get('name')
   }
 }

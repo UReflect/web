@@ -21,7 +21,7 @@ export class ModuleEditComponent implements OnInit {
   /**
    * Module to edit
    */
-  private module: IModule
+  module: IModule
 
   /**
    * Constructor
@@ -88,5 +88,12 @@ export class ModuleEditComponent implements OnInit {
         this.store.dispatch(new fromStore.Upload(form))
       }
     })
+  }
+
+  /**
+   * Deletes module
+   */
+  deleteHandler() {
+    this.store.dispatch(new fromStore.Delete(this.module))
   }
 }
