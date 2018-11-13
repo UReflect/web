@@ -35,7 +35,7 @@ export class ModuleDetailComponent implements OnInit {
    * @param store Module store
    * Init module$ and user$ Observables
    */
-  constructor(private store: Store<fromStore.IModulesState>) {
+  constructor(private store: Store<fromStore.IModuleReducerState>) {
     this.module$ = this.store.pipe(select(fromSelectors.getSelectedModule))
     this.user$ = this.store.pipe(select(fromAuth.getLoggedUser))
   }

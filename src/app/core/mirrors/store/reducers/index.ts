@@ -4,17 +4,17 @@ import { ActionReducerMap, createFeatureSelector } from '@ngrx/store'
 /**
  * Returns mirror state definition
  */
-export interface IMirrorState {
+export interface IMirrorReducerState {
   /**
    * Mirror state
    */
-  mirrors: fromMirrors.IState
+  mirrors: fromMirrors.IMirrorState
 }
 
 /**
  * Returns mirror state reducer definition
  */
-export const reducers: ActionReducerMap<IMirrorState> = {
+export const reducers: ActionReducerMap<IMirrorReducerState> = {
   /**
    * Mirror reducer
    */
@@ -24,6 +24,6 @@ export const reducers: ActionReducerMap<IMirrorState> = {
 /**
  * Returns mirror state definition using a FeatureSelector
  */
-export const getMirrorsState = createFeatureSelector<IMirrorState>(
+export const getMirrorsState = createFeatureSelector<IMirrorReducerState>(
   'mirrors'
 )

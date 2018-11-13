@@ -12,7 +12,7 @@ import { Store }                                                                
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router,
-              private store: Store<fromStore.IState>) {
+              private store: Store<fromStore.IAuthReducerState>) {
   }
 
   private handleAuthError(err: HttpErrorResponse): Observable<any> {

@@ -4,17 +4,17 @@ import { ActionReducerMap, createFeatureSelector } from '@ngrx/store'
 /**
  * Exports module state
  */
-export interface IModulesState {
+export interface IModuleReducerState {
   /**
    * Modules state
    */
-  modules: fromModules.IState
+  modules: fromModules.IModuleState
 }
 
 /**
  * Exports module reducer
  */
-export const reducers: ActionReducerMap<IModulesState> = {
+export const reducers: ActionReducerMap<IModuleReducerState> = {
   /**
    * Modules reducer
    */
@@ -24,6 +24,6 @@ export const reducers: ActionReducerMap<IModulesState> = {
 /**
  * Feature Selector for modules
  */
-export const getModulesState = createFeatureSelector<IModulesState>(
+export const getModulesState = createFeatureSelector<IModuleReducerState>(
   'modules'
 )

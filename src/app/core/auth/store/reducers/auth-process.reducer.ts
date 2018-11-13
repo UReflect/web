@@ -3,7 +3,7 @@ import { AuthActionsUnion, AuthActionTypes } from '../actions/auth-process.actio
 /**
  * Auth process state
  */
-export interface IState {
+export interface IAuthProcessState {
   /**
    * Is user authenticated
    */
@@ -21,7 +21,7 @@ export interface IState {
 /**
  * Auth process initial state
  */
-export const initialState: IState = {
+export const initialState: IAuthProcessState = {
   /**
    * IsAuthenticated initial value
    */
@@ -41,7 +41,7 @@ export const initialState: IState = {
  * @param state Current state
  * @param action Action received
  */
-export function reducer(state: IState = initialState, action: AuthActionsUnion): IState {
+export function reducer(state: IAuthProcessState = initialState, action: AuthActionsUnion): IAuthProcessState {
   switch (action.type) {
     case AuthActionTypes.SignIn:
     case AuthActionTypes.SignUp:
@@ -82,14 +82,14 @@ export function reducer(state: IState = initialState, action: AuthActionsUnion):
  * IsAuthenticated getter
  * @param state Current state
  */
-export const getPending = (state: IState) => state.pending
+export const getPending = (state: IAuthProcessState) => state.pending
 /**
  * Pending getter
  * @param state Current state
  */
-export const getError = (state: IState) => state.error
+export const getError = (state: IAuthProcessState) => state.error
 /**
  * Error getter
  * @param state Current state
  */
-export const getIsAuthenticated = (state: IState) => state.isAuthenticated
+export const getIsAuthenticated = (state: IAuthProcessState) => state.isAuthenticated

@@ -68,7 +68,7 @@ export class ModuleFormComponent implements OnInit {
    * @param store Auth store
    * @param fb FormBuilder
    */
-  constructor(private store: Store<fromAuth.IState>,
+  constructor(private store: Store<fromAuth.IAuthReducerState>,
               private manifestService: ManifestService,
               private fb: FormBuilder) {
   }

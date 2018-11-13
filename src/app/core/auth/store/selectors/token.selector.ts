@@ -7,7 +7,7 @@ import * as fromToken     from '../reducers/token.reducer'
  */
 export const getTokenState = createSelector(
   fromFeature.getAuthState,
-  (state: fromFeature.IState) => state.token
+  (state: fromFeature.IAuthReducerState) => state.token
 )
 
 /**

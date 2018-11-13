@@ -27,7 +27,7 @@ export class CommentsComponent implements OnInit {
    * Constructor
    * @param store Comment store
    */
-  constructor(private store: Store<fromStore.ICommentState>) {
+  constructor(private store: Store<fromStore.ICommentReducerState>) {
   }
 
   /**

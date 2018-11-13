@@ -38,7 +38,7 @@ export class ProfileFormComponent implements OnInit {
    * Constructor
    * @param store Profile Store
    */
-  constructor(private store: Store<fromStore.IProfileState>) {
+  constructor(private store: Store<fromStore.IProfileReducerState>) {
   }
 
   /**

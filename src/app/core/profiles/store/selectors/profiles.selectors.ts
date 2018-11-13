@@ -9,7 +9,7 @@ import { IProfile }       from '@core/profiles/models'
  */
 export const getProfileState = createSelector(
   fromFeature.getProfilesState,
-  (state: fromFeature.IProfileState) => state.profiles
+  (state: fromFeature.IProfileReducerState) => state.profiles
 )
 
 /**

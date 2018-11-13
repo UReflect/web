@@ -37,7 +37,7 @@ export class PasswordLostComponent implements OnInit {
    * @param store Auth store
    */
   constructor(private fb: FormBuilder,
-              private store: Store<fromStore.IState>) {
+              private store: Store<fromStore.IAuthReducerState>) {
     this.submitBtn = {
       icon: 'fa fa-asterisk mr-10',
       text: {

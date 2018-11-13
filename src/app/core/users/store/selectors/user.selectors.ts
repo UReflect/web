@@ -9,7 +9,7 @@ import { IUser }          from '@core/users/model/user.model'
  */
 export const getUserState = createSelector(
   fromFeature.getUsersState,
-  (state: fromFeature.IUserState) => state.users
+  (state: fromFeature.IUserReducerState) => state.users
 )
 
 /**

@@ -3,7 +3,7 @@ import { TokenActionsUnion, TokenActionTypes } from '../actions/token.actions'
 /**
  * Token state
  */
-export interface IState {
+export interface ITokenState {
   /**
    * Token
    */
@@ -13,7 +13,7 @@ export interface IState {
 /**
  * Token initial state
  */
-export const initialState: IState = {
+export const initialState: ITokenState = {
   /**
    * Token initial value
    */
@@ -25,7 +25,7 @@ export const initialState: IState = {
  * @param state Current state
  * @param action Action received
  */
-export function reducer(state: IState = initialState, action: TokenActionsUnion): IState {
+export function reducer(state: ITokenState = initialState, action: TokenActionsUnion): ITokenState {
   switch (action.type) {
     case TokenActionTypes.StoreToken:
       return {
@@ -43,4 +43,4 @@ export function reducer(state: IState = initialState, action: TokenActionsUnion)
  * Token getter
  * @param state Current state
  */
-export const getToken = (state: IState) => state.token
+export const getToken = (state: ITokenState) => state.token

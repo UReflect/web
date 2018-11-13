@@ -42,7 +42,7 @@ export class MirrorFormComponent implements OnInit {
    * @param store Mirror store
    */
   constructor(private route: ActivatedRoute,
-              private store: Store<fromStore.IMirrorState>) {
+              private store: Store<fromStore.IMirrorReducerState>) {
   }
 
   /**

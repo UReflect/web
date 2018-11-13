@@ -14,7 +14,7 @@ export class CommentsGuard {
    * Constructor
    * @param store Comment store
    */
-  constructor(private store: Store<fromStore.ICommentState>) {
+  constructor(private store: Store<fromStore.ICommentReducerState>) {
   }
 
   /**

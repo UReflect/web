@@ -4,7 +4,7 @@ import * as fromActions from '../actions'
 /**
  * State interface which defines user store
  */
-export interface IState {
+export interface IUserState {
   /**
    * User entities
    * Formatted using { userID: user, ... }
@@ -27,7 +27,7 @@ export interface IState {
 /**
  * Initial state for user store
  */
-export const initialState: IState = {
+export const initialState: IUserState = {
   entities: {},
   loaded: false,
   loading: false,
@@ -39,7 +39,7 @@ export const initialState: IState = {
  * @param state Current state of the user store
  * @param action Action received
  */
-export function reducer(state: IState = initialState,
+export function reducer(state: IUserState = initialState,
                         action: fromActions.UserActionsUnion) {
   switch (action.type) {
     case fromActions.UserActionTypes.Create:
@@ -107,20 +107,20 @@ export function reducer(state: IState = initialState,
  * Returns entities contained in user store
  * @param state Current state of the user store
  */
-export const getEntities = (state: IState) => state.entities
+export const getEntities = (state: IUserState) => state.entities
 /**
  * Returns current loading status of the user store
  * @param state Current state of the user store
  */
-export const getLoading = (state: IState) => state.loading
+export const getLoading = (state: IUserState) => state.loading
 /**
  * Returns current loaded state of the user store
  * @param state Current state of the user store
  */
-export const getLoaded = (state: IState) => state.loaded
+export const getLoaded = (state: IUserState) => state.loaded
 /**
  * Returns current errors related to the user store
  * @param state Current state of the user store
  */
-export const getError = (state: IState) => state.error
+export const getError = (state: IUserState) => state.error
 

@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
    * Constructor
    * @param store App store
    */
-  constructor(private store: Store<fromRoot.IState>) {
+  constructor(private store: Store<fromRoot.IAppState>) {
   }
 
   /**

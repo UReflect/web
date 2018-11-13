@@ -66,7 +66,7 @@ export class AuthFormComponent implements OnInit {
    * @param store Auth store
    */
   constructor(private fb: FormBuilder,
-              private store: Store<fromStore.IState>) {
+              private store: Store<fromStore.IAuthReducerState>) {
   }
 
   /**

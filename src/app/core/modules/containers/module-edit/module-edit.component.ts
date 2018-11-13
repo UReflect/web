@@ -30,7 +30,7 @@ export class ModuleEditComponent implements OnInit {
    * @param actionsSubject$ Action triggered
    */
   constructor(private fb: FormBuilder,
-              private store: Store<fromStore.IModulesState>,
+              private store: Store<fromStore.IModuleReducerState>,
               private actionsSubject$: ActionsSubject) {
   }
 

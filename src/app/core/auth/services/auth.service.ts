@@ -28,7 +28,7 @@ export class AuthService {
    * @param store Auth store
    */
   constructor(private http: HttpClient,
-              private store: Store<AuthState.IState>) {
+              private store: Store<AuthState.IAuthReducerState>) {
     this.url = environment.apiUrl
     this.token$ = this.store.pipe(select(fromAuth.getToken))
   }

@@ -14,7 +14,7 @@ export class UsersGuard {
    * Constructor
    * @param store User store
    */
-  constructor(private store: Store<fromStore.IUserState>) {
+  constructor(private store: Store<fromStore.IUserReducerState>) {
   }
 
   /**

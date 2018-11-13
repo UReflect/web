@@ -6,25 +6,25 @@ import { ActionReducerMap, createFeatureSelector } from '@ngrx/store'
 /**
  * Auth state
  */
-export interface IState {
+export interface IAuthReducerState {
   /**
    * Auth process state
    */
-  authProcess: fromAuthProcess.IState,
+  authProcess: fromAuthProcess.IAuthProcessState,
   /**
    * Logged user state
    */
-  loggedUser: fromLoggedUser.IState,
+  loggedUser: fromLoggedUser.ILoggedUserState,
   /**
    * Token state
    */
-  token: fromToken.IState
+  token: fromToken.ITokenState
 }
 
 /**
  * Auth reducer
  */
-export const reducers: ActionReducerMap<IState> = {
+export const reducers: ActionReducerMap<IAuthReducerState> = {
   /**
    * Token reducer
    */
@@ -42,4 +42,4 @@ export const reducers: ActionReducerMap<IState> = {
 /**
  * Auth feature selector
  */
-export const getAuthState = createFeatureSelector<IState>('auth')
+export const getAuthState = createFeatureSelector<IAuthReducerState>('auth')

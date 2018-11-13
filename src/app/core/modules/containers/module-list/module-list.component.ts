@@ -27,7 +27,7 @@ export class ModuleListComponent implements OnInit {
    * Constructor
    * @param store Module store
    */
-  constructor(private store: Store<fromStore.IModulesState>) {
+  constructor(private store: Store<fromStore.IModuleReducerState>) {
     this.modulesEntities$ = this.store.pipe(select(fromSelectors.getModuleEntities))
     this.modules$ = this.store.pipe(select(fromSelectors.getAllModules))
   }

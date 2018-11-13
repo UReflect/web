@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
    * @param store Auth store
    */
   constructor(private fb: FormBuilder,
-              private store: Store<fromStore.IState>) {
+              private store: Store<fromStore.IAuthReducerState>) {
     this.submitBtn = {
       icon: 'si si-login mr-10',
       text: {

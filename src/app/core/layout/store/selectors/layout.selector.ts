@@ -7,7 +7,7 @@ import * as fromLayout    from '../reducers/layout.reducer'
  */
 export const getShowSidenavState = createSelector(
   fromFeature.getLayoutState,
-  (state: fromFeature.IState) => state.layout
+  (state: fromFeature.ILayoutReducerState) => state.layout
 )
 
 /**

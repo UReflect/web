@@ -4,7 +4,7 @@ import { IProfile }     from '@core/profiles/models/profile.model'
 /**
  * State interface which defines profile store
  */
-export interface IState {
+export interface IProfileState {
   /**
    * User entities
    * Formatted using { profileID: profile, ... }
@@ -27,7 +27,7 @@ export interface IState {
 /**
  * Initial state for profile store
  */
-export const initialState: IState = {
+export const initialState: IProfileState = {
   entities: {},
   loaded: false,
   loading: false,
@@ -39,7 +39,7 @@ export const initialState: IState = {
  * @param state Current state of the profile store
  * @param action Action received
  */
-export function reducer(state: IState = initialState,
+export function reducer(state: IProfileState = initialState,
                         action: fromActions.ProfileActionsUnion) {
   switch (action.type) {
     case fromActions.ProfileActionTypes.Create:
@@ -109,20 +109,20 @@ export function reducer(state: IState = initialState,
  * Returns entities contained in profile store
  * @param state Current state of the profile store
  */
-export const getEntities = (state: IState) => state.entities
+export const getEntities = (state: IProfileState) => state.entities
 /**
  * Returns current loading status of the profile store
  * @param state Current state of the profile store
  */
-export const getLoading = (state: IState) => state.loading
+export const getLoading = (state: IProfileState) => state.loading
 /**
  * Returns current loaded state of the profile store
  * @param state Current state of the profile store
  */
-export const getLoaded = (state: IState) => state.loaded
+export const getLoaded = (state: IProfileState) => state.loaded
 /**
  * Returns current errors related to the profile store
  * @param state Current state of the profile store
  */
-export const getError = (state: IState) => state.error
+export const getError = (state: IProfileState) => state.error
 

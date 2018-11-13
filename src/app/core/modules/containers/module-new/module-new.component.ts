@@ -26,7 +26,7 @@ export class ModuleNewComponent implements OnInit {
    * @param actionsSubject$ Actions triggered
    */
   constructor(private fb: FormBuilder,
-              private store: Store<fromStore.IModulesState>,
+              private store: Store<fromStore.IModuleReducerState>,
               private actionsSubject$: ActionsSubject) {
   }
 

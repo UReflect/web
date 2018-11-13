@@ -28,7 +28,7 @@ export class FirstProfileComponent implements OnInit {
    * @param actionsSubject$ Action observable to catch emitted actions
    */
   constructor(private fb: FormBuilder,
-              private store: Store<fromProfile.IProfileState>,
+              private store: Store<fromProfile.IProfileReducerState>,
               private route: ActivatedRoute,
               private actionsSubject$: ActionsSubject) {
     this.formFields = this.fb.group({

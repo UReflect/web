@@ -22,7 +22,7 @@ export class JoinMirrorComponent implements OnInit {
    * Constructor
    * @param store Mirror store
    */
-  constructor(private store: Store<fromStore.IMirrorState>) {
+  constructor(private store: Store<fromStore.IMirrorReducerState>) {
   }
 
   /**

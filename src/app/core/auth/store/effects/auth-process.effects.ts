@@ -22,7 +22,7 @@ export class AuthProcessEffects {
    */
   constructor(private actions$: Actions,
               private authService: AuthService,
-              private store: Store<AuthState.IState>,
+              private store: Store<AuthState.IAuthReducerState>,
               private router: Router) {
   }
 
