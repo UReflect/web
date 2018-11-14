@@ -98,6 +98,8 @@ export function reducer(state: IUserState = initialState,
         entities
       }
     }
+    case fromActions.UserActionTypes.ClearUsers:
+      return initialState
     default:
       return state
   }

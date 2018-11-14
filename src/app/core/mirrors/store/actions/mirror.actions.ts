@@ -1,6 +1,5 @@
 import { Action }                                                  from '@ngrx/store'
 import { IMirror, IMirrorJoin, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models/mirror.model'
-import { IProfile }                                                from '@core/profiles/models'
 
 export enum MirrorActionTypes {
   LoadMine = '[Mirror] Load Mine',
@@ -18,7 +17,8 @@ export enum MirrorActionTypes {
   LinkProfile = '[Mirror] Link Profile',
   LinkProfileSuccess = '[Mirror] Link Profile Success',
   LinkProfileFailure = '[Mirror] Link Profile Failure',
-  ClearError = '[Mirror] Clear Error'
+  ClearError = '[Mirror] Clear Error',
+  ClearMirrors = '[Mirror] Clear Mirrors'
 }
 
 /**
@@ -288,6 +288,17 @@ export class SetupFailure implements Action {
   }
 }
 
+/**
+ * Clear mirror action
+ */
+export class ClearMirrors implements Action {
+  /**
+   * Action type
+   * '[Mirror] Clear Mirrors
+   */
+  readonly type = MirrorActionTypes.ClearMirrors
+}
+
 export type MirrorActionsUnion =
   | LoadMine
   | LoadMineSuccess
@@ -305,3 +316,4 @@ export type MirrorActionsUnion =
   | Setup
   | SetupSuccess
   | SetupFailure
+  | ClearMirrors

@@ -7,6 +7,9 @@ import { Actions, Effect, ofType }         from '@ngrx/effects'
 import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { Router }                          from '@angular/router'
 import { of }                              from 'rxjs'
+import * as fromUser                       from '@core/users/store/actions'
+import * as fromMirror                     from '@core/mirrors/store/actions'
+import * as fromProfile                    from '@core/profiles/store/actions'
 
 /**
  * Auth process effects
@@ -77,6 +80,9 @@ export class AuthProcessEffects {
       tap(() => {
         this.store.dispatch(new fromAuth.ClearLoggedUser)
         this.store.dispatch(new fromAuth.ClearToken)
+        this.store.dispatch(new fromUser.ClearUsers)
+        this.store.dispatch(new fromMirror.ClearMirrors)
+        this.store.dispatch(new fromProfile.ClearProfiles)
         this.store.dispatch(new fromAuth.SignInRedirect)
       })
     )

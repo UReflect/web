@@ -1,0 +1,10 @@
+<a class="block block-transparent mirror-card-link"
+   [routerLink]="['/mirror', mirror.ID]">
+  <div class="block-content block-content-full"
+       [ngClass]="backgroundColor">
+    <div class="py-50 text-center bg-black-op-10 mirror-card">
+      <div class="font-size-h2 font-w700 mb-0 text-white">{{ mirror.name }}</div>
+      <div class="font-size-sm font-w600 text-uppercase text-white-op">{{ mirror.location }}</div>
+    </div>
+  </div>
+</a>

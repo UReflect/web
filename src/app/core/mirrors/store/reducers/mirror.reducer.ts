@@ -109,6 +109,8 @@ export function reducer(state: IMirrorState = initialState,
         ...state,
         error: null
       }
+    case fromActions.MirrorActionTypes.ClearMirrors:
+      return initialState
     default:
       return state
   }

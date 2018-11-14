@@ -100,6 +100,8 @@ export function reducer(state: IProfileState = initialState,
         entities
       }
     }
+    case fromActions.ProfileActionTypes.ClearProfiles:
+      return initialState
     default:
       return state
   }

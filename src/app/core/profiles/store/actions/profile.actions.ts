@@ -13,7 +13,8 @@ export enum ProfileActionTypes {
   UpdateFailure = '[Profile] Update Failure',
   Delete = '[Profile] Delete',
   DeleteSuccess = '[Profile] Delete Success',
-  DeleteFailure = '[Profile] Delete Failure'
+  DeleteFailure = '[Profile] Delete Failure',
+  ClearProfiles = 'Profile] Clear Profiles'
 }
 
 /**
@@ -159,7 +160,7 @@ export class UpdateSuccess implements Action {
 export class UpdateFailure implements Action {
   /**
    * Action type
-   * '[User] Update Failure'
+   * '[Profile] Update Failure'
    */
   readonly type = ProfileActionTypes.UpdateFailure
 
@@ -177,7 +178,7 @@ export class UpdateFailure implements Action {
 export class Delete implements Action {
   /**
    * Action type
-   * '[User] Delete'
+   * '[Profile] Delete'
    */
   readonly type = ProfileActionTypes.Delete
 
@@ -195,7 +196,7 @@ export class Delete implements Action {
 export class DeleteSuccess implements Action {
   /**
    * Action type
-   * '[User] Delete Success'
+   * '[Profile] Delete Success'
    */
   readonly type = ProfileActionTypes.DeleteSuccess
 
@@ -213,7 +214,7 @@ export class DeleteSuccess implements Action {
 export class DeleteFailure implements Action {
   /**
    * Action type
-   * '[User] Delete Failure'
+   * '[Profile] Delete Failure'
    */
   readonly type = ProfileActionTypes.DeleteFailure
 
@@ -223,6 +224,17 @@ export class DeleteFailure implements Action {
    */
   constructor(public payload: any) {
   }
+}
+
+/**
+ * Clear profiles
+ */
+export class ClearProfiles implements Action {
+  /**
+   * Action type
+   * '[Profile] Clear Profiles'
+   */
+  readonly type = ProfileActionTypes.ClearProfiles
 }
 
 export type ProfileActionsUnion =
@@ -238,3 +250,4 @@ export type ProfileActionsUnion =
   | Delete
   | DeleteSuccess
   | DeleteFailure
+  | ClearProfiles
