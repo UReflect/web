@@ -9,8 +9,8 @@
     <div class="col-lg-7 offset-lg-1">
       <div class="form-group text-body"
            [ngClass]="{'is-invalid': name().invalid && name().touched}">
-        <label for="module-add-name">Name *</label>
-        <input type="text" class="form-control form-control-lg" id="module-add-name"
+        <label for="mirror-add-name">Name *</label>
+        <input type="text" class="form-control form-control-lg" id="mirror-add-name"
                placeholder="Mirror Name" formControlName="name">
         <div class="invalid-feedback animated fadeInDown"
              *ngIf="name().invalid">{{ getErrors('name') }}
@@ -18,8 +18,8 @@
       </div>
       <div class="form-group text-body"
            [ngClass]="{'is-invalid': location().invalid && location().touched}">
-        <label for="module-add-location">Location *</label>
-        <input type="text" class="form-control form-control-lg" id="module-add-location"
+        <label for="mirror-add-location">Location *</label>
+        <input type="text" class="form-control form-control-lg" id="mirror-add-location"
                placeholder="Mirror Location" formControlName="location">
         <div class="invalid-feedback animated fadeInDown"
              *ngIf="location().invalid">{{ getErrors('location') }}
@@ -51,6 +51,32 @@
           {{ btnText }}
         </button>
       </div>
+    </div>
+  </div>
+
+  <h2 class="content-heading text-black"
+      *ngIf="edit">Delete Mirror</h2>
+  <div class="row items-push"
+       *ngIf="edit">
+    <div class="col-lg-3">
+      <p class="text-muted">
+        Enter your mirror name to delete your mirror.
+      </p>
+    </div>
+    <div class="col-lg-7 offset-lg-1">
+      <form [formGroup]="formDelete">
+        <div class="form-group text-body">
+          <label>Module Name *
+            <input type="text" class="form-control form-control-lg" formControlName="name">
+          </label>
+        </div>
+        <div class="form-group text-body">
+          <button type="button" class="btn btn-danger mr-5 mb-5" (click)="deleteHandler()"
+                  [disabled]="deleteName().value !== mirrorName">
+            <i class="fa fa-times mr-5"></i>Delete
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </form>

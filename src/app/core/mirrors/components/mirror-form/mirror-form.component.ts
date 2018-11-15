@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { AbstractControl, FormGroup }                     from '@angular/forms'
-import { IMirrorUpdate }                                  from '@core/mirrors/models'
-import { ActivatedRoute }                                 from '@angular/router'
-import * as fromStore                                     from '@core/mirrors/store'
-import { select, Store }                                  from '@ngrx/store'
-import { Observable }                                     from 'rxjs'
+import { Component, EventEmitter, Input, OnInit, Output }      from '@angular/core'
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { IMirrorUpdate }                                       from '@core/mirrors/models'
+import { ActivatedRoute }                                      from '@angular/router'
+import * as fromStore                                          from '@core/mirrors/store'
+import { select, Store }                                       from '@ngrx/store'
+import { Observable }                                          from 'rxjs'
 
 /**
  * Mirror form component
@@ -28,21 +28,43 @@ export class MirrorFormComponent implements OnInit {
    */
   @Input() btnIcon: string
   /**
+   * Mirror owner user id
+   */
+  @Input() userId: number
+  /**
+   * Edit boolean
+   */
+  @Input() edit: boolean
+  /**
    * Submit event emitter
    */
   @Output() submit = new EventEmitter<IMirrorUpdate>()
   /**
+   * Submit event for deletion
+   */
+  @Output() submitDelete = new EventEmitter()
+  /**
    * Error Observable from store
    */
   err$: Observable<any>
+  /**
+   * Mirror name
+   */
+  mirrorName: string
+  /**
+   * Form used to activate delete button
+   */
+  formDelete: FormGroup
 
   /**
    * Constructor
    * @param route Current route
    * @param store Mirror store
+   * @param fb Form builder
    */
   constructor(private route: ActivatedRoute,
-              private store: Store<fromStore.IMirrorReducerState>) {
+              private store: Store<fromStore.IMirrorReducerState>,
+              private fb: FormBuilder) {
   }
 
   /**
@@ -50,6 +72,10 @@ export class MirrorFormComponent implements OnInit {
    */
   ngOnInit() {
     this.err$ = this.store.pipe(select(fromStore.getMirrorError))
+    this.mirrorName = this.formFields.get('name').value
+    this.formDelete = this.fb.group({
+      name: ['', Validators.required]
+    })
   }
 
   /**
@@ -61,6 +87,13 @@ export class MirrorFormComponent implements OnInit {
       name: this.name().value,
       location: this.location().value
     })
+  }
+
+  /**
+   * Emits delete event
+   */
+  deleteHandler() {
+    this.submitDelete.emit()
   }
 
   /**
@@ -92,5 +125,12 @@ export class MirrorFormComponent implements OnInit {
    */
   location(): AbstractControl {
     return this.formFields.get('location')
+  }
+
+  /**
+   * Mirror name used to check deletion
+   */
+  deleteName(): AbstractControl {
+    return this.formDelete.get('name')
   }
 }

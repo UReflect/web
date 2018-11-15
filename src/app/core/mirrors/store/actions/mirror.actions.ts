@@ -18,7 +18,10 @@ export enum MirrorActionTypes {
   LinkProfileSuccess = '[Mirror] Link Profile Success',
   LinkProfileFailure = '[Mirror] Link Profile Failure',
   ClearError = '[Mirror] Clear Error',
-  ClearMirrors = '[Mirror] Clear Mirrors'
+  ClearMirrors = '[Mirror] Clear Mirrors',
+  Delete = '[Mirror] Delete',
+  DeleteSuccess = '[Mirror] Delete Success',
+  DeleteFailure = '[Mirror] Delete Failure'
 }
 
 /**
@@ -299,6 +302,60 @@ export class ClearMirrors implements Action {
   readonly type = MirrorActionTypes.ClearMirrors
 }
 
+/**
+ * Delete mirror action
+ */
+export class Delete implements Action {
+  /**
+   * Action type
+   * '[Mirror] Delete
+   */
+  readonly type = MirrorActionTypes.Delete
+
+  /**
+   * Constructor
+   * @param payload Mirror
+   */
+  constructor(public payload: IMirror) {
+  }
+}
+
+/**
+ * Delete mirror success action
+ */
+export class DeleteSuccess implements Action {
+  /**
+   * Action type
+   * '[Mirror] Delete Success'
+   */
+  readonly type = MirrorActionTypes.DeleteSuccess
+
+  /**
+   * Mirror to delete
+   * @param payload Mirror
+   */
+  constructor(public payload: IMirror) {
+  }
+}
+
+/**
+ * Delete mirror failure action
+ */
+export class DeleteFailure implements Action {
+  /**
+   * Action type
+   * '[Mirror] Delete Failure'
+   */
+  readonly type = MirrorActionTypes.DeleteFailure
+
+  /**
+   * Constructor
+   * @param payload Error received
+   */
+  constructor(public payload: any) {
+  }
+}
+
 export type MirrorActionsUnion =
   | LoadMine
   | LoadMineSuccess
@@ -317,3 +374,6 @@ export type MirrorActionsUnion =
   | SetupSuccess
   | SetupFailure
   | ClearMirrors
+  | Delete
+  | DeleteSuccess
+  | DeleteFailure

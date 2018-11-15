@@ -1,10 +1,10 @@
-import { Injectable }                                     from '@angular/core'
-import { Observable }                                     from 'rxjs'
-import { HttpClient }                                     from '@angular/common/http'
-import { select, Store }                                  from '@ngrx/store'
-import * as fromAuth                                      from '@core/auth/store'
-import { IMirrorJoin, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
-import { environment }                                    from '@env/environment'
+import { Injectable }                                              from '@angular/core'
+import { Observable }                                              from 'rxjs'
+import { HttpClient }                                              from '@angular/common/http'
+import { select, Store }                                           from '@ngrx/store'
+import * as fromAuth                                               from '@core/auth/store'
+import { IMirror, IMirrorJoin, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
+import { environment }                                             from '@env/environment'
 
 /**
  * Mirror HTTP service
@@ -106,6 +106,22 @@ export class MirrorService {
       this.http.post(`${this.url}/mirrors/${data.id}/profile`, {
         profile_id: data.profile_id
       }, {
+        headers: { ...header }
+      }).subscribe(response => {
+        resolve(response['data'])
+      }, e => reject(e.error))
+    })
+  }
+
+  /**
+   * Deletes mirror from API
+   * @param mirror Mirror to delete
+   */
+  async delete(mirror: IMirror): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise<any>((resolve, reject) => {
+      this.http.delete(`${this.url}/mirror/${mirror.ID}`, {
         headers: { ...header }
       }).subscribe(response => {
         resolve(response['data'])

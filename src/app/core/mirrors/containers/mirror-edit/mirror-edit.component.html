@@ -8,9 +8,11 @@
     <div class="block-content">
       <app-mirror-form
         (submit)="updateHandler($event)"
+        (submitDelete)="deleteHandler()"
         [formFields]="formFields"
         [btnText]="'Save Mirror'"
-        [btnIcon]="'fa-pencil'"></app-mirror-form>
+        [btnIcon]="'fa-pencil'"
+        [edit]="true"></app-mirror-form>
     </div>
   </div>
 </div>

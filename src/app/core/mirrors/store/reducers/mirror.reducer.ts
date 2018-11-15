@@ -47,6 +47,7 @@ export function reducer(state: IMirrorState = initialState,
     case fromActions.MirrorActionTypes.Join:
     case fromActions.MirrorActionTypes.LinkProfile:
     case fromActions.MirrorActionTypes.Setup:
+    case fromActions.MirrorActionTypes.Delete:
       return {
         ...state,
         loading: true
@@ -56,6 +57,7 @@ export function reducer(state: IMirrorState = initialState,
     case fromActions.MirrorActionTypes.JoinFailure:
     case fromActions.MirrorActionTypes.LinkProfileFailure:
     case fromActions.MirrorActionTypes.SetupFailure:
+    case fromActions.MirrorActionTypes.DeleteFailure:
       return {
         ...state,
         loading: false,
@@ -104,6 +106,15 @@ export function reducer(state: IMirrorState = initialState,
         loaded: true,
         loading: false
       }
+    case fromActions.MirrorActionTypes.DeleteSuccess: {
+      const mirror = action.payload
+      const { [mirror.ID]: removed, ...entities } = state.entities
+
+      return {
+        ...state,
+        entities
+      }
+    }
     case fromActions.MirrorActionTypes.ClearError:
       return {
         ...state,

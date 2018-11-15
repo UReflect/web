@@ -17,6 +17,10 @@ export class MirrorEditComponent implements OnInit {
    * Form fields with mirror data
    */
   formFields: FormGroup
+  /**
+   * Mirror loaded
+   */
+  mirror: IMirror
 
   /**
    * Constructor
@@ -34,6 +38,7 @@ export class MirrorEditComponent implements OnInit {
     this.store.pipe(select(fromStore.getSelectedMirror))
       .subscribe((mirror: IMirror) => {
         if (mirror) {
+          this.mirror = mirror
           this.formFields = this.fb.group({
             name: [mirror.name, Validators.required],
             location: [mirror.location, Validators.required]
@@ -50,5 +55,12 @@ export class MirrorEditComponent implements OnInit {
     if (data.id) {
       this.store.dispatch(new fromStore.Update(data))
     }
+  }
+
+  /**
+   * Deletes mirror
+   */
+  deleteHandler() {
+    this.store.dispatch(new fromStore.Delete(this.mirror))
   }
 }
