@@ -1,10 +1,10 @@
-import { NgModule }                                                     from '@angular/core'
-import { RouterModule, Routes }                                         from '@angular/router'
-import { JoinMirrorComponent, MirrorListComponent, SetMirrorComponent } from '@core/mirrors/containers'
-import { AuthGuardService }                                             from '@core/auth/guards/auth-guard.service'
-import { FirstProfileComponent }                                        from '@core/profiles/containers'
-import { MirrorJoinedGuard, MirrorSetUpGuard }                          from '@core/mirrors/guards'
-import { MirrorsGuard }                                                 from '@core/mirrors/guards/mirrors.guard'
+import { NgModule }                                                                          from '@angular/core'
+import { RouterModule, Routes }                                                              from '@angular/router'
+import { JoinMirrorComponent, MirrorEditComponent, MirrorListComponent, SetMirrorComponent } from '@core/mirrors/containers'
+import { AuthGuardService }                                                                  from '@core/auth/guards/auth-guard.service'
+import { FirstProfileComponent }                                                             from '@core/profiles/containers'
+import { MirrorGuard, MirrorJoinedGuard, MirrorSetUpGuard }                                  from '@core/mirrors/guards'
+import { MirrorsGuard }                                                                      from '@core/mirrors/guards/mirrors.guard'
 
 const routes: Routes = [
   {
@@ -13,6 +13,14 @@ const routes: Routes = [
     canActivate: [
       AuthGuardService,
       MirrorsGuard
+    ]
+  },
+  {
+    path: 'mirror/:id/edit',
+    component: MirrorEditComponent,
+    canActivate: [
+      AuthGuardService,
+      MirrorGuard
     ]
   },
   {
