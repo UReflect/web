@@ -1,6 +1,6 @@
 <a class="block block-rounded ribbon ribbon-bookmark ribbon-left ribbon-success text-center"
    [routerLink]="['/module', module.ID]">
-  <div class="ribbon-box">${{ module.price }}</div>
+  <div class="ribbon-box">{{ module.price === 0 ? 'Free' : '$' + module.price }}</div>
   <div class="block-content block-content-full">
     <div class="item item-circle bg-pulse text-pulse-lighter mx-auto my-20">
       <i class="fa fa-html5"></i>
