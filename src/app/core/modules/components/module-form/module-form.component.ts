@@ -121,6 +121,7 @@ export class ModuleFormComponent implements OnInit {
     const cut = payload.name.match(re)
 
     this.fileName().patchValue(payload.name)
+    this.err = []
     if (!re.test(payload.name)) {
       return
     }
