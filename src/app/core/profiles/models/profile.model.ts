@@ -45,3 +45,17 @@ export interface IProfileUpdate {
    */
   title: string
 }
+
+/**
+ * Interface which defines profile pin update parameters
+ */
+export interface IProfilePIN {
+  /**
+   * Profile ID
+   */
+  ID: number,
+  /**
+   * New PIN number
+   */
+  pin: string
+}

@@ -113,7 +113,7 @@ export class MirrorEffects {
     .pipe(map((action: mirrorActions.LinkProfile) => action.payload),
       switchMap((data: IMIrrorLinkProfile) => {
         return this.mirrorService.linkProfile(data)
-          .then(() => new mirrorActions.LinkProfileSuccess())
+          .then(() => new mirrorActions.LinkProfileSuccess(data.profile_id))
           .catch(e => new mirrorActions.LinkProfileFailure(e))
       }))
 
@@ -123,11 +123,12 @@ export class MirrorEffects {
   @Effect()
   linkProfileSuccess$ = this.actions$
     .pipe(ofType(mirrorActions.MirrorActionTypes.LinkProfileSuccess))
-    .pipe(map(() => {
-      return new routerActions.Go({
-        path: ['/mirrors']
-      })
-    }))
+    .pipe(map((action: mirrorActions.LinkProfileSuccess) => action.payload),
+      map(profile_id => {
+        return new routerActions.Go({
+          path: [`/profile/${profile_id}/set-pincode`]
+        })
+      }))
 
   /**
    * Delete mirror using HTTP service

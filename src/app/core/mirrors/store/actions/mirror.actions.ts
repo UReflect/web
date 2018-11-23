@@ -1,5 +1,6 @@
 import { Action }                                                  from '@ngrx/store'
 import { IMirror, IMirrorJoin, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models/mirror.model'
+import { IProfile }                                                from '@core/profiles/models'
 
 export enum MirrorActionTypes {
   LoadMine = '[Mirror] Load Mine',
@@ -217,6 +218,13 @@ export class LinkProfileSuccess implements Action {
    * '[Mirror] Link Profile Success'
    */
   readonly type = MirrorActionTypes.LinkProfileSuccess
+
+  /**
+   * Constructor
+   * @param payload Profile received
+   */
+  constructor(public payload: number) {
+  }
 }
 
 /**

@@ -1,9 +1,10 @@
-import { Injectable }              from '@angular/core'
-import { Actions, Effect, ofType } from '@ngrx/effects'
-import { map, switchMap }          from 'rxjs/operators'
-import { ProfileService }          from '@core/profiles/services/profile.service'
-import * as profileActions         from '../actions'
-import { IProfileCreate }          from '@core/profiles/models'
+import { Injectable }                  from '@angular/core'
+import { Actions, Effect, ofType }     from '@ngrx/effects'
+import { map, switchMap }              from 'rxjs/operators'
+import { ProfileService }              from '@core/profiles/services/profile.service'
+import * as profileActions             from '../actions'
+import { IProfileCreate, IProfilePIN } from '@core/profiles/models'
+import * as routerActions              from '@store'
 
 /**
  * Profile effects
@@ -42,5 +43,28 @@ export class ProfileEffects {
         return this.profileService.create(data)
           .then(profile => new profileActions.CreateSuccess(profile))
           .catch(e => new profileActions.CreateFailure(e))
-      }))
+      })
+    )
+
+  /**
+   * Updates profile PIN using HTTP service
+   */
+  @Effect()
+  updatePin$ = this.actions$.pipe(ofType(profileActions.ProfileActionTypes.UpdatePin))
+    .pipe(map((action: profileActions.UpdatePin) => action.payload),
+      switchMap((data: IProfilePIN) => {
+        return this.profileService.updatePin(data)
+          .then(() => new profileActions.UpdatePinSuccess(data.ID))
+          .catch(e => new profileActions.UpdatePinFailure(e))
+      })
+    )
+
+  // @Effect()
+  // updatePinSuccess$ = this.actions$.pipe(ofType(profileActions.ProfileActionTypes.UpdatePinSuccess))
+  //   .pipe(map((action: profileActions.UpdatePinSuccess) => action.payload),
+  //     map(profile_id => {
+  //       return new routerActions.Go({
+  //         path: [`/profile/${profile_id}`]
+  //       })
+  //     }))
 }

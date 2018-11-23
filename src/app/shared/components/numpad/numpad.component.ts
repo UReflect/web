@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { NumpadService }                           from '@shared/components/numpad/numpad.service'
 
 /**
  * Numpad component
@@ -22,14 +23,17 @@ export class NumpadComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor() {
+  constructor(private service: NumpadService) {
+    this.code = ''
   }
 
   /**
    * Init code string with empty value
    */
   ngOnInit() {
-    this.code = ''
+    this.service.clear.subscribe(() => {
+      this.code = ''
+    })
   }
 
   /**

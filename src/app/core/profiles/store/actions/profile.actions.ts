@@ -1,5 +1,5 @@
-import { Action }                                   from '@ngrx/store'
-import { IProfile, IProfileCreate, IProfileUpdate } from '@core/profiles/models/profile.model'
+import { Action }                                                from '@ngrx/store'
+import { IProfile, IProfileCreate, IProfilePIN, IProfileUpdate } from '@core/profiles/models/profile.model'
 
 export enum ProfileActionTypes {
   LoadMine = '[Profile] Load Mine',
@@ -14,7 +14,10 @@ export enum ProfileActionTypes {
   Delete = '[Profile] Delete',
   DeleteSuccess = '[Profile] Delete Success',
   DeleteFailure = '[Profile] Delete Failure',
-  ClearProfiles = 'Profile] Clear Profiles'
+  ClearProfiles = 'Profile] Clear Profiles',
+  UpdatePin = '[Profile] Update PIN',
+  UpdatePinSuccess = '[Profile] Update PIN Success',
+  UpdatePinFailue = '[Profile] Update PIN Failure'
 }
 
 /**
@@ -237,6 +240,60 @@ export class ClearProfiles implements Action {
   readonly type = ProfileActionTypes.ClearProfiles
 }
 
+/**
+ * Updates pin profile
+ */
+export class UpdatePin implements Action {
+  /**
+   * Action type
+   * '[Profile] Update PIN'
+   */
+  readonly type = ProfileActionTypes.UpdatePin
+
+  /**
+   * Constructor
+   * @param payload PIN code
+   */
+  constructor(public payload: IProfilePIN) {
+  }
+}
+
+/**
+ * Update Pin Success
+ */
+export class UpdatePinSuccess implements Action {
+  /**
+   * Action type
+   * '[Profile] Update PIN Success'
+   */
+  readonly type = ProfileActionTypes.UpdatePinSuccess
+
+  /**
+   * Constructor
+   * @param payload Success response
+   */
+  constructor(public payload: number) {
+  }
+}
+
+/**
+ * Update Pin Failure
+ */
+export class UpdatePinFailure implements Action {
+  /**
+   * Action type
+   * '[Profile] Update PIN Failure'
+   */
+  readonly type = ProfileActionTypes.UpdatePinFailue
+
+  /**
+   * Constructor
+   * @param payload Failure response
+   */
+  constructor(public payload: any) {
+  }
+}
+
 export type ProfileActionsUnion =
   | LoadMine
   | LoadMineSuccess
@@ -251,3 +308,6 @@ export type ProfileActionsUnion =
   | DeleteSuccess
   | DeleteFailure
   | ClearProfiles
+  | UpdatePin
+  | UpdatePinSuccess
+  | UpdatePinFailure
