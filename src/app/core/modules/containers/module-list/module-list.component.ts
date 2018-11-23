@@ -15,10 +15,6 @@ import * as fromSelectors    from '@core/modules/store/selectors'
 
 export class ModuleListComponent implements OnInit {
   /**
-   * Modules entities from store
-   */
-  private modulesEntities$: Observable<any>
-  /**
    * Modules in array from store
    */
   modules$: Observable<any>
@@ -28,7 +24,6 @@ export class ModuleListComponent implements OnInit {
    * @param store Module store
    */
   constructor(private store: Store<fromStore.IModuleReducerState>) {
-    this.modulesEntities$ = this.store.pipe(select(fromSelectors.getModuleEntities))
     this.modules$ = this.store.pipe(select(fromSelectors.getAllModules))
   }
 

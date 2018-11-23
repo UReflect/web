@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { AbstractControl, FormGroup }                     from '@angular/forms'
-import * as fromStore                                     from '@core/profiles/store'
-import { Observable }                                     from 'rxjs'
-import { select, Store }                                  from '@ngrx/store'
+import { Component, EventEmitter, Input, OnInit, Output }      from '@angular/core'
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import * as fromStore                                          from '@core/profiles/store'
+import { Observable }                                          from 'rxjs'
+import { select, Store }                                       from '@ngrx/store'
+import { IUser }                                               from '@core/users/model/user.model'
+import * as fromLoggedUser                                     from '@core/auth/store'
 
 /**
  * Profile form component
@@ -30,15 +32,37 @@ export class ProfileFormComponent implements OnInit {
    */
   @Output() submit = new EventEmitter()
   /**
+   * Delete event
+   */
+  @Output() delete = new EventEmitter()
+  /**
+   * Profile user's ID
+   */
+  @Input() userId: number
+  /**
    * Errors from profile store
    */
   err$: Observable<any>
+  /**
+   * User from auth store
+   */
+  user$: Observable<IUser>
+  /**
+   * Profile name
+   */
+  profileName: string
+  /**
+   * Form used to activate delete button
+   */
+  formDelete: FormGroup
 
   /**
    * Constructor
    * @param store Profile Store
+   * @param fb FromBuilder
    */
-  constructor(private store: Store<fromStore.IProfileReducerState>) {
+  constructor(private store: Store<fromStore.IProfileReducerState>,
+              private fb: FormBuilder) {
   }
 
   /**
@@ -47,6 +71,11 @@ export class ProfileFormComponent implements OnInit {
    */
   ngOnInit() {
     this.err$ = this.store.pipe(select(fromStore.getProfileError))
+    this.user$ = this.store.pipe(select(fromLoggedUser.getLoggedUser))
+    this.profileName = this.formFields.get('title').value
+    this.formDelete = this.fb.group({
+      name: ['', Validators.required]
+    })
   }
 
   /**
@@ -56,6 +85,13 @@ export class ProfileFormComponent implements OnInit {
     this.submit.emit({
       title: this.title().value
     })
+  }
+
+  /**
+   * Sends delete event
+   */
+  deleteHandler() {
+    this.delete.emit()
   }
 
   /**
@@ -78,4 +114,12 @@ export class ProfileFormComponent implements OnInit {
   title(): AbstractControl {
     return this.formFields.get('title')
   }
+
+  /**
+   * Getter for AbstractControl name
+   */
+  deleteName(): AbstractControl {
+    return this.formDelete.get('name')
+  }
+
 }

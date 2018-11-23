@@ -1,10 +1,10 @@
-import { Injectable }                  from '@angular/core'
-import { Actions, Effect, ofType }     from '@ngrx/effects'
-import { map, switchMap }              from 'rxjs/operators'
-import { ProfileService }              from '@core/profiles/services/profile.service'
-import * as profileActions             from '../actions'
-import { IProfileCreate, IProfilePIN } from '@core/profiles/models'
-import * as routerActions              from '@store'
+import { Injectable }                            from '@angular/core'
+import { Actions, Effect, ofType }               from '@ngrx/effects'
+import { map, switchMap }                        from 'rxjs/operators'
+import { ProfileService }                        from '@core/profiles/services/profile.service'
+import * as profileActions                       from '../actions'
+import { IProfile, IProfileCreate, IProfilePIN } from '@core/profiles/models'
+import * as routerActions                        from '@store'
 
 /**
  * Profile effects
@@ -47,6 +47,18 @@ export class ProfileEffects {
     )
 
   /**
+   * Create success effect
+   */
+  @Effect()
+  createSuccess = this.actions$.pipe(ofType(profileActions.ProfileActionTypes.CreateSuccess))
+    .pipe(map((action: profileActions.CreateSuccess) => action.payload),
+      map((profile: IProfile) => {
+        return new routerActions.Go({
+          path: [`/profile/${profile.ID}/edit`]
+        })
+      }))
+
+  /**
    * Updates profile PIN using HTTP service
    */
   @Effect()
@@ -59,12 +71,57 @@ export class ProfileEffects {
       })
     )
 
-  // @Effect()
-  // updatePinSuccess$ = this.actions$.pipe(ofType(profileActions.ProfileActionTypes.UpdatePinSuccess))
-  //   .pipe(map((action: profileActions.UpdatePinSuccess) => action.payload),
-  //     map(profile_id => {
-  //       return new routerActions.Go({
-  //         path: [`/profile/${profile_id}`]
-  //       })
-  //     }))
+  /**
+   * Updates profile using HTTP service
+   */
+  @Effect()
+  update$ = this.actions$.pipe(ofType(profileActions.ProfileActionTypes.Update))
+    .pipe(map((action: profileActions.Update) => action.payload),
+      switchMap((profile: IProfile) => {
+        return this.profileService.update(profile)
+          .then(updatedProfile => new profileActions.UpdateSuccess(updatedProfile))
+          .catch(e => new profileActions.UpdateFailure(e))
+      })
+    )
+
+  /**
+   * Deletes profile using HTTP service
+   */
+  @Effect()
+  delete$ = this.actions$.pipe(ofType(profileActions.ProfileActionTypes.Delete))
+    .pipe(map((action: profileActions.Delete) => action.payload),
+      switchMap((profile: IProfile) => {
+        return this.profileService.delete(profile)
+          .then(() => new profileActions.DeleteSuccess(profile))
+          .catch(e => new profileActions.DeleteFailure(e))
+      })
+    )
+
+  /**
+   * Route user to updated profile
+   */
+  @Effect()
+  updatePinSuccess$ = this.actions$.pipe(ofType(profileActions.ProfileActionTypes.UpdatePinSuccess))
+    .pipe(map((action: profileActions.UpdatePinSuccess) => action.payload),
+      map(profile_id => {
+        return new routerActions.Go({
+          path: [`/profile/${profile_id}/edit`]
+        })
+      })
+    )
+
+  /**
+   * Delete profile success effect
+   */
+  @Effect()
+  deleteModuleSuccess$ = this.actions$.pipe(ofType(
+    profileActions.ProfileActionTypes.DeleteSuccess))
+    .pipe(
+      map(() => {
+        return new routerActions.Go({
+          path: ['/profiles']
+        })
+      })
+    )
+
 }

@@ -19,7 +19,15 @@ export interface IProfile {
   /**
    * user_id of the user owner of the profile
    */
-  user_id: number
+  user_id: number,
+  /**
+   * Profile date of creation
+   */
+  CreatedAt: Date,
+  /**
+   * Profile last update date
+   */
+  UpdatedAt: Date
 }
 
 /**

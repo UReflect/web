@@ -95,8 +95,7 @@ export function reducer(state: IProfileState = initialState,
       }
     }
     case fromActions.ProfileActionTypes.DeleteSuccess: {
-      const profile = action.payload
-      const { [profile.id]: removed, ...entities } = state.entities
+      const { [action.payload.ID]: removed, ...entities } = state.entities
       return {
         ...state,
         entities

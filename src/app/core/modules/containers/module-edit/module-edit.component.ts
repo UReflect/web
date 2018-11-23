@@ -39,7 +39,8 @@ export class ModuleEditComponent implements OnInit {
    * Fill module variable
    */
   ngOnInit() {
-    this.store.pipe(select(fromStore.getSelectedModule)).subscribe((module: IModule) => {
+    this.store.pipe(select(fromStore.getSelectedModule))
+      .subscribe((module: IModule) => {
       if (module) {
         this.formFields = this.fb.group({
           title: [module.title, [

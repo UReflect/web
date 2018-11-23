@@ -108,8 +108,7 @@ export function reducer(state: IModuleState = initialState,
       }
     }
     case fromActions.ModuleActionTypes.DeleteSuccess: {
-      const module = action.payload
-      const { [module.ID]: removed, ...entities } = state.entities
+      const { [action.payload.ID]: removed, ...entities } = state.entities
 
       return {
         ...state,

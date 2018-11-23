@@ -164,8 +164,9 @@
     <div class="col-lg-7 offset-lg-1">
       <form [formGroup]="formDelete">
         <div class="form-group text-body">
-          <label for="module-add-pricing">Module Name *</label>
-          <input type="text" class="form-control form-control-lg" formControlName="name">
+          <label>Module Name *
+            <input type="text" class="form-control form-control-lg" formControlName="name">
+          </label>
         </div>
         <div class="form-group text-body">
           <button type="button" class="btn btn-danger mr-5 mb-5" (click)="deleteHandler()"

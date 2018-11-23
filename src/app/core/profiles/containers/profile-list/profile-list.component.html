@@ -1,0 +1,37 @@
+<div class="content-heading">
+  Profiles ({{ (profiles$ | async).length }})
+</div>
+<div class="block block-rounded text-body">
+  <div class="block-content">
+    <!-- Orders Table -->
+    <table class="table table-borderless table-striped">
+      <thead>
+      <tr>
+        <th style="width: 100px;">ID</th>
+        <th class="d-none d-sm-table-cell">Created</th>
+        <th class="d-none d-sm-table-cell">Updated</th>
+        <th class="d-none d-sm-table-cell">Profile Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let profile of (profiles$ | async)"
+          style="cursor: pointer"
+          routerLink="/profile/{{profile.ID}}/edit">
+        <td>
+          <a class="font-w600">{{ profile.ID }}</a>
+        </td>
+        <td class="d-none d-sm-table-cell">
+          {{ profile.CreatedAt | date:'longDate' }}
+        </td>
+        <td class="d-none d-sm-table-cell">
+          {{ profile.UpdatedAt | date:'longDate' }}
+        </td>
+        <td class="d-none d-sm-table-cell">
+          <a>{{ profile.title }}</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <!-- END Orders Table -->
+  </div>
+</div>
