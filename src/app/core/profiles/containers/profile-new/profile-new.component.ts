@@ -37,6 +37,7 @@ export class ProfileNewComponent implements OnInit {
    * Inits form
    */
   ngOnInit() {
+    this.store.dispatch(new fromStore.ClearError())
     this.formFields = this.fb.group({
       title: ['', Validators.required]
     })

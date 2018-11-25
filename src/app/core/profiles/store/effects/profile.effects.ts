@@ -54,7 +54,7 @@ export class ProfileEffects {
     .pipe(map((action: profileActions.CreateSuccess) => action.payload),
       map((profile: IProfile) => {
         return new routerActions.Go({
-          path: [`/profile/${profile.ID}/edit`]
+          path: [`/profile/${profile.ID}/pincode-set`]
         })
       }))
 
@@ -124,4 +124,15 @@ export class ProfileEffects {
       })
     )
 
+  /**
+   * Verify profile PIN effect
+   */
+  @Effect()
+  verifyPin$ = this.actions$.pipe(ofType(profileActions.ProfileActionTypes.VerifyPin))
+    .pipe(map((action: profileActions.VerifyPin) => action.payload),
+      switchMap((data: IProfilePIN) => {
+        return this.profileService.verifyPin(data)
+          .then(() => new profileActions.VerifyPinSuccess())
+          .catch(e => new profileActions.VerifyPinFailure(e))
+      }))
 }

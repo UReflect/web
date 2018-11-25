@@ -129,4 +129,22 @@ export class ProfileService {
       }, e => reject(e.error))
     })
   }
+
+  /**
+   * Verify provided profile PIN
+   * @param data PIN
+   */
+  async verifyPin(data: IProfilePIN): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.url}/profile/${data.ID}/pin/verify`, {
+        pin: data.pin
+      }, {
+        headers: { ...header }
+      }).subscribe(() => {
+        resolve()
+      }, e => reject(e.error))
+    })
+  }
 }

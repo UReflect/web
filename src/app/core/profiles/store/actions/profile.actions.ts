@@ -17,7 +17,11 @@ export enum ProfileActionTypes {
   ClearProfiles = 'Profile] Clear Profiles',
   UpdatePin = '[Profile] Update PIN',
   UpdatePinSuccess = '[Profile] Update PIN Success',
-  UpdatePinFailue = '[Profile] Update PIN Failure'
+  UpdatePinFailue = '[Profile] Update PIN Failure',
+  VerifyPin = '[Profile] Verify PIN',
+  VerifyPinSuccess = '[Profile] Verify PIN Success',
+  VerifyPinFailure = '[Profile] Verify PIN Failure',
+  ClearError = '[Profile] Clear Error'
 }
 
 /**
@@ -294,6 +298,64 @@ export class UpdatePinFailure implements Action {
   }
 }
 
+/**
+ * Verify PIN
+ */
+export class VerifyPin implements Action {
+  /**
+   * Action type
+   * '[Profile] Verify PIN'
+   */
+  readonly type = ProfileActionTypes.VerifyPin
+
+  /**
+   * Constructor
+   * @param payload PIN
+   */
+  constructor(public payload: IProfilePIN) {
+  }
+}
+
+/**
+ * Verify PIN Success
+ */
+export class VerifyPinSuccess implements Action {
+  /**
+   * Action type
+   * '[Profile] Verify PIN Success'
+   */
+  readonly type = ProfileActionTypes.VerifyPinSuccess
+}
+
+/**
+ * Verify PIN Failure
+ */
+export class VerifyPinFailure implements Action {
+  /**
+   * Action type
+   * '[Profile] Verify PIN Failure'
+   */
+  readonly type = ProfileActionTypes.VerifyPinFailure
+
+  /**
+   * Constructor
+   * @param payload Failure response
+   */
+  constructor(public payload: any) {
+  }
+}
+
+/**
+ * Clears error
+ */
+export class ClearError implements Action {
+  /**
+   * Action type
+   * '[Profile] Clear Error'
+   */
+  readonly type = ProfileActionTypes.ClearError
+}
+
 export type ProfileActionsUnion =
   | LoadMine
   | LoadMineSuccess
@@ -311,3 +373,7 @@ export type ProfileActionsUnion =
   | UpdatePin
   | UpdatePinSuccess
   | UpdatePinFailure
+  | VerifyPin
+  | VerifyPinSuccess
+  | VerifyPinFailure
+  | ClearError

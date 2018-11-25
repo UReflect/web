@@ -2,7 +2,7 @@ import { NgModule }                                                             
 import { RouterModule, Routes }                                                              from '@angular/router'
 import { JoinMirrorComponent, MirrorEditComponent, MirrorListComponent, SetMirrorComponent } from '@core/mirrors/containers'
 import { AuthGuardService }                                                                  from '@core/auth/guards/auth-guard.service'
-import { FirstProfileComponent }                                                             from '@core/profiles/containers'
+import { ProfileFirstComponent }                                                             from '@core/profiles/containers'
 import { MirrorGuard, MirrorJoinedGuard, MirrorSetUpGuard }                                  from '@core/mirrors/guards'
 import { MirrorsGuard }                                                                      from '@core/mirrors/guards/mirrors.guard'
 
@@ -39,8 +39,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'mirror/:id/first-profile',
-    component: FirstProfileComponent,
+    path: 'mirror/:id/profile-first',
+    component: ProfileFirstComponent,
     canActivate: [
       AuthGuardService,
       MirrorSetUpGuard

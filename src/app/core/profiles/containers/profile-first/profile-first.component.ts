@@ -11,10 +11,10 @@ import { IMIrrorLinkProfile }                 from '@core/mirrors/models'
  */
 @Component({
   selector: 'app-first-profile',
-  templateUrl: 'first-profile.component.html'
+  templateUrl: 'profile-first.component.html'
 })
 
-export class FirstProfileComponent implements OnInit {
+export class ProfileFirstComponent implements OnInit {
   /**
    * Form declaration
    */

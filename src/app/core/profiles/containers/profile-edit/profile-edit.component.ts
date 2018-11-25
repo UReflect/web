@@ -25,7 +25,7 @@ export class ProfileEditComponent implements OnInit {
   /**
    * Profile from store
    */
-  private profile: IProfile
+  profile: IProfile
 
   /**
    * Constructor

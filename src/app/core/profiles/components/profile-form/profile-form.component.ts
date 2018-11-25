@@ -40,6 +40,10 @@ export class ProfileFormComponent implements OnInit {
    */
   @Input() userId: number
   /**
+   * Profile ID
+   */
+  @Input() profileId: number
+  /**
    * Errors from profile store
    */
   err$: Observable<any>

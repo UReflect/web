@@ -47,6 +47,7 @@ export function reducer(state: IProfileState = initialState,
     case fromActions.ProfileActionTypes.Delete:
     case fromActions.ProfileActionTypes.LoadMine:
     case fromActions.ProfileActionTypes.UpdatePin:
+    case fromActions.ProfileActionTypes.VerifyPin:
       return {
         ...state,
         loading: true
@@ -75,6 +76,7 @@ export function reducer(state: IProfileState = initialState,
     case fromActions.ProfileActionTypes.DeleteFailure:
     case fromActions.ProfileActionTypes.LoadMineFailure:
     case fromActions.ProfileActionTypes.UpdatePinFailue:
+    case fromActions.ProfileActionTypes.VerifyPinFailure:
       return {
         ...state,
         loading: false,
@@ -102,10 +104,16 @@ export function reducer(state: IProfileState = initialState,
       }
     }
     case fromActions.ProfileActionTypes.UpdatePinSuccess:
+    case fromActions.ProfileActionTypes.VerifyPinSuccess:
       return {
         ...state,
         loading: false,
         loaded: true
+      }
+    case fromActions.ProfileActionTypes.ClearError:
+      return {
+        ...state,
+        error: null
       }
     case fromActions.ProfileActionTypes.ClearProfiles:
       return initialState

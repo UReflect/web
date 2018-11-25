@@ -1,0 +1,14 @@
+<div class="content">
+  <div class="my-50 text-center">
+    <h2 class="font-w700 text-body-color-light mb-10">
+      <i class="fa fa-lock text-muted mr-5"></i> {{ text }}
+    </h2>
+  </div>
+  <div class="container">
+    <app-numpad (submit)="pincodeHandler($event)"></app-numpad>
+    <div class="text-danger">
+      {{ error$ | async }}
+      {{ err }}
+    </div>
+  </div>
+</div>

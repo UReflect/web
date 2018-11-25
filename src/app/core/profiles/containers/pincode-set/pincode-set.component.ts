@@ -10,11 +10,11 @@ import { ActivatedRoute }    from '@angular/router'
  */
 @Component({
   selector: 'app-set-pincode',
-  templateUrl: 'set-pincode.component.html',
-  styleUrls: ['set-pincode.component.scss']
+  templateUrl: 'pincode-set.component.html',
+  styleUrls: ['pincode-set.component.scss']
 })
 
-export class SetPincodeComponent implements OnInit {
+export class PincodeSetComponent implements OnInit {
   /**
    * Entered code received by NumpadComponent
    */
