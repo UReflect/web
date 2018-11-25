@@ -7,6 +7,9 @@ import { Actions, Effect, ofType }         from '@ngrx/effects'
 import { catchError, map, switchMap, tap } from 'rxjs/operators'
 import { Router }                          from '@angular/router'
 import { of }                              from 'rxjs'
+import * as fromUser                       from '@core/users/store/actions'
+import * as fromMirror                     from '@core/mirrors/store/actions'
+import * as fromProfile                    from '@core/profiles/store/actions'
 
 /**
  * Auth process effects
@@ -22,7 +25,7 @@ export class AuthProcessEffects {
    */
   constructor(private actions$: Actions,
               private authService: AuthService,
-              private store: Store<AuthState.IState>,
+              private store: Store<AuthState.IAuthReducerState>,
               private router: Router) {
   }
 
@@ -41,7 +44,7 @@ export class AuthProcessEffects {
               return new fromAuth.SignInSuccess
             }),
             catchError(e => {
-              return of(new fromAuth.SignInFailure(e.error.error))
+              return of(new fromAuth.SignInFailure(e.error))
             })
           )
       })
@@ -62,7 +65,7 @@ export class AuthProcessEffects {
               return new fromAuth.SignInSuccess
             }),
             catchError(e => {
-              return of(new fromAuth.SignInFailure(e.error.error))
+              return of(new fromAuth.SignInFailure(e.error))
             })
           )
       })
@@ -77,6 +80,9 @@ export class AuthProcessEffects {
       tap(() => {
         this.store.dispatch(new fromAuth.ClearLoggedUser)
         this.store.dispatch(new fromAuth.ClearToken)
+        this.store.dispatch(new fromUser.ClearUsers)
+        this.store.dispatch(new fromMirror.ClearMirrors)
+        this.store.dispatch(new fromProfile.ClearProfiles)
         this.store.dispatch(new fromAuth.SignInRedirect)
       })
     )
@@ -88,7 +94,7 @@ export class AuthProcessEffects {
   signInSuccess$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.SignInSuccess))
     .pipe(ofType(fromAuth.AuthActionTypes.SignInSuccess),
       tap(() => {
-        this.router.navigate(['/modules'])
+        this.router.navigate(['/'])
       })
     )
 
@@ -115,9 +121,8 @@ export class AuthProcessEffects {
             map(() => {
               this.store.dispatch(new fromAuth.SignInRedirect)
               return new fromAuth.PasswordLostSuccess
-            }),
-            catchError(e => {
-              return of(new fromAuth.PasswordLostFailure(e.error.error))
+            }), catchError(e => {
+              return of(new fromAuth.PasswordLostFailure(e.error))
             })
           )
       })

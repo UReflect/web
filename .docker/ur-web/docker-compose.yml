@@ -1,0 +1,33 @@
+version: "3.2"
+
+services:
+ portainer:
+   image: portainer/portainer
+   volumes:
+     - type: bind
+       source: /docker-host/portainer
+       target: /var/data
+     - type: bind
+       source: /var/run/docker.sock
+       target: /var/run/docker.sock
+   restart: always
+   ports:
+     - "7778:9000"
+ ur-web:
+   image: nginx
+   volumes:
+     - type: bind
+       source: ../../dist/web
+       target: /usr/share/nginx/html
+   ports:
+     - "8080:80"
+   restart: always
+ ur-doc:
+   image: nginx
+   volumes:
+     - type: bind
+       source: ../../doc
+       target: /usr/share/nginx/html
+   ports:
+     - "8081:80"
+   restart: always

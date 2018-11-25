@@ -1,0 +1,5 @@
+<div class="row gutters">
+  <app-mirror-card *ngFor="let mirror of (mirrors$ | async)"
+                   [mirror]="mirror"
+                   class="col-md-6 col-xl-3"></app-mirror-card>
+</div>

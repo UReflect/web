@@ -4,17 +4,17 @@ import { ActionReducerMap, createFeatureSelector } from '@ngrx/store'
 /**
  * Returns user state definition
  */
-export interface IUserState {
+export interface IUserReducerState {
   /**
    * User state
    */
-  users: fromUsers.IState
+  users: fromUsers.IUserState
 }
 
 /**
  * Returns user state reducer definition
  */
-export const reducers: ActionReducerMap<IUserState> = {
+export const reducers: ActionReducerMap<IUserReducerState> = {
   /**
    * User reducer
    */
@@ -24,6 +24,6 @@ export const reducers: ActionReducerMap<IUserState> = {
 /**
  * Returns user state definition using a FeatureSelector
  */
-export const getUsersState = createFeatureSelector<IUserState>(
+export const getUsersState = createFeatureSelector<IUserReducerState>(
   'users'
 )

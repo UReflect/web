@@ -12,11 +12,11 @@ import { Store }                                                                
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router,
-              private store: Store<fromStore.IState>) {
+              private store: Store<fromStore.IAuthReducerState>) {
   }
 
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
-    if (err.status === 401) {
+    if (err.status === 401 && err.url.indexOf('/signin') <= 0) {
       this.store.dispatch(new fromStore.SignOut())
       return new Observable()
     }

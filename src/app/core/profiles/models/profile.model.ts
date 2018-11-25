@@ -19,7 +19,15 @@ export interface IProfile {
   /**
    * user_id of the user owner of the profile
    */
-  user_id: number
+  user_id: number,
+  /**
+   * Profile date of creation
+   */
+  CreatedAt: Date,
+  /**
+   * Profile last update date
+   */
+  UpdatedAt: Date
 }
 
 /**
@@ -44,4 +52,18 @@ export interface IProfileUpdate {
    * Title of the profile
    */
   title: string
+}
+
+/**
+ * Interface which defines profile pin update parameters
+ */
+export interface IProfilePIN {
+  /**
+   * Profile ID
+   */
+  ID: number,
+  /**
+   * New PIN number
+   */
+  pin: string
 }

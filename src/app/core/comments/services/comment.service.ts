@@ -24,7 +24,7 @@ export class CommentService {
    * @param store Auth store
    */
   constructor(private http: HttpClient,
-              private store: Store<fromAuth.IState>) {
+              private store: Store<fromAuth.IAuthReducerState>) {
     this.url = environment.apiUrl
     this.token$ = this.store.pipe(select(fromAuth.getToken))
   }

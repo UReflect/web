@@ -1,0 +1,18 @@
+<div class="content">
+  <div class="my-50 text-center">
+    <h2 class="font-w700 text-body-color-light mb-10">
+      <i class="fa fa-info text-muted mr-5"></i> Update Your Mirror
+    </h2>
+  </div>
+  <div class="block block-rounded">
+    <div class="block-content">
+      <app-mirror-form
+        (submit)="updateHandler($event)"
+        (submitDelete)="deleteHandler()"
+        [formFields]="formFields"
+        [btnText]="'Save Mirror'"
+        [btnIcon]="'fa-pencil'"
+        [edit]="true"></app-mirror-form>
+    </div>
+  </div>
+</div>

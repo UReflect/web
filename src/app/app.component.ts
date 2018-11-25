@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
    * Constructor
    * @param store Layout store
    */
-  constructor(private store: Store<fromLayout.IState>) {
+  constructor(private store: Store<fromLayout.ILayoutReducerState>) {
   }
 
   /**

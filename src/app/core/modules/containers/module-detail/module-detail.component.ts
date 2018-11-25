@@ -35,7 +35,7 @@ export class ModuleDetailComponent implements OnInit {
    * @param store Module store
    * Init module$ and user$ Observables
    */
-  constructor(private store: Store<fromStore.IModulesState>) {
+  constructor(private store: Store<fromStore.IModuleReducerState>) {
     this.module$ = this.store.pipe(select(fromSelectors.getSelectedModule))
     this.user$ = this.store.pipe(select(fromAuth.getLoggedUser))
   }
@@ -58,13 +58,6 @@ export class ModuleDetailComponent implements OnInit {
     return ratingNb === 1
       ? '1 review'
       : `${ratingNb} reviews`
-  }
-
-  /**
-   * Deletes module
-   */
-  deleteHandler() {
-    this.store.dispatch(new fromStore.Delete(this.module))
   }
 
   /**

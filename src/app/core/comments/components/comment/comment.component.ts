@@ -28,7 +28,7 @@ export class CommentComponent implements OnInit {
    * Constructor
    * @param store User store
    */
-  constructor(private store: Store<fromUserStore.IUserState>) {
+  constructor(private store: Store<fromUserStore.IUserReducerState>) {
   }
 
   /**

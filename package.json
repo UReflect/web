@@ -1,6 +1,6 @@
 {
   "name": "web",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compodoc": "./node_modules/.bin/compodoc src -p tsconfig.json -d ./doc -n 'uReflect Web Documentation'",
-    "release": "standard-version && git push --follow-tags origin master"
+    "changelog": "standard-version"
   },
   "private": false,
   "dependencies": {

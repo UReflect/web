@@ -1,0 +1,92 @@
+<form class="js-validation" [formGroup]="formFields">
+  <div class="block block-themed block-rounded block-shadow">
+    <div class="block-header bg-gd-dusk">
+      <h3 class="block-title">{{ title }}</h3>
+    </div>
+    <div class="block-content text-body-color">
+
+      <div class="form-group row"
+           [ngClass]="{'is-invalid': getName().invalid && getName().touched}"
+           *ngIf="fields.name">
+        <div class="col-12">
+          <label for="name">Name *</label>
+          <input type="text" class="form-control" id="name" name="name"
+                 placeholder="eg: John Smith" formControlName="name">
+          <div class="invalid-feedback animated fadeInDown"
+               *ngIf="getName().invalid"> {{ getFormErrors('name') }}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row"
+           [ngClass]="{'is-invalid': getEmail().invalid && getEmail().touched}"
+           *ngIf="fields.email">
+        <div class="col-12">
+          <label for="email">Email *</label>
+          <input type="text" class="form-control" id="email" name="email" formControlName="email">
+          <div class="invalid-feedback animated fadeInDown" *ngIf="getEmail().invalid">{{ getFormErrors('email') }}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row"
+           [ngClass]="{'is-invalid': getPassword().invalid && getPassword().touched}"
+           *ngIf="fields.password">
+        <div class="col-12">
+          <label for="password">Password *</label>
+          <input type="password" class="form-control" id="password" name="password"
+                 placeholder="********" formControlName="password">
+          <div class="invalid-feedback animated fadeInDown"
+               *ngIf="getPassword().invalid"> {{ getFormErrors('password') }}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row"
+           [ngClass]="{'is-invalid': getPasswordConfirm().invalid && getPasswordConfirm().touched}"
+           *ngIf="fields.passwordConfirm">
+        <div class="col-12">
+          <form class="js-validation" [formGroup]="passwordConfirmForm">
+            <label for="password-confirm">Password Confirmation *</label>
+            <input type="password" class="form-control" id="password-confirm" name="password-confirm"
+                   placeholder="********" formControlName="passwordConfirm">
+            <div class="invalid-feedback animated fadeInDown"
+                 *ngIf="getPasswordConfirm().invalid"> {{ getFormErrors('passwordConfirm') }}
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-alt-primary" [disabled]="!checkValidation()"
+                (click)="submitHandler()">
+          <i class="{{ submitBtn.icon }}"></i>
+          <span *ngIf="pending$ | async; else submitBtnStatic">{{ submitBtn.text.loading }}</span>
+          <ng-template #submitBtnStatic>{{ submitBtn.text.static }}</ng-template>
+        </button>
+      </div>
+    </div>
+
+    <div class="block-content bg-body-light">
+      <div class="form-group text-center">
+        <a class="link-effect text-muted mr-10 mb-5 d-inline-block"
+           [routerLink]="[footer[0].link]">
+          <i class="fa {{ footer[0].btnIcon }} text-muted mr-5"></i>
+          {{ footer[0].btnText }}
+        </a>
+        <a class="link-effect text-muted mr-10 mb-5 d-inline-block"
+           [routerLink]="[footer[1].link]"
+           *ngIf="footer[1]">
+          <i class="fa {{ footer[1].btnIcon }} text-muted mr-5"></i>
+          {{ footer[1].btnText }}
+        </a>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="alert alert-danger" role="alert"
+     *ngIf="(error$ | async) && (error$ | async).length > 0">
+  <h3 class="alert-heading font-size-h4 font-w400">Error</h3>
+  <p class="mb-0">{{ error$ | async }}</p>
+</div>

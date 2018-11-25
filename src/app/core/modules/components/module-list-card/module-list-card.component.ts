@@ -32,7 +32,7 @@ export class ModuleListCardComponent implements OnInit {
    * Constructor
    * @param store Module store
    */
-  constructor(private store: Store<fromStore.IUserState>) {
+  constructor(private store: Store<fromStore.IUserReducerState>) {
   }
 
   /**

@@ -13,7 +13,8 @@ export enum UserActionTypes {
   UpdateFailure = '[User] Update Failure',
   Delete = '[User] Delete',
   DeleteSuccess = '[User] Delete Success',
-  DeleteFailure = '[User] Delete Failure'
+  DeleteFailure = '[User] Delete Failure',
+  ClearUsers = '[User] Clear Users'
 }
 
 /**
@@ -225,6 +226,17 @@ export class DeleteFailure implements Action {
   }
 }
 
+/**
+ * Clear users
+ */
+export class ClearUsers implements Action {
+  /**
+   * Action type
+   * '[User] Clear Users'
+   */
+  readonly type = UserActionTypes.ClearUsers
+}
+
 export type UserActionsUnion =
   | LoadAll
   | LoadAllSuccess
@@ -238,3 +250,4 @@ export type UserActionsUnion =
   | Delete
   | DeleteSuccess
   | DeleteFailure
+  | ClearUsers

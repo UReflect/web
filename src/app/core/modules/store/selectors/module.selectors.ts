@@ -9,7 +9,7 @@ import { IModule }        from '@core/modules/models/module'
  */
 export const getModuleState = createSelector(
   fromFeature.getModulesState,
-  (state: fromFeature.IModulesState) => state.modules
+  (state: fromFeature.IModuleReducerState) => state.modules
 )
 
 /**

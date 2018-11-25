@@ -8,6 +8,8 @@ import { containers }                       from '@core/mirrors/containers'
 import { MirrorRoutingModule }              from '@core/mirrors/mirror.routing'
 import { components }                       from '@core/mirrors/components'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { guards }                           from '@core/mirrors/guards'
+import { SharedModule }                     from '@shared/shared.module'
 
 @NgModule({
   imports: [
@@ -16,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forFeature('mirrors', reducers),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
+    SharedModule
   ],
   exports: [
     ...containers,
@@ -27,7 +30,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     ...components
   ],
   providers: [
-    ...services
+    ...services,
+    ...guards
   ]
 })
 export class MirrorModule {

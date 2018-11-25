@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/UReflect/web/compare/v0.2.0...v0.3.0) (2018-11-25)
+
+
+### Bug Fixes
+
+* **modules:** fixed err display on module creation ([fa1083e](https://github.com/UReflect/web/commit/fa1083e))
+* **modules:** Fixed price display for free modules. ([78c1c2a](https://github.com/UReflect/web/commit/78c1c2a))
+
+
+### Features
+
+* **mirrors:** Add delete button ([8c56726](https://github.com/UReflect/web/commit/8c56726))
+* **mirrors:** Add mirror edit ([bc58839](https://github.com/UReflect/web/commit/bc58839))
+* **mirrors:** Add mirrors list ([6790f61](https://github.com/UReflect/web/commit/6790f61))
+* **profiles:** add set pincode for new profile on new mirror ([7f31f5e](https://github.com/UReflect/web/commit/7f31f5e))
+* **profiles:** crud ([d935eef](https://github.com/UReflect/web/commit/d935eef))
+* **profiles:** edit pincode ([66b03f9](https://github.com/UReflect/web/commit/66b03f9))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/UReflect/web/compare/v0.1.0...v0.2.0) (2018-11-08)
 

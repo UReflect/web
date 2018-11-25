@@ -27,7 +27,7 @@ export class SidebarUserComponent implements OnInit {
    * Constructor
    * @param store Auth store
    */
-  constructor(private store: Store<fromAuth.IState>) {
+  constructor(private store: Store<fromAuth.IAuthReducerState>) {
   }
 
   /**

@@ -3,7 +3,7 @@ import { LayoutActionsUnion, LayoutActionTypes } from '../actions/layout.actions
 /**
  * Layout interface
  */
-export interface IState {
+export interface ILayoutState {
   /**
    * Sidenav state
    */
@@ -13,7 +13,7 @@ export interface IState {
 /**
  * Initial state for layout
  */
-export const initialState: IState = {
+export const initialState: ILayoutState = {
   /**
    * Sidenav starts open
    */
@@ -25,7 +25,7 @@ export const initialState: IState = {
  * @param state Layout state
  * @param action Received action
  */
-export function reducer(state: IState = initialState, action: LayoutActionsUnion): IState {
+export function reducer(state: ILayoutState = initialState, action: LayoutActionsUnion): ILayoutState {
   switch (action.type) {
     case LayoutActionTypes.CloseSidenav:
       return {
@@ -48,4 +48,4 @@ export function reducer(state: IState = initialState, action: LayoutActionsUnion
  * Sidenav getter
  * @param state Current state
  */
-export const getShowSidenav = (state: IState) => state.showSidenav
+export const getShowSidenav = (state: ILayoutState) => state.showSidenav

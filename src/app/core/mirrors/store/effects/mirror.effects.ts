@@ -1,11 +1,11 @@
-import { Injectable }                        from '@angular/core'
-import { Actions, Effect, ofType }           from '@ngrx/effects'
-import { map, switchMap }                    from 'rxjs/operators'
-import { MirrorService }                     from '@core/mirrors/services/mirror.service'
-import * as mirrorActions                    from '../actions'
-import { IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
-import * as routerActions                    from '@store/actions'
-import { ActivatedRoute }                    from '@angular/router'
+import { Injectable }                                 from '@angular/core'
+import { Actions, Effect, ofType }                    from '@ngrx/effects'
+import { map, switchMap }                             from 'rxjs/operators'
+import { MirrorService }                              from '@core/mirrors/services/mirror.service'
+import * as mirrorActions                             from '../actions'
+import { IMirror, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
+import * as routerActions                             from '@store/actions'
+import { ActivatedRoute }                             from '@angular/router'
 
 /**
  * Mirror effects
@@ -108,12 +108,52 @@ export class MirrorEffects {
    * Link profile to mirror using HTTP service
    */
   @Effect()
-  linkProfileSuccess = this.actions$
+  linkProfile$ = this.actions$
     .pipe(ofType(mirrorActions.MirrorActionTypes.LinkProfile))
     .pipe(map((action: mirrorActions.LinkProfile) => action.payload),
       switchMap((data: IMIrrorLinkProfile) => {
         return this.mirrorService.linkProfile(data)
-          .then(() => new mirrorActions.LinkProfileSuccess())
+          .then(() => new mirrorActions.LinkProfileSuccess(data.profile_id))
           .catch(e => new mirrorActions.LinkProfileFailure(e))
       }))
+
+  /**
+   * Link profile successful, routes towards list
+   */
+  @Effect()
+  linkProfileSuccess$ = this.actions$
+    .pipe(ofType(mirrorActions.MirrorActionTypes.LinkProfileSuccess))
+    .pipe(map((action: mirrorActions.LinkProfileSuccess) => action.payload),
+      map(profile_id => {
+        return new routerActions.Go({
+          path: [`/profile/${profile_id}/set-pincode`]
+        })
+      }))
+
+  /**
+   * Delete mirror using HTTP service
+   */
+  @Effect()
+  delete$ = this.actions$
+    .pipe(ofType(mirrorActions.MirrorActionTypes.Delete))
+    .pipe(map((action: mirrorActions.Delete) => action.payload),
+      switchMap((mirror: IMirror) => {
+        return this.mirrorService.delete(mirror)
+          .then(() => new mirrorActions.DeleteSuccess(mirror))
+          .catch(e => new mirrorActions.DeleteFailure(e))
+      }))
+
+  /**
+   * Delete mirror success effect
+   */
+  @Effect()
+  deleteModuleSuccess$ = this.actions$.pipe(ofType(
+    mirrorActions.MirrorActionTypes.DeleteSuccess))
+    .pipe(
+      map(() => {
+        return new routerActions.Go({
+          path: ['/mirrors']
+        })
+      })
+    )
 }

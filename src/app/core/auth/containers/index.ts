@@ -1,16 +1,16 @@
-import { LoginPageComponent }        from '@core/auth/containers/login-page/login-page.component'
-import { RegisterPageComponent }     from '@core/auth/containers/register-page/register-page.component'
-import { PasswordLostPageComponent } from '@core/auth/containers/password-lost-page/password-lost-page.component'
+import { LoginComponent }        from '@core/auth/containers/login/login.component'
+import { RegisterComponent }     from '@core/auth/containers/register/register.component'
+import { PasswordLostComponent } from '@core/auth/containers/password-lost/password-lost.component'
 
-export * from './login-page/login-page.component'
-export * from './register-page/register-page.component'
-export * from './password-lost-page/password-lost-page.component'
+export * from './login/login.component'
+export * from './register/register.component'
+export * from './password-lost/password-lost.component'
 
 /**
  * Exports all containers
  */
 export const containers: any[] = [
-  LoginPageComponent,
-  RegisterPageComponent,
-  PasswordLostPageComponent
+  LoginComponent,
+  RegisterComponent,
+  PasswordLostComponent
 ]

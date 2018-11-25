@@ -4,7 +4,7 @@ import * as fromActions from '../actions'
 /**
  * Module state interface
  */
-export interface IState {
+export interface IModuleState {
   /**
    * Module entities
    */
@@ -26,7 +26,7 @@ export interface IState {
 /**
  * Module initial state definition
  */
-export const initialState: IState = {
+export const initialState: IModuleState = {
   /**
    * Initial state for entities
    */
@@ -50,7 +50,7 @@ export const initialState: IState = {
  * @param state State of modules
  * @param action Action triggered
  */
-export function reducer(state: IState = initialState,
+export function reducer(state: IModuleState = initialState,
                         action: fromActions.ModuleActionsUnion) {
   switch (action.type) {
     case fromActions.ModuleActionTypes.Create:
@@ -108,8 +108,7 @@ export function reducer(state: IState = initialState,
       }
     }
     case fromActions.ModuleActionTypes.DeleteSuccess: {
-      const module = action.payload
-      const { [module.ID]: removed, ...entities } = state.entities
+      const { [action.payload.ID]: removed, ...entities } = state.entities
 
       return {
         ...state,
@@ -131,19 +130,19 @@ export function reducer(state: IState = initialState,
  * Module entities getter
  * @param state Current module state
  */
-export const getEntities = (state: IState) => state.entities
+export const getEntities = (state: IModuleState) => state.entities
 /**
  * Module loading getter
  * @param state Current module state
  */
-export const getLoading = (state: IState) => state.loading
+export const getLoading = (state: IModuleState) => state.loading
 /**
  * Module loaded getter
  * @param state Current module state
  */
-export const getLoaded = (state: IState) => state.loaded
+export const getLoaded = (state: IModuleState) => state.loaded
 /**
  * Module error getter
  * @param state Current module state
  */
-export const getError = (state: IState) => state.error
+export const getError = (state: IModuleState) => state.error

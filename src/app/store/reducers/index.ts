@@ -26,7 +26,7 @@ export interface IRouterStateUrl {
 /**
  * Router app state
  */
-export interface IState {
+export interface IAppState {
   /**
    * router reducer imported from router state
    */
@@ -36,7 +36,7 @@ export interface IState {
 /**
  * Router app reducer
  */
-export const reducers: ActionReducerMap<IState> = {
+export const reducers: ActionReducerMap<IAppState> = {
   routerReducer: fromRouter.routerReducer
 }
 
@@ -44,8 +44,8 @@ export const reducers: ActionReducerMap<IState> = {
  * Logger method used in development
  * @param reducer app reducer
  */
-export function logger(reducer: ActionReducer<IState>): ActionReducer<IState> {
-  return function (state: IState, action: any): IState {
+export function logger(reducer: ActionReducer<IAppState>): ActionReducer<IAppState> {
+  return function (state: IAppState, action: any): IAppState {
     console.log('state', state)
     console.log('action', action)
 
@@ -65,7 +65,7 @@ export const getRouterState
  * @param reducer app reducer
  */
 export function localStorageSyncReducer(
-  reducer: ActionReducer<IState>): ActionReducer<IState> {
+  reducer: ActionReducer<IAppState>): ActionReducer<IAppState> {
   return localStorageSync({
     keys: ['routerReducer', 'auth', 'layout', 'modules', 'users',
       'comments', 'mirrors', 'profiles'],

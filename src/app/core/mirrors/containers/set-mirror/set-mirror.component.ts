@@ -24,7 +24,7 @@ export class SetMirrorComponent implements OnInit {
    * Init form field
    */
   constructor(private fb: FormBuilder,
-              private store: Store<fromStore.IMirrorState>) {
+              private store: Store<fromStore.IMirrorReducerState>) {
     this.formFields = this.fb.group({
       name: ['', Validators.required],
       location: ['', Validators.required]

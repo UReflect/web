@@ -1,11 +1,11 @@
-import { Injectable }                               from '@angular/core'
-import { HttpClient }                               from '@angular/common/http'
-import * as fromAuth                                from '@core/auth/store'
-import { select, Store }                            from '@ngrx/store'
-import { environment }                              from '@env/environment'
-import { Observable }                               from 'rxjs'
-import { IProfile, IProfileCreate, IProfileUpdate } from '@core/profiles/models/profile.model'
-import { map }                                      from 'rxjs/operators'
+import { Injectable }                                            from '@angular/core'
+import { HttpClient }                                            from '@angular/common/http'
+import * as fromAuth                                             from '@core/auth/store'
+import { select, Store }                                         from '@ngrx/store'
+import { environment }                                           from '@env/environment'
+import { Observable }                                            from 'rxjs'
+import { IProfile, IProfileCreate, IProfilePIN, IProfileUpdate } from '@core/profiles/models/profile.model'
+import { map }                                                   from 'rxjs/operators'
 
 /**
  * Profile HTTP service
@@ -27,7 +27,7 @@ export class ProfileService {
    * @param store Auth store
    */
   constructor(private http: HttpClient,
-              private store: Store<fromAuth.IState>) {
+              private store: Store<fromAuth.IAuthReducerState>) {
     this.url = environment.apiUrl
     this.token$ = this.store.pipe(select(fromAuth.getToken))
   }
@@ -109,6 +109,42 @@ export class ProfileService {
       }, e => {
         reject(e.error)
       })
+    })
+  }
+
+  /**
+   * Updates the provided profile PIN
+   * @param data PIN
+   */
+  async updatePin(data: IProfilePIN): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.url}/profile/${data.ID}/pin`, {
+        pin: data.pin
+      }, {
+        headers: { ...header }
+      }).subscribe(() => {
+        resolve()
+      }, e => reject(e.error))
+    })
+  }
+
+  /**
+   * Verify provided profile PIN
+   * @param data PIN
+   */
+  async verifyPin(data: IProfilePIN): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.post(`${this.url}/profile/${data.ID}/pin/verify`, {
+        pin: data.pin
+      }, {
+        headers: { ...header }
+      }).subscribe(() => {
+        resolve()
+      }, e => reject(e.error))
     })
   }
 }

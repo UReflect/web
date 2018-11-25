@@ -4,17 +4,17 @@ import { ActionReducerMap, createFeatureSelector } from '@ngrx/store'
 /**
  * Returns comment state
  */
-export interface ICommentState {
+export interface ICommentReducerState {
   /**
    * Comments state
    */
-  comments: fromComments.IState
+  comments: fromComments.ICommentState
 }
 
 /**
  * Returns comment reducer
  */
-export const reducers: ActionReducerMap<ICommentState> = {
+export const reducers: ActionReducerMap<ICommentReducerState> = {
   /**
    * Comment reducer
    */
@@ -24,6 +24,6 @@ export const reducers: ActionReducerMap<ICommentState> = {
 /**
  * Comment feature selector
  */
-export const getCommentsState = createFeatureSelector<ICommentState>(
+export const getCommentsState = createFeatureSelector<ICommentReducerState>(
   'comments'
 )

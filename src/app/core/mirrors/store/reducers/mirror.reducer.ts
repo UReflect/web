@@ -4,7 +4,7 @@ import { IMirror }      from '@core/mirrors/models/mirror.model'
 /**
  * State interface which defines mirror store
  */
-export interface IState {
+export interface IMirrorState {
   /**
    * User entities
    * Formatted using { mirrorID: mirror, ... }
@@ -27,7 +27,7 @@ export interface IState {
 /**
  * Initial state for mirror store
  */
-export const initialState: IState = {
+export const initialState: IMirrorState = {
   entities: {},
   loaded: false,
   loading: false,
@@ -39,7 +39,7 @@ export const initialState: IState = {
  * @param state Current state of the mirror store
  * @param action Action received
  */
-export function reducer(state: IState = initialState,
+export function reducer(state: IMirrorState = initialState,
                         action: fromActions.MirrorActionsUnion) {
   switch (action.type) {
     case fromActions.MirrorActionTypes.Update:
@@ -47,6 +47,7 @@ export function reducer(state: IState = initialState,
     case fromActions.MirrorActionTypes.Join:
     case fromActions.MirrorActionTypes.LinkProfile:
     case fromActions.MirrorActionTypes.Setup:
+    case fromActions.MirrorActionTypes.Delete:
       return {
         ...state,
         loading: true
@@ -56,6 +57,7 @@ export function reducer(state: IState = initialState,
     case fromActions.MirrorActionTypes.JoinFailure:
     case fromActions.MirrorActionTypes.LinkProfileFailure:
     case fromActions.MirrorActionTypes.SetupFailure:
+    case fromActions.MirrorActionTypes.DeleteFailure:
       return {
         ...state,
         loading: false,
@@ -104,11 +106,22 @@ export function reducer(state: IState = initialState,
         loaded: true,
         loading: false
       }
+    case fromActions.MirrorActionTypes.DeleteSuccess: {
+      const mirror = action.payload
+      const { [mirror.ID]: removed, ...entities } = state.entities
+
+      return {
+        ...state,
+        entities
+      }
+    }
     case fromActions.MirrorActionTypes.ClearError:
       return {
         ...state,
         error: null
       }
+    case fromActions.MirrorActionTypes.ClearMirrors:
+      return initialState
     default:
       return state
   }
@@ -118,20 +131,20 @@ export function reducer(state: IState = initialState,
  * Returns entities contained in mirror store
  * @param state Current state of the mirror store
  */
-export const getEntities = (state: IState) => state.entities
+export const getEntities = (state: IMirrorState) => state.entities
 /**
  * Returns current loading status of the mirror store
  * @param state Current state of the mirror store
  */
-export const getLoading = (state: IState) => state.loading
+export const getLoading = (state: IMirrorState) => state.loading
 /**
  * Returns current loaded state of the mirror store
  * @param state Current state of the mirror store
  */
-export const getLoaded = (state: IState) => state.loaded
+export const getLoaded = (state: IMirrorState) => state.loaded
 /**
  * Returns current errors related to the mirror store
  * @param state Current state of the mirror store
  */
-export const getError = (state: IState) => state.error
+export const getError = (state: IMirrorState) => state.error
 

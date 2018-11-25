@@ -1,5 +1,5 @@
-import { Action }                                   from '@ngrx/store'
-import { IProfile, IProfileCreate, IProfileUpdate } from '@core/profiles/models/profile.model'
+import { Action }                                                from '@ngrx/store'
+import { IProfile, IProfileCreate, IProfilePIN, IProfileUpdate } from '@core/profiles/models/profile.model'
 
 export enum ProfileActionTypes {
   LoadMine = '[Profile] Load Mine',
@@ -13,7 +13,15 @@ export enum ProfileActionTypes {
   UpdateFailure = '[Profile] Update Failure',
   Delete = '[Profile] Delete',
   DeleteSuccess = '[Profile] Delete Success',
-  DeleteFailure = '[Profile] Delete Failure'
+  DeleteFailure = '[Profile] Delete Failure',
+  ClearProfiles = 'Profile] Clear Profiles',
+  UpdatePin = '[Profile] Update PIN',
+  UpdatePinSuccess = '[Profile] Update PIN Success',
+  UpdatePinFailue = '[Profile] Update PIN Failure',
+  VerifyPin = '[Profile] Verify PIN',
+  VerifyPinSuccess = '[Profile] Verify PIN Success',
+  VerifyPinFailure = '[Profile] Verify PIN Failure',
+  ClearError = '[Profile] Clear Error'
 }
 
 /**
@@ -159,7 +167,7 @@ export class UpdateSuccess implements Action {
 export class UpdateFailure implements Action {
   /**
    * Action type
-   * '[User] Update Failure'
+   * '[Profile] Update Failure'
    */
   readonly type = ProfileActionTypes.UpdateFailure
 
@@ -177,7 +185,7 @@ export class UpdateFailure implements Action {
 export class Delete implements Action {
   /**
    * Action type
-   * '[User] Delete'
+   * '[Profile] Delete'
    */
   readonly type = ProfileActionTypes.Delete
 
@@ -195,7 +203,7 @@ export class Delete implements Action {
 export class DeleteSuccess implements Action {
   /**
    * Action type
-   * '[User] Delete Success'
+   * '[Profile] Delete Success'
    */
   readonly type = ProfileActionTypes.DeleteSuccess
 
@@ -213,7 +221,7 @@ export class DeleteSuccess implements Action {
 export class DeleteFailure implements Action {
   /**
    * Action type
-   * '[User] Delete Failure'
+   * '[Profile] Delete Failure'
    */
   readonly type = ProfileActionTypes.DeleteFailure
 
@@ -223,6 +231,129 @@ export class DeleteFailure implements Action {
    */
   constructor(public payload: any) {
   }
+}
+
+/**
+ * Clear profiles
+ */
+export class ClearProfiles implements Action {
+  /**
+   * Action type
+   * '[Profile] Clear Profiles'
+   */
+  readonly type = ProfileActionTypes.ClearProfiles
+}
+
+/**
+ * Updates pin profile
+ */
+export class UpdatePin implements Action {
+  /**
+   * Action type
+   * '[Profile] Update PIN'
+   */
+  readonly type = ProfileActionTypes.UpdatePin
+
+  /**
+   * Constructor
+   * @param payload PIN code
+   */
+  constructor(public payload: IProfilePIN) {
+  }
+}
+
+/**
+ * Update Pin Success
+ */
+export class UpdatePinSuccess implements Action {
+  /**
+   * Action type
+   * '[Profile] Update PIN Success'
+   */
+  readonly type = ProfileActionTypes.UpdatePinSuccess
+
+  /**
+   * Constructor
+   * @param payload Success response
+   */
+  constructor(public payload: number) {
+  }
+}
+
+/**
+ * Update Pin Failure
+ */
+export class UpdatePinFailure implements Action {
+  /**
+   * Action type
+   * '[Profile] Update PIN Failure'
+   */
+  readonly type = ProfileActionTypes.UpdatePinFailue
+
+  /**
+   * Constructor
+   * @param payload Failure response
+   */
+  constructor(public payload: any) {
+  }
+}
+
+/**
+ * Verify PIN
+ */
+export class VerifyPin implements Action {
+  /**
+   * Action type
+   * '[Profile] Verify PIN'
+   */
+  readonly type = ProfileActionTypes.VerifyPin
+
+  /**
+   * Constructor
+   * @param payload PIN
+   */
+  constructor(public payload: IProfilePIN) {
+  }
+}
+
+/**
+ * Verify PIN Success
+ */
+export class VerifyPinSuccess implements Action {
+  /**
+   * Action type
+   * '[Profile] Verify PIN Success'
+   */
+  readonly type = ProfileActionTypes.VerifyPinSuccess
+}
+
+/**
+ * Verify PIN Failure
+ */
+export class VerifyPinFailure implements Action {
+  /**
+   * Action type
+   * '[Profile] Verify PIN Failure'
+   */
+  readonly type = ProfileActionTypes.VerifyPinFailure
+
+  /**
+   * Constructor
+   * @param payload Failure response
+   */
+  constructor(public payload: any) {
+  }
+}
+
+/**
+ * Clears error
+ */
+export class ClearError implements Action {
+  /**
+   * Action type
+   * '[Profile] Clear Error'
+   */
+  readonly type = ProfileActionTypes.ClearError
 }
 
 export type ProfileActionsUnion =
@@ -238,3 +369,11 @@ export type ProfileActionsUnion =
   | Delete
   | DeleteSuccess
   | DeleteFailure
+  | ClearProfiles
+  | UpdatePin
+  | UpdatePinSuccess
+  | UpdatePinFailure
+  | VerifyPin
+  | VerifyPinSuccess
+  | VerifyPinFailure
+  | ClearError

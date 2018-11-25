@@ -7,6 +7,10 @@ import { EffectsModule }                    from '@ngrx/effects'
 import { containers }                       from '@core/profiles/containers'
 import { components }                       from '@core/profiles/components'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { ProfileRoutingModule }             from '@core/profiles/profile.routing'
+import { SharedModule }                     from '@shared/shared.module'
+import { guards }                           from '@core/profiles/guards'
+import { RouterModule }                     from '@angular/router'
 
 @NgModule({
   imports: [
@@ -14,7 +18,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forFeature('profiles', reducers),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
+    ProfileRoutingModule,
+    SharedModule,
+    RouterModule
   ],
   exports: [
     ...containers,
@@ -25,7 +32,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     ...components
   ],
   providers: [
-    ...services
+    ...services,
+    ...guards
   ]
 })
 export class ProfileModule {

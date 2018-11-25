@@ -4,17 +4,17 @@ import { ActionReducerMap, createFeatureSelector } from '@ngrx/store'
 /**
  * Returns profile state definition
  */
-export interface IProfileState {
+export interface IProfileReducerState {
   /**
    * Profile state
    */
-  profiles: fromProfiles.IState
+  profiles: fromProfiles.IProfileState
 }
 
 /**
  * Returns profile state reducer definition
  */
-export const reducers: ActionReducerMap<IProfileState> = {
+export const reducers: ActionReducerMap<IProfileReducerState> = {
   /**
    * Profile reducer
    */
@@ -24,6 +24,6 @@ export const reducers: ActionReducerMap<IProfileState> = {
 /**
  * Returns profile state definition using a FeatureSelector
  */
-export const getProfilesState = createFeatureSelector<IProfileState>(
+export const getProfilesState = createFeatureSelector<IProfileReducerState>(
   'profiles'
 )

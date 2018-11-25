@@ -39,3 +39,60 @@ export interface IPasswordLost {
    */
   email: string
 }
+
+/**
+ * Fields to display in AuthForm interface
+ */
+export interface IFields {
+  /**
+   * Email boolean
+   */
+  email: boolean,
+  /**
+   * Name boolean
+   */
+  name: boolean,
+  /**
+   * Password boolean
+   */
+  password: boolean,
+  /**
+   * PasswordConfirm boolean
+   */
+  passwordConfirm: boolean
+}
+
+/**
+ * Footer setting for AuthForm interface
+ */
+export interface IFooter {
+  /**
+   * Link for routing
+   */
+  link: string,
+  /**
+   * Text for button
+   */
+  btnText: string,
+  /**
+   * Icon for button
+   */
+  btnIcon: string
+}
+
+/**
+ * Submit button settings for AuthForm interface
+ */
+export interface ISubmitBtn {
+  /**
+   * Icon for button
+   */
+  icon: string,
+  /**
+   * Text for button depending on status
+   */
+  text: {
+    static: string,
+    loading: string
+  }
+}

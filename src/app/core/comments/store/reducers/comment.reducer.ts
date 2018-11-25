@@ -4,7 +4,7 @@ import * as fromActions from '../actions'
 /**
  * Comment state interface
  */
-export interface IState {
+export interface ICommentState {
   /**
    * Comment entities
    */
@@ -26,7 +26,7 @@ export interface IState {
 /**
  * Initial state for comment state
  */
-export const initialState: IState = {
+export const initialState: ICommentState = {
   /**
    * Initial comment entities state
    */
@@ -50,7 +50,7 @@ export const initialState: IState = {
  * @param state Current or initial state
  * @param action Action received
  */
-export function reducer(state: IState = initialState,
+export function reducer(state: ICommentState = initialState,
                         action: fromActions.CommentActionsUnion) {
   switch (action.type) {
     case fromActions.CommentActionTypes.Load:
@@ -107,19 +107,19 @@ export function reducer(state: IState = initialState,
  * Entities getter
  * @param state Current state
  */
-export const getEntities = (state: IState) => state.entities
+export const getEntities = (state: ICommentState) => state.entities
 /**
  * Loading getter
  * @param state Current state
  */
-export const getLoading = (state: IState) => state.loading
+export const getLoading = (state: ICommentState) => state.loading
 /**
  * Loaded getter
  * @param state Current state
  */
-export const getLoaded = (state: IState) => state.loaded
+export const getLoaded = (state: ICommentState) => state.loaded
 /**
  * Error getter
  * @param state Current state
  */
-export const getError = (state: IState) => state.error
+export const getError = (state: ICommentState) => state.error

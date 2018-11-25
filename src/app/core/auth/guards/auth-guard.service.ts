@@ -14,7 +14,7 @@ export class AuthGuardService {
    * @param store Auth store
    * @param router Router
    */
-  constructor(private store: Store<fromAuth.IState>,
+  constructor(private store: Store<fromAuth.IAuthReducerState>,
               private router: Router) {
   }
 

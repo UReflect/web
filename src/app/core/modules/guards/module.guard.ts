@@ -15,7 +15,7 @@ export class ModuleGuard {
    * Constructor
    * @param store Module store
    */
-  constructor(private store: Store<fromStore.IModulesState>) {
+  constructor(private store: Store<fromStore.IModuleReducerState>) {
   }
 
   /**

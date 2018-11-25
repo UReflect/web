@@ -21,7 +21,7 @@ export class ModuleEditComponent implements OnInit {
   /**
    * Module to edit
    */
-  private module: IModule
+  module: IModule
 
   /**
    * Constructor
@@ -30,7 +30,7 @@ export class ModuleEditComponent implements OnInit {
    * @param actionsSubject$ Action triggered
    */
   constructor(private fb: FormBuilder,
-              private store: Store<fromStore.IModulesState>,
+              private store: Store<fromStore.IModuleReducerState>,
               private actionsSubject$: ActionsSubject) {
   }
 
@@ -39,7 +39,8 @@ export class ModuleEditComponent implements OnInit {
    * Fill module variable
    */
   ngOnInit() {
-    this.store.pipe(select(fromStore.getSelectedModule)).subscribe((module: IModule) => {
+    this.store.pipe(select(fromStore.getSelectedModule))
+      .subscribe((module: IModule) => {
       if (module) {
         this.formFields = this.fb.group({
           title: [module.title, [
@@ -88,5 +89,12 @@ export class ModuleEditComponent implements OnInit {
         this.store.dispatch(new fromStore.Upload(form))
       }
     })
+  }
+
+  /**
+   * Deletes module
+   */
+  deleteHandler() {
+    this.store.dispatch(new fromStore.Delete(this.module))
   }
 }

@@ -9,7 +9,7 @@ import { IMirror }       from '@core/mirrors/models'
  */
 export const getMirrorState = createSelector(
   fromFeature.getMirrorsState,
-  (state: fromFeature.IMirrorState) => state.mirrors
+  (state: fromFeature.IMirrorReducerState) => state.mirrors
 )
 
 /**

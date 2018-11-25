@@ -7,7 +7,7 @@ import * as fromAuthProcess from '../reducers/auth-process.reducer'
  */
 export const getAuthProcessState = createSelector(
   fromFeature.getAuthState,
-  (state: fromFeature.IState) => state.authProcess
+  (state: fromFeature.IAuthReducerState) => state.authProcess
 )
 
 /**

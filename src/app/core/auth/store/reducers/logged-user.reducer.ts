@@ -4,7 +4,7 @@ import { IUser }                                         from '@core/users/model
 /**
  * Logged user state
  */
-export interface IState {
+export interface ILoggedUserState {
   /**
    * Logged user
    */
@@ -14,7 +14,7 @@ export interface IState {
 /**
  * Logged user initial state
  */
-export const initialState: IState = {
+export const initialState: ILoggedUserState = {
   /**
    * Logged user initial value
    */
@@ -26,7 +26,7 @@ export const initialState: IState = {
  * @param state Current state
  * @param action Action received
  */
-export function reducer(state: IState = initialState, action: LoggedUserActionsUnion): IState {
+export function reducer(state: ILoggedUserState = initialState, action: LoggedUserActionsUnion): ILoggedUserState {
   switch (action.type) {
     case LoggedUserActionTypes.StoreLoggedUser:
       return {
@@ -44,4 +44,4 @@ export function reducer(state: IState = initialState, action: LoggedUserActionsU
  * Logged user getter
  * @param state Current state
  */
-export const getUser = (state: IState) => state.user
+export const getUser = (state: ILoggedUserState) => state.user

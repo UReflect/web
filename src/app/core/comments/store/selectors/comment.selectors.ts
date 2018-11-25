@@ -7,7 +7,7 @@ import * as fromComments  from '../reducers/comment.reducer'
  */
 export const getCommentState = createSelector(
   fromFeature.getCommentsState,
-  (state: fromFeature.ICommentState) => state.comments
+  (state: fromFeature.ICommentReducerState) => state.comments
 )
 
 /**

@@ -6,6 +6,7 @@ import { IAuthentication, IPasswordLost, IRegistration } from '@core/auth/models
 import * as fromAuth                                     from '@core/auth/store/selectors'
 import * as AuthState                                    from '@core/auth/store/reducers'
 import { select, Store }                                 from '@ngrx/store'
+import { catchError, map }                               from 'rxjs/operators'
 
 /**
  * Auth HTTP service
@@ -27,7 +28,7 @@ export class AuthService {
    * @param store Auth store
    */
   constructor(private http: HttpClient,
-              private store: Store<AuthState.IState>) {
+              private store: Store<AuthState.IAuthReducerState>) {
     this.url = environment.apiUrl
     this.token$ = this.store.pipe(select(fromAuth.getToken))
   }

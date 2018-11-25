@@ -1,0 +1,19 @@
+<div class="content">
+  <div class="my-50 text-center">
+    <h2 class="font-w700 text-body-color-light mb-10">
+      <i class="fa fa-pen text-muted mr-5"></i> Edit Profile
+    </h2>
+  </div>
+  <div class="block block-rounded">
+    <div class="block-content">
+      <app-profile-form
+        [formFields]="formFields"
+        [btnText]="'Save profile'"
+        [btnIcon]="'fa-plus'"
+        [userId]="userId"
+        [profileId]="profile.ID"
+        (submit)="updateHandler($event)"
+        (delete)="deleteHandler()"></app-profile-form>
+    </div>
+  </div>
+</div>
