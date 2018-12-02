@@ -8,6 +8,15 @@ import { CommentsGuard }                               from '@core/comments/guar
 
 const routes: Routes = [
   {
+    path: 'modules/mine',
+    component: fromContainer.ModuleListComponent,
+    canActivate: [
+      AuthGuardService,
+      ModulesGuard,
+      UsersGuard
+    ]
+  },
+  {
     path: 'modules',
     component: fromContainer.ModuleListComponent,
     canActivate: [
