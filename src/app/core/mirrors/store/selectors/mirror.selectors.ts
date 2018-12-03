@@ -1,8 +1,9 @@
 import * as fromFeature   from '../reducers'
-import * as fromMirrors  from '../reducers/mirror.reducer'
+import * as fromMirrors   from '../reducers/mirror.reducer'
 import * as fromRouter    from '@store'
 import { createSelector } from '@ngrx/store'
-import { IMirror }       from '@core/mirrors/models'
+import { IMirror }        from '@core/mirrors/models'
+import { getAuthState }   from '@core/auth/store'
 
 /**
  * Selector to get mirror's state
@@ -37,6 +38,39 @@ export const getSelectedMirror = createSelector(
 export const getAllMirrors = createSelector(
   getMirrorEntities, entities => {
     return Object.keys(entities).map(id => entities[parseInt(id, 10)])
+  }
+)
+
+/**
+ * Gets all mirrors by user ID
+ */
+export const getAllMirrorsByUserId = createSelector(
+  getMirrorEntities,
+  (entities, userID) => {
+    const ret = []
+    Object.keys(entities).map(id => {
+      if (entities[parseInt(id, 10)].userID === parseInt(userID, 10)) {
+        ret.push(entities[parseInt(id, 10)])
+      }
+    })
+    return ret
+  }
+)
+
+/**
+ * Gets all mirrors for currently logged user
+ */
+export const getAllLoggedUserMirrors = createSelector(
+  getMirrorEntities,
+  getAuthState,
+  (entities, auth) => {
+    const ret = []
+    Object.keys(entities).map(id => {
+      if (entities[parseInt(id, 10)].userID === auth.loggedUser.user.ID) {
+        ret.push(entities[parseInt(id, 10)])
+      }
+    })
+    return ret
   }
 )
 

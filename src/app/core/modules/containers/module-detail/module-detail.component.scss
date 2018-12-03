@@ -2,7 +2,20 @@
   display: flex
 }
 
+.dropdown-menu.show {
+  overflow-y: scroll;
+  max-height: 360px;
+
+  .dropdown-item {
+    cursor: pointer;
+  }
+}
+
 .module-content {
   display: flex;
   flex-direction: column;
+}
+
+.block-content.block-content-full {
+  height: 460px;
 }

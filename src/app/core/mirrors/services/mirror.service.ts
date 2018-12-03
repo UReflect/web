@@ -1,10 +1,10 @@
-import { Injectable }                                              from '@angular/core'
-import { Observable }                                              from 'rxjs'
-import { HttpClient }                                              from '@angular/common/http'
-import { select, Store }                                           from '@ngrx/store'
-import * as fromAuth                                               from '@core/auth/store'
-import { IMirror, IMirrorJoin, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
-import { environment }                                             from '@env/environment'
+import { Injectable }                                                                    from '@angular/core'
+import { Observable }                                                                    from 'rxjs'
+import { HttpClient }                                                                    from '@angular/common/http'
+import { select, Store }                                                                 from '@ngrx/store'
+import * as fromAuth                                                                     from '@core/auth/store'
+import { IMirror, IMIrrorInstallModule, IMirrorJoin, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
+import { environment }                                                                   from '@env/environment'
 
 /**
  * Mirror HTTP service
@@ -122,6 +122,38 @@ export class MirrorService {
 
     return new Promise<any>((resolve, reject) => {
       this.http.delete(`${this.url}/mirror/${mirror.ID}`, {
+        headers: { ...header }
+      }).subscribe(response => {
+        resolve(response['data'])
+      }, e => reject(e.error))
+    })
+  }
+
+  /**
+   * Installs module on mirror
+   * @param data Module to install on mirror
+   */
+  async installModule(data: IMIrrorInstallModule): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(`${this.url}/module/${data.module_id}/install/${data.profile_id}`, null, {
+        headers: { ...header }
+      }).subscribe(() => {
+        resolve()
+      }, e => reject(e.error))
+    })
+  }
+
+  /**
+   * Loads profiles for a mirror from API
+   * @param mirrorID Mirror ID
+   */
+  async loadProfiles(mirrorID: number): Promise<any> {
+    const header: any = await this.authHeader()
+
+    return new Promise((resolve, reject) => {
+      this.http.get(`${this.url}/mirror/${mirrorID}/profiles`, {
         headers: { ...header }
       }).subscribe(response => {
         resolve(response['data'])
