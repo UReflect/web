@@ -4,6 +4,33 @@
 #
 version: 2
 jobs:
+  lint:
+    docker:
+    - image: circleci/node:8.10
+
+    working-directory: ~/ur-web
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "yarn.lock" }}
+        - v1-dependencies-
+
+    - run:
+        name: Install local dependencies
+        command: yarn
+
+    - save_cache:
+        key: v1-dependencies-{{ checksum "yarn.lock" }}
+        paths:
+        - node_modules
+
+    - run:
+        name: Linting
+        command: yarn lint
+
   build:
     docker:
     - image: circleci/node:8.10
@@ -19,45 +46,35 @@ jobs:
         - v1-dependencies-
 
     - run:
-        name: Install local dependencies
-        command: yarn
-
-    - save_cache:
-        paths:
-        - node_modules
-        key: v1-dependencies-{{ checksum "yarn.lock" }}
-
-    - run:
-        name: Linting
-        command: yarn lint
-
-#    - run:
-#        name: Testing
-#        command: yarn test --browsers ChromeHeadless --progress=false --watch=false
-
-    - run:
         name: Building
         command: yarn build --prod
 
+    - save_cache:
+        keys: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+        paths:
+        - dist
+
+  doc:
+    docker:
+    - image: circleci/node:8.10
+
+    working_directory: ~/ur-web
+
+    steps:
     - run:
         name: Generating Documentation
         command: yarn compodoc
-
-    - save_cache:
-        key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-        paths:
-        - dist
 
     - save_cache:
         key: v1-doc-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
         paths:
         - doc
 
-  deploy:
-    working_directory: ~/ur-web
-
+  deploy_app:
     docker:
     - image: circleci/node:8.10
+
+    working_directory: ~/ur-web
 
     steps:
     - restore_cache:
@@ -70,13 +87,13 @@ jobs:
 
     - run:
         name: Deploy Over SSH
-        command: scp -rv ./dist/web/* $SSH_USER@$SSH_HOST:/var/www/ur-web/
+        command: rsync -rav ./dist/web/* $SSH_USER@$SSH_HOST:/var/www/ur-web/
 
-  doc:
-    working_directory: ~/ur-web
-
+  deploy_doc:
     docker:
     - image: circleci/node:8.10
+
+    working_directory: ~/ur-web
 
     steps:
     - restore_cache:
@@ -89,26 +106,50 @@ jobs:
 
     - run:
         name: Deploy Documentation Over SSH
-        command: scp -rv ./doc/* $SSH_USER@$SSH_HOST:/var/www/doc/
+        command: rsync -rav ./doc/* $SSH_USER@$SSH_HOST:/var/www/ur-web/
 
 workflows:
   version: 2
 
   workflow:
     jobs:
+    - lint
+
     - build:
-        filters:
-          branches:
-            only: master
-    - deploy:
         requires:
-        - build
-        filters:
-          branches:
-            only: master
+        - lint
+
     - doc:
+        filters:
+          branches:
+            only: master
+
+    - deploy_app:
+        type: approval
         requires:
         - build
+        filters:
+          branches:
+            only: master
+
+    - deploy_doc:
+        type: approval
+        requires:
+        - doc
+        filters:
+          branches:
+            only: master
+
+    - deploy_app_task:
+        requires:
+        - deploy_app
+        filters:
+          branches:
+            only: master
+
+    - deploy_doc_task:
+        requires:
+        - deploy_doc
         filters:
           branches:
             only: master
