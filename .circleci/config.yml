@@ -16,7 +16,7 @@ jobs:
     - save_cache:
         key: v1-source-code
         paths:
-        - /
+        - .
 
     - restore_cache:
         keys:
