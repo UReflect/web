@@ -48,6 +48,7 @@ export function reducer(state: IMirrorState = initialState,
     case fromActions.MirrorActionTypes.LinkProfile:
     case fromActions.MirrorActionTypes.Setup:
     case fromActions.MirrorActionTypes.Delete:
+    case fromActions.MirrorActionTypes.InstallModule:
       return {
         ...state,
         loading: true
@@ -58,6 +59,7 @@ export function reducer(state: IMirrorState = initialState,
     case fromActions.MirrorActionTypes.LinkProfileFailure:
     case fromActions.MirrorActionTypes.SetupFailure:
     case fromActions.MirrorActionTypes.DeleteFailure:
+    case fromActions.MirrorActionTypes.InstallModuleFailure:
       return {
         ...state,
         loading: false,
@@ -100,6 +102,7 @@ export function reducer(state: IMirrorState = initialState,
       }
     }
     case fromActions.MirrorActionTypes.LinkProfileSuccess:
+    case fromActions.MirrorActionTypes.InstallModuleSuccess:
       return {
         ...state,
         error: null,

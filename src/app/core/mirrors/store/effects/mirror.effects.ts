@@ -1,11 +1,11 @@
-import { Injectable }                                 from '@angular/core'
-import { Actions, Effect, ofType }                    from '@ngrx/effects'
-import { map, switchMap }                             from 'rxjs/operators'
-import { MirrorService }                              from '@core/mirrors/services/mirror.service'
-import * as mirrorActions                             from '../actions'
-import { IMirror, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
-import * as routerActions                             from '@store/actions'
-import { ActivatedRoute }                             from '@angular/router'
+import { Injectable }                                                       from '@angular/core'
+import { Actions, Effect, ofType }                                          from '@ngrx/effects'
+import { map, switchMap }                                                   from 'rxjs/operators'
+import { MirrorService }                                                    from '@core/mirrors/services/mirror.service'
+import * as mirrorActions                                                   from '../actions'
+import { IMirror, IMIrrorInstallModule, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models'
+import * as routerActions                                                   from '@store/actions'
+import { ActivatedRoute }                                                   from '@angular/router'
 
 /**
  * Mirror effects
@@ -100,7 +100,7 @@ export class MirrorEffects {
     .pipe(map((action: mirrorActions.SetupSuccess) => action.payload),
       map(mirror => {
         return new routerActions.Go({
-          path: [`/mirror/${mirror.ID}/first-profile`]
+          path: [`/mirror/${mirror.ID}/profile-first`]
         })
       }))
 
@@ -126,7 +126,7 @@ export class MirrorEffects {
     .pipe(map((action: mirrorActions.LinkProfileSuccess) => action.payload),
       map(profile_id => {
         return new routerActions.Go({
-          path: [`/profile/${profile_id}/set-pincode`]
+          path: [`/profile/${profile_id}/pincode-set`]
         })
       }))
 
@@ -154,6 +154,20 @@ export class MirrorEffects {
         return new routerActions.Go({
           path: ['/mirrors']
         })
+      })
+    )
+
+  /**
+   * Install module on mirror effect
+   */
+  @Effect()
+  installModule$ = this.actions$.pipe(ofType(
+    mirrorActions.MirrorActionTypes.InstallModule))
+    .pipe(map((action: mirrorActions.InstallModule) => action.payload),
+      switchMap((data: IMIrrorInstallModule) => {
+        return this.mirrorService.installModule(data)
+          .then(() => new mirrorActions.InstallModuleSuccess())
+          .catch(e => new mirrorActions.InstallModuleFailure(e))
       })
     )
 }

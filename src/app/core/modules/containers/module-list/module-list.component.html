@@ -1,5 +1,54 @@
 <div class="container">
-  <div class="col-md-6 col-xl-3" *ngFor="let module of modules$ | async">
-    <app-module-list-card [module]="module"></app-module-list-card>
+  <div class="filtering" *ngIf="all">
+    <form class="push"
+          [formGroup]="searchForm">
+      <div class="input-group input-group-lg">
+        <input type="text" class="form-control"
+               (keyup)="searchHandler()"
+               placeholder="Search module..."
+               formControlName="search">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-secondary">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="btn-group" role="group"
+         [ngClass]="{'show': toggleFilters}">
+      <button type="button" class="btn btn-secondary dropdown-toggle"
+              id="filters-btn"
+              (click)="toggleFilters = !toggleFilters">
+        {{ getSortBtnText() }}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="filters-btn"
+           [ngClass]="{'show': toggleFilters}"
+           x-placement="top-start">
+        <a class="dropdown-item" (click)="sortHandler('reset')"
+           *ngIf="mode && mode !== 'reset'">
+          <i class="fa fa-eraser mr-5"></i>Reset
+        </a>
+        <div class="dropdown-divider"
+             *ngIf="mode && mode !== 'reset'"></div>
+        <a class="dropdown-item" (click)="sortHandler('name-asc')">
+          <i class="fa fa-sort-alpha-asc mr-5"></i>Name
+        </a>
+        <a class="dropdown-item" (click)="sortHandler('name-desc')">
+          <i class="fa fa-sort-alpha-desc mr-5"></i>Name
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="sortHandler('price-asc')">
+          <i class="fa fa-sort-numeric-asc mr-5"></i>Price
+        </a>
+        <a class="dropdown-item" (click)="sortHandler('price-desc')">
+          <i class="fa fa-sort-numeric-desc mr-5"></i>Price
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="module-list">
+    <div class="col-md-6 col-xl-3" *ngFor="let module of modules$ | async">
+      <app-module-list-card [module]="module"></app-module-list-card>
+    </div>
   </div>
 </div>
