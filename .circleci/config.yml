@@ -13,6 +13,26 @@ jobs:
     steps:
     - checkout
 
+    - save_cache:
+        key: v1-source-code
+        paths:
+        - ./
+
+    - run:
+        name: Linting
+        command: yarn lint
+
+  build:
+    docker:
+    - image: circleci/node:8.10
+
+    working_directory: ~/ur-web
+
+    steps:
+    - restore_cache:
+        keys:
+        - v1-source-code
+
     - restore_cache:
         keys:
         - v1-dependencies-{{ checksum "yarn.lock" }}
@@ -26,24 +46,6 @@ jobs:
         key: v1-dependencies-{{ checksum "yarn.lock" }}
         paths:
         - node_modules
-
-    - run:
-        name: Linting
-        command: yarn lint
-
-  build:
-    docker:
-    - image: circleci/node:8.10
-
-    working_directory: ~/ur-web
-
-    steps:
-    - checkout
-
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "yarn.lock" }}
-        - v1-dependencies-
 
     - run:
         name: Building
