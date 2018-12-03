@@ -5,6 +5,7 @@ import * as fromContainer                              from './containers'
 import { ModuleGuard, ModuleOwnerGuard, ModulesGuard } from './guards'
 import { UsersGuard }                                  from '@core/users/guards'
 import { CommentsGuard }                               from '@core/comments/guards'
+import { MirrorsGuard }                                from '@core/mirrors/guards'
 
 const routes: Routes = [
   {
@@ -47,7 +48,8 @@ const routes: Routes = [
       AuthGuardService,
       ModuleGuard,
       UsersGuard,
-      CommentsGuard
+      CommentsGuard,
+      MirrorsGuard
     ]
   }
 ]

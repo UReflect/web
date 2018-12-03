@@ -1,6 +1,5 @@
-import { Action }                                                  from '@ngrx/store'
-import { IMirror, IMirrorJoin, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models/mirror.model'
-import { IProfile }                                                from '@core/profiles/models'
+import { Action }                                                                        from '@ngrx/store'
+import { IMirror, IMIrrorInstallModule, IMirrorJoin, IMIrrorLinkProfile, IMirrorUpdate } from '@core/mirrors/models/mirror.model'
 
 export enum MirrorActionTypes {
   LoadMine = '[Mirror] Load Mine',
@@ -22,7 +21,16 @@ export enum MirrorActionTypes {
   ClearMirrors = '[Mirror] Clear Mirrors',
   Delete = '[Mirror] Delete',
   DeleteSuccess = '[Mirror] Delete Success',
-  DeleteFailure = '[Mirror] Delete Failure'
+  DeleteFailure = '[Mirror] Delete Failure',
+  InstallModule = '[Mirror] Install Module',
+  InstallModuleSuccess = '[Mirror] Install Module Success',
+  InstallModuleFailure = '[Mirror] Install Module Failure',
+  // LoadProfiles = '[Mirror] Load Profiles',
+  // LoadProfilesSuccess = '[Mirror] Load Profiles Success',
+  // LoadProfilesFailure = '[Mirror] Load Profiles Failure',
+  // UnlinkProfile = '[Mirror] Unlink Profile',
+  // UnlinkProfileSuccess = '[Mirror] Unlink Profile Success',
+  // UnlinkProfileFailure = '[Mirror] Unlink Profile Failure'
 }
 
 /**
@@ -364,6 +372,86 @@ export class DeleteFailure implements Action {
   }
 }
 
+/**
+ * Install module on mirror action
+ */
+export class InstallModule implements Action {
+  /**
+   * Action type
+   * '[Mirror] Install Module'
+   */
+  readonly type = MirrorActionTypes.InstallModule
+
+  /**
+   * Constructor
+   * @param payload Mirror and module IDs
+   */
+  constructor(public payload: IMIrrorInstallModule) {
+  }
+}
+
+/**
+ * Install module on mirror success action
+ */
+export class InstallModuleSuccess implements Action {
+  /**
+   * Action type
+   * '[Mirror] Install Module Success'
+   */
+  readonly type = MirrorActionTypes.InstallModuleSuccess
+}
+
+/**
+ * Install module on mirror failure action
+ */
+export class InstallModuleFailure implements Action {
+  /**
+   * Action type
+   * '[Mirror] Install Module Failure'
+   */
+  readonly type = MirrorActionTypes.InstallModuleFailure
+
+  /**
+   * Constructor
+   * @param payload Error received
+   */
+  constructor(public payload: any) {
+  }
+}
+
+// export class LoadProfiles implements Action {
+//   /**
+//    * Action type
+//    * '[Mirror] Load Profiles'
+//    */
+//   readonly type = MirrorActionTypes.LoadProfiles
+//
+//   constructor(public payload: number) {
+//   }
+// }
+//
+// export class LoadProfilesSuccess implements Action {
+//   /**
+//    * Action type
+//    * '[Mirror] Load Profiles Success'
+//    */
+//   readonly type = MirrorActionTypes.LoadProfilesSuccess
+//
+//   constructor(public payload: IProfile[]) {
+//   }
+// }
+//
+// export class LoadProfileFailure implements Action {
+//   /**
+//    * Action type
+//    * '[Mirror] Load Profiles Failure'
+//    */
+//   readonly type = MirrorActionTypes.LoadProfilesFailure
+//
+//   constructor(public payload: any) {
+//   }
+// }
+
 export type MirrorActionsUnion =
   | LoadMine
   | LoadMineSuccess
@@ -385,3 +473,6 @@ export type MirrorActionsUnion =
   | Delete
   | DeleteSuccess
   | DeleteFailure
+  | InstallModule
+  | InstallModuleSuccess
+  | InstallModuleFailure

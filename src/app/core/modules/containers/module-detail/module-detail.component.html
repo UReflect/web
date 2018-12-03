@@ -45,6 +45,24 @@
           <i class="fa fa-edit mr-5"></i>Edit
         </button>
       </div>
+      <div btn-type="install">
+        <div class="btn-group" role="group"
+             [ngClass]="{'show': toggleDropdown}">
+          <button type="button" class="btn btn-primary dropdown-toggle"
+                  id="filters-btn"
+                  (click)="toggleDropdown = !toggleDropdown">
+            Install
+          </button>
+          <div class="dropdown-menu" aria-labelledby="filters-btn"
+               [ngClass]="{'show': toggleDropdown}"
+               x-placement="top-start">
+            <a class="dropdown-item" (click)="installHandler(mirror.ID)"
+               *ngFor="let mirror of mirrors$ | async">
+              {{ mirror.name.length > 0 ? mirror.name : '[Unnamed Mirror]' }}
+            </a>
+          </div>
+        </div>
+      </div>
     </app-module-detail-tags>
     <div class="block-content block-content-full">
       <div class="row">

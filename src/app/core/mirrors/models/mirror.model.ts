@@ -33,7 +33,7 @@ export interface IMirror {
   /**
    * User ID of the owner of the mirror
    */
-  user_id: number,
+  userID: number,
   /**
    * Mirror timezone
    */
@@ -80,4 +80,18 @@ export interface IMIrrorLinkProfile {
    * Profile ID
    */
   profile_id: number
+}
+
+/**
+ * Interface which defines data needed for module installation
+ */
+export interface IMIrrorInstallModule {
+  /**
+   * Profile ID
+   */
+  profile_id: number,
+  /**
+   * Module ID
+   */
+  module_id: number
 }
