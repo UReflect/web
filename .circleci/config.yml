@@ -16,7 +16,7 @@ jobs:
     - save_cache:
         key: v1-source-code
         paths:
-        - ./
+        - *
 
     - restore_cache:
         keys:
@@ -57,7 +57,7 @@ jobs:
         command: yarn build --prod
 
     - save_cache:
-        keys: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+        key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
         paths:
         - dist
 
