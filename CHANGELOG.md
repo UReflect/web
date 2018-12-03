@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/UReflect/web/compare/v0.3.0...v0.4.0) (2018-12-03)
+
+
+### Features
+
+* **modules:** install module on mirror ([7875ea2](https://github.com/UReflect/web/commit/7875ea2))
+* **store:** add filtering and search ([00b3b04](https://github.com/UReflect/web/commit/00b3b04))
+
+
+
+<a name="0.3.0"></a>
+# 0.3.0 (2018-11-25)
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/UReflect/web/compare/v0.2.0...v0.3.0) (2018-11-25)
 
