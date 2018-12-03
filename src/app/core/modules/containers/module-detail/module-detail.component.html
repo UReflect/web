@@ -8,7 +8,7 @@
       <div tag-type="price">
         <p class="text-muted">
           <i class="fa fa-fw fa-money text-muted mr-5"></i>
-          ${{ (module$ | async).price }}
+          {{ (module$ | async).price === 0 ? 'Free' : '$' + (module$ | async).price }}
         </p>
       </div>
       <div tag-type="reviews" class="rating">
