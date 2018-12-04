@@ -61,6 +61,13 @@ jobs:
     working_directory: ~/ur-web
 
     steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "yarn.lock" }}
+        - v1-dependencies-
+
     - run:
         name: Generating Documentation
         command: yarn compodoc
