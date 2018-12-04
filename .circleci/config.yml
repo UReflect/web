@@ -84,7 +84,7 @@ jobs:
     working_directory: ~/ur-web
 
     steps:
-    - run: apt-get update && apt-get install rsync
+    - run: sudo apt-get update && sudo apt-get install rsync
 
     - restore_cache:
         keys:
@@ -105,7 +105,7 @@ jobs:
     working_directory: ~/ur-web
 
     steps:
-    - run: apt-get update && apt-get install rsync
+    - run: sudo apt-get update && sudo apt-get install rsync
 
     - restore_cache:
         keys:
