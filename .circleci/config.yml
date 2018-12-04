@@ -77,7 +77,7 @@ jobs:
         paths:
         - doc
 
-  deploy_app:
+  deploy_app_task:
     docker:
     - image: circleci/node:8.10
 
@@ -96,7 +96,7 @@ jobs:
         name: Deploy Over SSH
         command: rsync -rav ./dist/web/* $SSH_USER@$SSH_HOST:/var/www/ur-web/
 
-  deploy_doc:
+  deploy_doc_task:
     docker:
     - image: circleci/node:8.10
 
