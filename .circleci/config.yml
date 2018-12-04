@@ -13,11 +13,6 @@ jobs:
     steps:
     - checkout
 
-    - save_cache:
-        key: v1-source-code
-        paths:
-        - .
-
     - restore_cache:
         keys:
         - v1-dependencies-{{ checksum "yarn.lock" }}
@@ -43,11 +38,7 @@ jobs:
     working_directory: ~/ur-web
 
     steps:
-    - restore_cache:
-        keys:
-        - v1-source-code
-
-    - run: pwd && ls
+    - checkout
 
     - restore_cache:
         keys:
