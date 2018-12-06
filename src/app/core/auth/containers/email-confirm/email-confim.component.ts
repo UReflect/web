@@ -6,7 +6,7 @@ import * as fromStore                     from '@core/auth/store'
 
 @Component({
   selector: 'app-email-confirm',
-  templateUrl: 'email-confirm.component.html'
+  template: '{{text}}'
 })
 
 export class EmailConfirmComponent implements OnInit {

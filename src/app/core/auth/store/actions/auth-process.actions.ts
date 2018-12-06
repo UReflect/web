@@ -1,5 +1,5 @@
-import { Action }                                                      from '@ngrx/store'
-import { IAuthentication, IPasswordLost, IRegistration } from '../../models/auth.model'
+import { Action }                                                        from '@ngrx/store'
+import { IAuthentication, IPasswordLost, IRegistration, IResetPassword } from '../../models/auth.model'
 
 export enum AuthActionTypes {
   SignIn = '[Auth] Sign In',
@@ -14,7 +14,10 @@ export enum AuthActionTypes {
   ClearError = '[Auth] Clear Error',
   ConfirmMail = '[Auth] Confirm Mail',
   ConfirmMailSuccess = '[Auth] Confirm Mail Success',
-  ConfirmMailFailure = '[Auth] Confirm Mail Failure'
+  ConfirmMailFailure = '[Auth] Confirm Mail Failure',
+  ResetPassword = '[Auth] Reset Password',
+  ResetPasswordSuccess = '[Auth] Reset Password Success',
+  ResetPasswordFailure = '[Auth] Reset Password Failure'
 }
 
 /**
@@ -183,6 +186,27 @@ export class ConfirmMailFailure implements Action {
   }
 }
 
+export class ResetPassword implements Action {
+  readonly type = AuthActionTypes.ResetPassword
+
+  constructor(public payload: IResetPassword) {
+  }
+}
+
+export class ResetPasswordSuccess implements Action {
+  readonly type = AuthActionTypes.ResetPasswordSuccess
+
+  constructor(public payload: string) {
+  }
+}
+
+export class ResetPasswordFailure implements Action {
+  readonly type = AuthActionTypes.ResetPasswordFailure
+
+  constructor(public payload: any) {
+  }
+}
+
 export type AuthActionsUnion =
   | SignIn
   | SignUp
@@ -197,3 +221,6 @@ export type AuthActionsUnion =
   | ConfirmMail
   | ConfirmMailSuccess
   | ConfirmMailFailure
+  | ResetPassword
+  | ResetPasswordSuccess
+  | ResetPasswordFailure

@@ -96,3 +96,8 @@ export interface ISubmitBtn {
     loading: string
   }
 }
+
+export interface IResetPassword {
+  token: string,
+  password: string
+}

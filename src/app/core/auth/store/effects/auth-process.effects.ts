@@ -137,4 +137,14 @@ export class AuthProcessEffects {
           .catch(e => new fromAuth.ConfirmMailFailure(e))
       })
     )
+
+  @Effect()
+  resetPassword$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.ResetPassword))
+    .pipe(map((action: fromAuth.ResetPassword) => action.payload),
+      switchMap(credentials => {
+        return this.authService.resetPassword(credentials)
+          .then(response => new fromAuth.ResetPasswordSuccess(response))
+          .catch(e => new fromAuth.ResetPasswordFailure(e))
+      })
+    )
 }

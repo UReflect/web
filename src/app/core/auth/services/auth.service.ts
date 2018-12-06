@@ -1,12 +1,12 @@
-import { Injectable }                                    from '@angular/core'
-import { HttpClient }                                    from '@angular/common/http'
-import { environment }                                   from '@env/environment'
-import { Observable }                                    from 'rxjs'
-import { IAuthentication, IPasswordLost, IRegistration } from '@core/auth/models/auth.model'
-import * as fromAuth                                     from '@core/auth/store/selectors'
-import * as AuthState                                    from '@core/auth/store/reducers'
-import { select, Store }                                 from '@ngrx/store'
-import { IUser }                                         from '@core/users/model/user.model'
+import { Injectable }                                                    from '@angular/core'
+import { HttpClient }                                                    from '@angular/common/http'
+import { environment }                                                   from '@env/environment'
+import { Observable }                                                    from 'rxjs'
+import { IAuthentication, IPasswordLost, IRegistration, IResetPassword } from '@core/auth/models/auth.model'
+import * as fromAuth                                                     from '@core/auth/store/selectors'
+import * as AuthState                                                    from '@core/auth/store/reducers'
+import { select, Store }                                                 from '@ngrx/store'
+import { IUser }                                                         from '@core/users/model/user.model'
 
 /**
  * Auth HTTP service
@@ -114,8 +114,19 @@ export class AuthService {
     return new Promise<any>((resolve, reject) => {
       this.http.post(`${this.url}/confirm-mail?token=${token}`, null)
         .subscribe(response => {
-        resolve(response)
-      }, e => reject(e.error))
+          resolve(response)
+        }, e => reject(e.error))
+    })
+  }
+
+  async resetPassword(data: IResetPassword): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(`${this.url}/confirm-mail?token=${data.token}`, {
+        password: data.password
+      })
+        .subscribe(response => {
+          resolve(response)
+        }, e => reject(e.error))
     })
   }
 }

@@ -1,6 +1,12 @@
-import { NgModule }                                                                        from '@angular/core'
-import { RouterModule, Routes }                                                            from '@angular/router'
-import { EmailConfirmComponent, LoginComponent, PasswordLostComponent, RegisterComponent } from '@core/auth/containers'
+import { NgModule }             from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
+import {
+  EmailConfirmComponent,
+  LoginComponent,
+  PasswordLostComponent,
+  RegisterComponent,
+  ResetPasswordComponent
+}                               from '@core/auth/containers'
 
 const routes: Routes = [
   {
@@ -18,6 +24,10 @@ const routes: Routes = [
   {
     path: 'confirm-mail',
     component: EmailConfirmComponent
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent
   }
 ]
 

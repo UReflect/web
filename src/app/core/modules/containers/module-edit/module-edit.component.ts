@@ -41,36 +41,35 @@ export class ModuleEditComponent implements OnInit {
   ngOnInit() {
     this.store.pipe(select(fromStore.getSelectedModule))
       .subscribe((module: IModule) => {
-      if (module) {
-        this.formFields = this.fb.group({
-          title: [module.title, [
-            Validators.required
-          ]],
-          description: [module.description, [
-            Validators.required
-          ]],
-          price: [module.price, [
-            Validators.required,
-            priceFormat()
-          ]],
-          min_width: [module.min_width, [
-            Validators.required,
-            Validators.min(1),
-            Validators.max(10)
-          ]],
-          min_height: [module.min_height, [
-            Validators.required,
-            Validators.min(1),
-            Validators.max(10)
-          ]],
-          fileName: ['', [
-            Validators.required,
-            moduleZipName()
-          ]]
-        })
-        this.module = module
-      }
-    })
+        if (module) {
+          this.formFields = this.fb.group({
+            title: [module.title, [
+              Validators.required
+            ]],
+            description: [module.description, [
+              Validators.required
+            ]],
+            price: [module.price, [
+              Validators.required,
+              priceFormat()
+            ]],
+            min_width: [module.min_width, [
+              Validators.required,
+              Validators.min(1),
+              Validators.max(10)
+            ]],
+            min_height: [module.min_height, [
+              Validators.required,
+              Validators.min(1),
+              Validators.max(10)
+            ]],
+            fileName: ['', [
+              moduleZipName()
+            ]]
+          })
+          this.module = module
+        }
+      })
   }
 
   /**
