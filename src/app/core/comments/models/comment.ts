@@ -22,6 +22,9 @@ export interface IComment {
    * Comment last update
    */
   UpdatedAt: any,
+  /**
+   * Comment owner name
+   */
   owner_name: string
 }
 

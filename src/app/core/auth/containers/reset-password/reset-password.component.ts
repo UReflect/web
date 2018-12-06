@@ -7,26 +7,56 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { passwordConfirm }                                     from '@shared/validators'
 import { Observable }                                          from 'rxjs'
 
+/**
+ * Password reset component
+ */
 @Component({
   selector: 'app-reset-password',
   templateUrl: 'reset-password.component.html'
 })
 
 export class ResetPasswordComponent implements OnInit {
+  /**
+   * Token from URL (from email)
+   */
   private token: string
+  /**
+   * Main form field
+   */
   formField: FormGroup
+  /**
+   * Password confirm form field
+   */
   confirmField: FormGroup
+  /**
+   * Text to display
+   */
   text: string
+  /**
+   * Boolean to display form or response text
+   */
   displayForm = false
+  /**
+   * Pending state for button
+   */
   pending$: Observable<any>
 
-
+  /**
+   * Constructor
+   * @param route Current route
+   * @param store Auth store
+   * @param actionsSubject$ Action subject
+   * @param fb FormBuilder
+   */
   constructor(private route: ActivatedRoute,
               private store: Store<IAuthReducerState>,
               private actionsSubject$: ActionsSubject,
               private fb: FormBuilder) {
   }
 
+  /**
+   * Init forms, token, and action subject
+   */
   ngOnInit() {
     this.formField = this.fb.group({
       password: ['', Validators.required]
@@ -47,6 +77,9 @@ export class ResetPasswordComponent implements OnInit {
     this.pending$ = this.store.pipe(select(fromStore.getPending))
   }
 
+  /**
+   * Submit handler
+   */
   submitHandler() {
     this.store.dispatch(new fromStore.ResetPassword({
       token: this.token,
@@ -54,10 +87,16 @@ export class ResetPasswordComponent implements OnInit {
     }))
   }
 
+  /**
+   * Getter for password field
+   */
   getPassword(): AbstractControl {
     return this.formField.get('password')
   }
 
+  /**
+   * Getter for password confirm field
+   */
   getPasswordConfirm(): AbstractControl {
     return this.confirmField.get('passwordConfirm')
   }

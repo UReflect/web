@@ -165,44 +165,110 @@ export class ClearError implements Action {
   readonly type = AuthActionTypes.ClearError
 }
 
+/**
+ * Confirm mail action
+ */
 export class ConfirmMail implements Action {
+  /**
+   * Action type
+   * '[Auth] Confirm Mail'
+   */
   readonly type = AuthActionTypes.ConfirmMail
 
+  /**
+   * Constructor
+   * @param payload Token from email
+   */
   constructor(public payload: string) {
   }
 }
 
+/**
+ * Confirm mail success action
+ */
 export class ConfirmMailSuccess implements Action {
+  /**
+   * Action type
+   * '[Auth] Confirm Mail Success'
+   */
   readonly type = AuthActionTypes.ConfirmMailSuccess
 
+  /**
+   * Constructor
+   * @param payload Response received
+   */
   constructor(public payload: string) {
   }
 }
 
+/**
+ * Confirm mail failure action
+ */
 export class ConfirmMailFailure implements Action {
+  /**
+   * Action type
+   * '[Auth] Confirm Mail Failure'
+   */
   readonly type = AuthActionTypes.ConfirmMailFailure
 
+  /**
+   * Constructor
+   * @param payload Error received
+   */
   constructor(public payload: any) {
   }
 }
 
+/**
+ * Reset password action
+ */
 export class ResetPassword implements Action {
+  /**
+   * Action type
+   * '[Auth] Reset Password'
+   */
   readonly type = AuthActionTypes.ResetPassword
 
+  /**
+   * Constructor
+   * @param payload Token from email and new password
+   */
   constructor(public payload: IResetPassword) {
   }
 }
 
+/**
+ * Reset password success action
+ */
 export class ResetPasswordSuccess implements Action {
+  /**
+   * Action type
+   * '[Auth] Reset Password Success'
+   */
   readonly type = AuthActionTypes.ResetPasswordSuccess
 
+  /**
+   * Constructor
+   * @param payload Response received
+   */
   constructor(public payload: string) {
   }
 }
 
+/**
+ * Reset password failure action
+ */
 export class ResetPasswordFailure implements Action {
+  /**
+   * Action type
+   * '[Auth] Reset Password Failure'
+   */
   readonly type = AuthActionTypes.ResetPasswordFailure
 
+  /**
+   * Constructor
+   * @param payload Error received
+   */
   constructor(public payload: any) {
   }
 }

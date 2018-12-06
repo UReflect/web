@@ -128,6 +128,9 @@ export class AuthProcessEffects {
       })
     )
 
+  /**
+   * Confirm mail effect
+   */
   @Effect()
   confirmMail$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.ConfirmMail))
     .pipe(map((action: fromAuth.ConfirmMail) => action.payload),
@@ -138,6 +141,9 @@ export class AuthProcessEffects {
       })
     )
 
+  /**
+   * Reset password effect
+   */
   @Effect()
   resetPassword$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.ResetPassword))
     .pipe(map((action: fromAuth.ResetPassword) => action.payload),

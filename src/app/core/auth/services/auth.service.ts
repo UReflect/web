@@ -92,6 +92,9 @@ export class AuthService {
     })
   }
 
+  /**
+   * Gets current logged user id
+   */
   private getUserId(): Promise<number> {
     return new Promise((resolve, reject) => {
       this.store.pipe(select(fromAuth.getLoggedUser))
@@ -101,6 +104,9 @@ export class AuthService {
     })
   }
 
+  /**
+   * Gets current logged user email
+   */
   private getUserEmail(): Promise<string> {
     return new Promise((resolve, reject) => {
       this.store.pipe(select(fromAuth.getLoggedUser))
@@ -110,6 +116,10 @@ export class AuthService {
     })
   }
 
+  /**
+   * Confirms email with API
+   * @param token Token received in email
+   */
   async confirmMail(token: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.http.post(`${this.url}/confirm-mail?token=${token}`, null)
@@ -119,6 +129,10 @@ export class AuthService {
     })
   }
 
+  /**
+   * Resets password with API
+   * @param data Token from email and new password
+   */
   async resetPassword(data: IResetPassword): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.http.post(`${this.url}/reset-password?token=${data.token}`, {

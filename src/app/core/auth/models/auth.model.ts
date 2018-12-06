@@ -97,7 +97,16 @@ export interface ISubmitBtn {
   }
 }
 
+/**
+ * Interface which defines password reset
+ */
 export interface IResetPassword {
+  /**
+   * Token received from email
+   */
   token: string,
+  /**
+   * New password
+   */
   password: string
 }
