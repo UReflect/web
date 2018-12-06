@@ -113,7 +113,7 @@
            [ngClass]="{'is-invalid': fileName().invalid}">
         <div class="custom-file form">
           <label class="custom-file-label" for="module-add-upload">
-            {{ fileName().value && fileName().value.length > 0 ? fileName().value : 'Choose file *'}}
+            {{ fileName().value && fileName().value.length > 0 ? fileName().value : 'Choose file'}}
           </label>
           <input type="file" class="custom-file-input" id="module-add-upload"
                  (change)="fileHandler($event)">

@@ -121,7 +121,7 @@ export class AuthService {
 
   async resetPassword(data: IResetPassword): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.http.post(`${this.url}/confirm-mail?token=${data.token}`, {
+      this.http.post(`${this.url}/reset-password?token=${data.token}`, {
         password: data.password
       })
         .subscribe(response => {
