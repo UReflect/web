@@ -6,7 +6,7 @@ import { AbstractControl, ValidatorFn } from '@angular/forms'
  */
 export function moduleZipName(): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
-    const re = new RegExp(/^([\w]{1,50})\.v([\d]+)-([\d]+)\.zip$/)
+    const re = new RegExp(/^([\w-]{1,50})\.v([\d]+)-([\d]+)\.zip$/)
     if (c.value === '') {
       return null
     }
