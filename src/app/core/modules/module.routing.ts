@@ -14,7 +14,7 @@ const routes: Routes = [
     canActivate: [
       AuthGuardService,
       ModulesGuard,
-      UsersGuard
+      // UsersGuard
     ]
   },
   {

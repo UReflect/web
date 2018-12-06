@@ -50,5 +50,8 @@
     <div class="col-md-6 col-xl-3" *ngFor="let module of modules$ | async">
       <app-module-list-card [module]="module"></app-module-list-card>
     </div>
+    <div *ngIf="(modules$ | async).length === 0">
+      Your don't have any modules.
+    </div>
   </div>
 </div>
