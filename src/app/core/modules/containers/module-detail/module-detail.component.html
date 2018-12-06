@@ -1,7 +1,7 @@
 <div class="content">
   <app-module-detail-header
     [title]="(module$ | async).title"
-    [userId]="(module$ | async).user_id">
+    [owner_name]="(module$ | async).owner_name">
   </app-module-detail-header>
   <div class="block block-rounded">
     <app-module-detail-tags>

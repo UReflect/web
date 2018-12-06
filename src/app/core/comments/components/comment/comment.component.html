@@ -1,6 +1,6 @@
 <div class="comment">
   <div class="title">
-    <span class="user">{{ (user$ | async).name }}</span>
+    <span class="user">{{ comment.owner_name }}</span>
     <span class="dash"> - </span>
     <span class="date">{{ comment.UpdatedAt | date:'longDate' }}</span>
   </div>

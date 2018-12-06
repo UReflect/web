@@ -23,7 +23,7 @@ const routes: Routes = [
     canActivate: [
       AuthGuardService,
       ModulesGuard,
-      UsersGuard
+      // UsersGuard
     ]
   },
   {
@@ -47,7 +47,7 @@ const routes: Routes = [
     canActivate: [
       AuthGuardService,
       ModuleGuard,
-      UsersGuard,
+      // UsersGuard,
       CommentsGuard,
       MirrorsGuard
     ]

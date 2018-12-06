@@ -19,10 +19,6 @@ export class ModuleListCardComponent implements OnInit {
    */
   @Input() module: IModule
   /**
-   * User from Observable
-   */
-  user$: Observable<IUser>
-  /**
    * Rating number as string
    * e.g. 232 reviews
    */
@@ -40,7 +36,6 @@ export class ModuleListCardComponent implements OnInit {
    * Fill ratingNbStr
    */
   ngOnInit() {
-    this.user$ = this.store.pipe(select(fromStore.getUserById, this.module.user_id))
     this.ratingNbStr = this.module.rating_nb === 1
       ? '1 review'
       : `${this.module.rating_nb} reviews`

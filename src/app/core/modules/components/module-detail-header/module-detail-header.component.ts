@@ -1,8 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core'
-import * as fromStore               from '@core/users/store'
-import { select, Store }            from '@ngrx/store'
-import { Observable }               from 'rxjs'
-import { IUser }                    from '@core/users/model/user.model'
 
 /**
  * Module detail header component
@@ -20,23 +16,18 @@ export class ModuleDetailHeaderComponent implements OnInit {
   /**
    * User ID
    */
-  @Input() userId: number
-  /**
-   * User from store
-   */
-  user$: Observable<IUser>
+  @Input() owner_name: string
 
   /**
    * Constructor
    * @param store User store
    */
-  constructor(private store: Store<fromStore.IUserReducerState>) {
+  constructor() {
   }
 
   /**
    * Gets user from store with selector
    */
   ngOnInit() {
-    this.user$ = this.store.pipe(select(fromStore.getUserById, this.userId))
   }
 }

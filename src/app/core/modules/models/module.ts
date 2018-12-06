@@ -41,7 +41,8 @@ export interface IModule {
   /**
    * Module last update date
    */
-  UpdatedAt: any
+  UpdatedAt: any,
+  owner_name: string
 }
 
 /**
