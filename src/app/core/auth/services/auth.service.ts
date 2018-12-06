@@ -6,7 +6,7 @@ import { IAuthentication, IPasswordLost, IRegistration } from '@core/auth/models
 import * as fromAuth                                     from '@core/auth/store/selectors'
 import * as AuthState                                    from '@core/auth/store/reducers'
 import { select, Store }                                 from '@ngrx/store'
-import { catchError, map }                               from 'rxjs/operators'
+import { IUser }                                         from '@core/users/model/user.model'
 
 /**
  * Auth HTTP service
@@ -89,6 +89,33 @@ export class AuthService {
   lost(credentials: IPasswordLost): Observable<any> {
     return this.http.post(`${this.url}/lost`, {
       email: credentials.email
+    })
+  }
+
+  private getUserId(): Promise<number> {
+    return new Promise((resolve, reject) => {
+      this.store.pipe(select(fromAuth.getLoggedUser))
+        .subscribe((user: IUser) => {
+          resolve(user.ID)
+        }, e => reject(e))
+    })
+  }
+
+  private getUserEmail(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      this.store.pipe(select(fromAuth.getLoggedUser))
+        .subscribe((user: IUser) => {
+          resolve(user.email)
+        }, e => reject(e))
+    })
+  }
+
+  async confirmMail(token: string): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.http.post(`${this.url}/confirm-mail?token=${token}`, null)
+        .subscribe(response => {
+        resolve(response)
+      }, e => reject(e.error))
     })
   }
 }

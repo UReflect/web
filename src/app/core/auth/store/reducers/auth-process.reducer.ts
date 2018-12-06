@@ -46,6 +46,7 @@ export function reducer(state: IAuthProcessState = initialState, action: AuthAct
     case AuthActionTypes.SignIn:
     case AuthActionTypes.SignUp:
     case AuthActionTypes.PasswordLost:
+    case AuthActionTypes.ConfirmMail:
       return {
         ...state,
         pending: true
@@ -58,6 +59,7 @@ export function reducer(state: IAuthProcessState = initialState, action: AuthAct
       }
     case AuthActionTypes.SignInFailure:
     case AuthActionTypes.PasswordLostFailure:
+    case AuthActionTypes.ConfirmMailFailure:
       return {
         ...state,
         pending: false,
@@ -66,6 +68,7 @@ export function reducer(state: IAuthProcessState = initialState, action: AuthAct
     case AuthActionTypes.ClearError:
     case AuthActionTypes.SignInRedirect:
     case AuthActionTypes.PasswordLostSuccess:
+    case AuthActionTypes.ConfirmMailSuccess:
       return {
         ...state,
         pending: false,

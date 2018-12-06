@@ -1,4 +1,4 @@
-import { Action }                                        from '@ngrx/store'
+import { Action }                                                      from '@ngrx/store'
 import { IAuthentication, IPasswordLost, IRegistration } from '../../models/auth.model'
 
 export enum AuthActionTypes {
@@ -11,7 +11,10 @@ export enum AuthActionTypes {
   PasswordLost = '[Auth] Password Lost',
   PasswordLostSuccess = '[Auth] Password Lost Success',
   PasswordLostFailure = '[Auth] Password Lost Failure',
-  ClearError = '[Auth] Clear Error'
+  ClearError = '[Auth] Clear Error',
+  ConfirmMail = '[Auth] Confirm Mail',
+  ConfirmMailSuccess = '[Auth] Confirm Mail Success',
+  ConfirmMailFailure = '[Auth] Confirm Mail Failure'
 }
 
 /**
@@ -159,6 +162,27 @@ export class ClearError implements Action {
   readonly type = AuthActionTypes.ClearError
 }
 
+export class ConfirmMail implements Action {
+  readonly type = AuthActionTypes.ConfirmMail
+
+  constructor(public payload: string) {
+  }
+}
+
+export class ConfirmMailSuccess implements Action {
+  readonly type = AuthActionTypes.ConfirmMailSuccess
+
+  constructor(public payload: string) {
+  }
+}
+
+export class ConfirmMailFailure implements Action {
+  readonly type = AuthActionTypes.ConfirmMailFailure
+
+  constructor(public payload: any) {
+  }
+}
+
 export type AuthActionsUnion =
   | SignIn
   | SignUp
@@ -170,3 +194,6 @@ export type AuthActionsUnion =
   | PasswordLostSuccess
   | PasswordLostFailure
   | ClearError
+  | ConfirmMail
+  | ConfirmMailSuccess
+  | ConfirmMailFailure

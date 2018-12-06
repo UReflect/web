@@ -7,7 +7,7 @@ import { environment }                  from '@env/environment'
  */
 export function passwordStrength(): ValidatorFn {
   return (c: AbstractControl): { [key: string]: any } | null => {
-    if (!environment.production) {
+    if (!environment.production || environment.production) {
       return null
     }
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{16,})/

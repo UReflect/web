@@ -113,7 +113,7 @@ export class AuthProcessEffects {
    * Password lost effect
    */
   @Effect()
-  passwordLost = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.PasswordLost))
+  passwordLost$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.PasswordLost))
     .pipe(map((action: fromAuth.PasswordLost) => action.payload),
       switchMap(credentials => {
         return this.authService.lost(credentials)
@@ -125,6 +125,16 @@ export class AuthProcessEffects {
               return of(new fromAuth.PasswordLostFailure(e.error))
             })
           )
+      })
+    )
+
+  @Effect()
+  confirmMail$ = this.actions$.pipe(ofType(fromAuth.AuthActionTypes.ConfirmMail))
+    .pipe(map((action: fromAuth.ConfirmMail) => action.payload),
+      switchMap(credentials => {
+        return this.authService.confirmMail(credentials)
+          .then(res => new fromAuth.ConfirmMailSuccess(res))
+          .catch(e => new fromAuth.ConfirmMailFailure(e))
       })
     )
 }
